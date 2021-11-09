@@ -1,1 +1,3 @@
+from src import *
+
 RunSimulator()
