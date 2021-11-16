@@ -1,3 +1,3 @@
-from src import *
+from src.WandSim.WandSimulatorManager import startSimulator
 
-RunSimulator()
+startSimulator()

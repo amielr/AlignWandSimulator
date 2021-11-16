@@ -2,8 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/WandSim/Vector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WandSim/Projector.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/WandSim/WindowLens.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/Vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Vector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/_init_.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/_init_.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -14,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Python Script" />
+        <option value="package.json" />
       </list>
     </option>
   </component>
@@ -33,6 +41,7 @@
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="nodejs_package_manager_path" value="npm" />
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -44,7 +53,8 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1636458013741</updated>
-      <workItem from="1636458015363" duration="3644000" />
+      <workItem from="1636458015363" duration="7520000" />
+      <workItem from="1637055729178" duration="11052000" />
     </task>
     <servers />
   </component>
@@ -52,13 +62,17 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636465643280">
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1636473954151">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1636465643280" />
+    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1636473954151" />
     <state x="446" y="172" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1636458169267">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="446" y="172" key="#com.intellij.fileTypes.FileTypeChooser/0.0.1366.738@0.0.1366.738" timestamp="1636458169267" />
+    <state x="324" y="136" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog" timestamp="1637059960464">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="324" y="136" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1366.738@0.0.1366.738" timestamp="1637059960464" />
   </component>
 </project>
