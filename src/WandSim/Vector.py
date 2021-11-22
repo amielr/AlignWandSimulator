@@ -4,15 +4,14 @@ import numpy as np
 class Vector():
     x, y, z = 0, 0, 0
 
-    def __init__(self):
-        self.x = 0
-        self.y = 0
-        self.z = 0
+    def __init__(self, _x=None, _y=None, _z=None):
 
-    def __init__(self,_x, _y, _z):
-        self.x = _x
-        self.y = _y
-        self.z = _z
+        self.x = 0 if _x is None else _x
+        self.y = 0 if _y is None else _y
+        self.z = 0 if _z is None else _z
+
+    def __str__(self):
+        return "The vector values are: x %s, y %s , z %s" % (self.x, self.y, self.z)
 
     def set_z(self,_z):
         self.z = _z

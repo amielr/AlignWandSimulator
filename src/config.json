@@ -1,7 +1,92 @@
 {
-  "name": "src",
-  "version": "1.0.0",
-  "dependencies": {
-    
-  }
-}
+
+  "windows":[
+        {
+          "name": "window1",
+          "normal": [0,0,1],
+          "center": [0,0,1],
+          "thickness": 1,
+          "refractiveindex": [
+            {"450":1.5},{"550":1.65} ]
+        },
+    {
+          "name": "window2",
+          "normal": [0,0,1],
+          "center": [0,0,0],
+          "thickness": 2,
+          "refractiveindex": [
+            {"450":1.7},{"550":1.75} ]
+
+    }]
+,
+  "cameras": [
+                {
+                                "name": "camera_1",
+                                "center": [ -1.5,  5, 3.5 ],
+                                "rotation": [ -15, -12.5, 90 ],
+                                "type": "Misumi_Camera"
+                },
+                {
+                                "name": "camera_2",
+                                "center": [ -1.5, -5, 3.5 ],
+                                "rotation": [ 15, -12.5, -90 ],
+                                "type": "Misumi_Camera"
+                },
+                {
+                                "name": "camera_3",
+                                "center": [ 7.5, 5, 4.7],
+                                "rotation": [ -15, 0, 90 ],
+                                "type": "Misumi_Camera"
+                },
+                {
+                                "name": "camera_4",
+                                "center": [ 7.5, -5, 4.7 ],
+                                "rotation": [ 15, 0, -90 ],
+                                "type": "Misumi_Camera"
+                },
+                {
+                                "name": "camera_5",
+                                "center": [ 16.5, 5, 4.2  ],
+                                "rotation": [ -15, 12.5, 90],
+                                "type": "Misumi_Camera"
+                },
+                {
+                                "name": "camera_6",
+                                "center": [ 16.5, -5, 4.2 ],
+                                "rotation": [ 15, 12.5, -90 ],
+                                "type": "Misumi_Camera"
+                }
+],
+"lights": [
+               {
+                                "name": "Blue projector 1",
+                                "center": [ -1.35, 0, 2.55 ],
+                                "rotation": [ 0, -15, -10 ],
+                                "type": "projector_blue"
+                },
+
+                {
+                                "name": "Green projector 1",
+                                "center": [ 3, 0, 3.2 ],
+                                "rotation": [ 0, 0, -5 ],
+                                "type": "projector_blue"
+                },
+                {
+                                "name": "Blue projector 2",
+                                "center": [ 8, 0, 3.2 ],
+                                "rotation": [ 0, 0, 0 ],
+                                "type": "projector_green"
+                },
+                {
+                                "name": "Green projector 2",
+                                "center": [ 13, 0, 3.2 ],
+                                "rotation": [ 0, 0, 5 ],
+                                "type": "projector_blue"
+                },
+                {
+                                "name": "Blue projector 3",
+                                "center": [ 17.75, 0, 2.6 ],
+                                "rotation": [ 0, 15, 10 ],
+                                "type": "projector_green"
+                }
+]}

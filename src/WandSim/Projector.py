@@ -4,9 +4,11 @@ import numpy as np
 
 class Projector():
 
-    ParentRay = Vector
+    ParentRay = Ray()
 
     def __init__(self):
         return
 
+    def central_ray(self):
+        return
 

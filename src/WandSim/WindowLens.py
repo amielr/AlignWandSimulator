@@ -2,33 +2,34 @@ from src.WandSim.Vector import Vector
 import json
 
 
-thisdict = {
-  "brand": "Ford",
-  "model": "Mustang",
-  "year": 1964
-}
+class WindowLens:
 
-
-with open('../config.json') as config_file:
-    config = json.load(config_file)
-
-
-class WindowLens():
-
-    Width, Length, Thickness = 0, 0, 0
-    RefractiveIndexDictionary = {}
-    Point1, Point2, Point3 = Vector(0, 0, 0), Vector(0, 0, 0), Vector(0, 0, 0)
+    #Width, Length = 0, 0
+    RefractiveIndexDictionary = {''}
+    Thickness = 0
+    #Point1, Point2, Point3 = Vector(0, 0, 0), Vector(0, 0, 0), Vector(0, 0, 0)
+    CenterPoint = Vector(0, 0, 0)
     Normal = Vector(0, 0, 0)
     WindowName = 'string'
 
-    def __init__(self):
+    def __init__(self, _windowname=None, _thickness=None, _centralpoint=None, _normal=None, _refractiveindex=None):
+
+        self.WindowName = "noNameWindow" if _windowname is None else _windowname
+        self.Thickness = 0 if _thickness is None else _thickness
+        self.CenterPoint = (0, 0, 0) if _centralpoint is None else _centralpoint
+        self.Normal = (0, 0, 1) if _normal is None else _normal
+        self.RefractiveIndexDictionary = 0 if _refractiveindex is None else _refractiveindex
 
         return
+
+    def __str__(self):
+        return "The object values are: WindowName - %s Thickness - %s CenterPoint - %s Normal - %s RefractiveIndex - %s" \
+               % (self.WindowName, self.Thickness, self.CenterPoint, self.Normal, self.RefractiveIndexDictionary)
+
+
 
     def create_refractive_index_dictionary(self):
         return
-
-
 
     def set_window_parameters(self, _width, _length, _thickness):
         self.Width = _width
