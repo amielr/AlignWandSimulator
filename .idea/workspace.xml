@@ -3,7 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/Projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Projector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Ray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Vector.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
@@ -82,7 +81,7 @@
       <updated>1636458013741</updated>
       <workItem from="1636458015363" duration="7520000" />
       <workItem from="1637055729178" duration="43308000" />
-      <workItem from="1637609568649" duration="4925000" />
+      <workItem from="1637609568649" duration="28305000" />
     </task>
     <servers />
   </component>
@@ -102,22 +101,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="324" y="136" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1366.738@0.0.1366.738" timestamp="1637059960464" />
-    <state width="1323" height="215" key="GridCell.Tab.0.bottom" timestamp="1637614908808">
+    <state width="1323" height="299" key="GridCell.Tab.0.bottom" timestamp="1638051002110">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="215" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1637614908808" />
-    <state width="1323" height="215" key="GridCell.Tab.0.center" timestamp="1637614908808">
+    <state width="1323" height="299" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1638051002110" />
+    <state width="1323" height="299" key="GridCell.Tab.0.center" timestamp="1638051002110">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="215" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1637614908808" />
-    <state width="1323" height="215" key="GridCell.Tab.0.left" timestamp="1637614908808">
+    <state width="1323" height="299" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1638051002110" />
+    <state width="1323" height="299" key="GridCell.Tab.0.left" timestamp="1638051002110">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="215" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1637614908808" />
-    <state width="1323" height="215" key="GridCell.Tab.0.right" timestamp="1637614908808">
+    <state width="1323" height="299" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1638051002110" />
+    <state width="1323" height="299" key="GridCell.Tab.0.right" timestamp="1638051002110">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="215" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1637614908808" />
+    <state width="1323" height="299" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1638051002110" />
     <state width="1323" height="227" key="GridCell.Tab.1.bottom" timestamp="1637316094377">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -134,8 +133,12 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="227" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1637316094377" />
+    <state x="379" y="101" width="607" height="536" key="find.popup" timestamp="1638050763946">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="379" y="101" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1638050763946" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1637614908793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1638051002094" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

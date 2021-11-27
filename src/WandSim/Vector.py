@@ -1,6 +1,8 @@
 import math
 import numpy as np
 
+origin = np.array([0, 0, 0], dtype=np.float_)
+
 class Vector():
     x, y, z = 0, 0, 0
 
@@ -45,6 +47,22 @@ class Vector():
         angleresult = math.acos(self.dot_product(vector)/(self.length()*vector.length()))
         return angleresult
 
+    def normalize(self):
+        normalizer = math.sqrt(math.pow(self.x, 2) + math.pow(self.y, 2) + math.pow(self.z, 2))
+        print("normalizer value is:", normalizer)
+        self.x = self.x/normalizer
+        self.y = self.y/normalizer
+        self.z = self.z/normalizer
+        return
+
+    def __sub__(self, vector):
+        return Vector(self.x - vector.x, self.y - vector.y, self.z - vector.z)
+
+    def __add__(self, vector):
+        return Vector(self.x + vector.x, self.y + vector.y, self.z + vector.z)
+
+    def __mul__(self, scalar):
+        return Vector(self.x * scalar, self.y * scalar, self.z * scalar)
 
 
 

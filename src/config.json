@@ -4,18 +4,18 @@
         {
           "name": "window1",
           "normal": [0,0,1],
-          "center": [0,0,1],
+          "center": [0,0,-1],
           "thickness": 1,
-          "refractiveindex": [
-            {"450":1.5},{"550":1.65} ]
+          "refractiveindex": {"450":1.5,
+                              "550":1.65 }
         },
     {
           "name": "window2",
           "normal": [0,0,1],
           "center": [0,0,0],
           "thickness": 2,
-          "refractiveindex": [
-            {"450":1.7},{"550":1.75} ]
+          "refractiveindex": {"450":1.7,
+                              "550":1.75}
 
     }]
 ,

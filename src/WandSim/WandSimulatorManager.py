@@ -1,5 +1,6 @@
 from src.WandSim.Ray import *
 from src.WandSim.WindowLens import *
+import json
 
 
 with open('../src/config.json') as config_file:
@@ -13,32 +14,36 @@ with open('../src/config.json') as config_file:
 
 def startSimulator():
 
-    WindowList = createWindows()
+    windowList = create_windows()
 
-    print(WindowList[0])
-    print(WindowList[1])
+    rayA = Ray((2, 2, 2), (0, 0, -1), 8, 'proj1')
+    rayB = Ray((-1, -2, 2), (0.3, 0, -1), 1, "proj2")
 
-    rayA = Ray((2, 2, 2), (1, 0, 0), 8, 'proj1')
-    rayB = Ray((-1, -2, -1), (0, 0, 1), 1, "proj2")
-
-
+    # todo rayList = create_rays()
+    print("before")
     print(rayA)
     print(rayB)
+    rayA = windowList[0].transmit_ray_through_window(rayA)
+    rayB = windowList[0].transmit_ray_through_window(rayB)
+    print("after")
+    print(rayA)
+    print(rayB)
+
 
     #rayA((2,2,2),(1,0,0),8,'proj1')
 
     return
 
-def createWindows():
+def create_windows():
     windowlist = []
     for window in config["windows"]:
-        name, normal, center, thickness, refractiveindex = getWindowParametersFromJson(window)
+        name, normal, center, thickness, refractiveindex = get_window_parameters_from_json(window)
         windowobject = WindowLens(name, thickness, Vector(center[0], center[1], center[2]),
                                   Vector(normal[0], normal[1], normal[2]), refractiveindex)
         windowlist.append(windowobject)
     return windowlist
 
-def getWindowParametersFromJson(window):
+def get_window_parameters_from_json(window):
 
         name = window["name"]
         normal = window["normal"]
