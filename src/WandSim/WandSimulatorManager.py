@@ -16,23 +16,25 @@ def startSimulator():
 
     windowList = create_windows()
 
-    rayA = Ray((2, 2, 2), (0, 0, -1), 8, 'proj1')
-    rayB = Ray((-1, -2, 2), (0.3, 0, -1), 1, "proj2")
+    #rayA = Ray((0, 0, 2), (0, 0, -1), 8, 'proj1')
+    rayA = Ray((-1, -2, 2), (0.3, 0, -1), 1, "proj2")
+
+    reflectivesurface = create_surfaces()
 
     # todo rayList = create_rays()
     print("before")
     print(rayA)
-    print(rayB)
-    rayA = windowList[0].transmit_ray_through_window(rayA)
-    rayB = windowList[0].transmit_ray_through_window(rayB)
-    print("after")
-    print(rayA)
-    print(rayB)
+    rayA.ray_surface_intersection(windowList[0])
+    windowList[0].transmit_ray_through_window(rayA)
+    print("after refraction at window surface", rayA)
+    rayA.ray_surface_intersection(reflectivesurface[0])
+    rayA.get_reflection_from_surface(reflectivesurface[0])
+    print("after reflection at surface", rayA)
 
 
-    #rayA((2,2,2),(1,0,0),8,'proj1')
 
     return
+
 
 def create_windows():
     windowlist = []
@@ -42,6 +44,7 @@ def create_windows():
                                   Vector(normal[0], normal[1], normal[2]), refractiveindex)
         windowlist.append(windowobject)
     return windowlist
+
 
 def get_window_parameters_from_json(window):
 
@@ -53,3 +56,18 @@ def get_window_parameters_from_json(window):
         return name, normal, center, thickness, refractiveindex
 
 
+def create_surfaces():
+    surfaceList = []
+    for surface in config["surfaces"]:
+        name, normal, center = get_surface_parameters_from_json(surface)
+        surfaceobject = Surface(name, Vector(center[0], center[1], center[2]),
+                                  Vector(normal[0], normal[1], normal[2]))
+        surfaceList.append(surfaceobject)
+    return surfaceList
+
+
+def get_surface_parameters_from_json(surface):
+        name = surface["name"]
+        normal = surface["normal"]
+        center = surface["center"]
+        return name, normal, center

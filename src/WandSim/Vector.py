@@ -13,7 +13,7 @@ class Vector():
         self.z = 0 if _z is None else _z
 
     def __str__(self):
-        return "The vector values are: x %s, y %s , z %s" % (self.x, self.y, self.z)
+        return "Vector: x %s, y %s , z %s" % (self.x, self.y, self.z)
 
     def set_z(self,_z):
         self.z = _z
@@ -49,7 +49,6 @@ class Vector():
 
     def normalize(self):
         normalizer = math.sqrt(math.pow(self.x, 2) + math.pow(self.y, 2) + math.pow(self.z, 2))
-        print("normalizer value is:", normalizer)
         self.x = self.x/normalizer
         self.y = self.y/normalizer
         self.z = self.z/normalizer

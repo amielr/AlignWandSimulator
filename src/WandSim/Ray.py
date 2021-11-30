@@ -21,7 +21,7 @@ class Ray():
         Ray.NumberOfRays += 1
 
     def __str__(self):
-        return "The ray object values are: Origin - %s Direction - %s Amplitude - %s ParentSource - %s"\
+        return "Ray values: Origin - %s Direction - %s Amplitude - %s ParentSource - %s"\
                % (self.get_origin(), self.get_direction(), self.get_amplitude(), self.get_parent_source())
 
     def set_parent_source(self, _parentsource):
@@ -44,47 +44,59 @@ class Ray():
         return self.Origin
 
     def get_direction(self):
-        #self.Direction.normalize()
         return self.Direction
 
     def set_origin(self, _x, _y, _z):
-        self.Origin = Vector(_x,_y,_z)
-
+        self.Origin = Vector(_x, _y, _z)
 
     def set_direction(self, _dx, _dy, _dz):
         self.Direction = Vector(_dx, _dy, _dz)
         self.Direction.normalize()
 
-    def get_refraction_ratio(self, _ni, _nt):
-        return _ni/_nt
-
     def get_ray_wavelength(self):
         return self.Wavelength
 
-    # def snell_refraction(self, _windownormalvector, _refractiveratio):
-    #
-    #     transmittedRay = math.sqrt(1-math.pow(_refractiveratio, 2)*(1 - math.pow(self.get_direction().dot_product(_windownormalvector), 2)))\
-    #                      * self.get_direction() + _refractiveratio*(self.get_direction() - _windownormalvector.dot_product(self.get_direction()*_windownormalvector))
-    #
-    #     self.set_direction(transmittedRay[0], transmittedRay[1], transmittedRay[2])
-    #     return transmittedRay
-
-    def snell_law(self, _windownormalvector, _refractivMuRatio):
-        s2 = (_windownormalvector.cross_product(_windownormalvector.cross_product(self.Direction))*-1) * _refractivMuRatio\
-             - _windownormalvector * math.sqrt(1-math.pow(_refractivMuRatio, 2) *
+    def snell_law(self, _windownormalvector, _refractivmuratio):
+        s2 = (_windownormalvector.cross_product((_windownormalvector*(-1)).cross_product(self.Direction))) * \
+             _refractivmuratio - _windownormalvector * (math.sqrt(1 - math.pow(_refractivmuratio, 2) *
                                                _windownormalvector.cross_product(self.Direction).
-                                               dot_product(_windownormalvector.cross_product(self.Direction)))
+                                               dot_product(_windownormalvector.cross_product(self.Direction))))
 
         self.set_direction(s2.x, s2.y, s2.z)
         return self
 
+    def snell_law_v2(self, _windownormalvector, _refractivmuratio):
+        s2 = _windownormalvector*math.sqrt(1-math.pow(_refractivmuratio, 2)*(1-math.pow(_windownormalvector.dot_product(self.Direction), 2)))\
+             + (self.Direction - _windownormalvector*(_windownormalvector.dot_product(self.Direction)))*_refractivmuratio
 
-    # def propRays(ray, distance):
-    #     newRay = ray
-    #     newRay[0] = getOrigin(ray) + getDirection(ray) * distance
-    #     return newRay
-    #
-    # def propogate_rays_in_free_space(rayList, distance):
-    #     propogatedRays = [propRays(ray, distance) for ray in rayList]
-    #     return propogatedRays
+        self.set_direction(s2.x, s2.y, s2.z)
+
+
+    def ray_surface_intersection(self, _surface, epsilon=1e-6):
+
+        surfacenormal = _surface.get_surface_normal()
+        rayorigin = self.get_origin()
+        raydirection = self.get_direction()
+        originplanepointvector = _surface.CenterPoint - rayorigin
+
+        lineplanetest = surfacenormal.dot_product(raydirection)
+
+        if abs(lineplanetest) < epsilon:
+            print("we have an intersection error: no intersection or line is within plane")
+        else:
+            kfactor = originplanepointvector.dot_product(surfacenormal) / raydirection.dot_product(surfacenormal)
+
+            if kfactor >= 0:
+                intersectionpoint = rayorigin + raydirection * kfactor
+                self.set_origin(intersectionpoint.x, intersectionpoint.y, intersectionpoint.z)
+                print("The intersection point is: %s" % (self.get_origin()))
+            else:
+                print("the intersection point is behind us, ray does not meet plane")
+
+    def get_reflection_from_surface(self, _surface):
+        surfacenormal = _surface.get_surface_normal()
+        ndot = self.Direction.dot_product(surfacenormal)
+        reflectedRayDirection = self.Direction - surfacenormal * (2 * ndot)
+
+        return self.set_direction(reflectedRayDirection.x, reflectedRayDirection.y, reflectedRayDirection.z)
 
