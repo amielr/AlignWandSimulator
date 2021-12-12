@@ -63,36 +63,53 @@
                                 "type": "Misumi_Camera"
                 }
 ],
-"lights": [
-               {
+"lights":        [
+                {
+                                "name": "Blue projector 2",
+                                "center": [ 8, 0, 3.2 ],
+                                "rotation": [ 0, 0, 1 ],
+                                "rotationformat": "angle",
+                                "type": "projector_green",
+                                "wavelength": 450
+
+                },
+                      {
                                 "name": "Blue projector 1",
                                 "center": [ -1.35, 0, 2.55 ],
                                 "rotation": [ 0, -15, -10 ],
-                                "type": "projector_blue"
+                                "rotationformat": "angle",
+                                "type": "projector_blue",
+                                "wavelength": 450
                 },
 
                 {
                                 "name": "Green projector 1",
                                 "center": [ 3, 0, 3.2 ],
                                 "rotation": [ 0, 0, -5 ],
-                                "type": "projector_blue"
+                                "rotationformat": "angle",
+                                "type": "projector_blue",
+                                "wavelength": 450
+
                 },
-                {
-                                "name": "Blue projector 2",
-                                "center": [ 8, 0, 3.2 ],
-                                "rotation": [ 0, 0, 0 ],
-                                "type": "projector_green"
-                },
+
                 {
                                 "name": "Green projector 2",
                                 "center": [ 13, 0, 3.2 ],
                                 "rotation": [ 0, 0, 5 ],
-                                "type": "projector_blue"
+                                "rotationformat": "angle",
+                                "type": "projector_blue",
+                                "wavelength": 450
+
                 },
                 {
                                 "name": "Blue projector 3",
                                 "center": [ 17.75, 0, 2.6 ],
                                 "rotation": [ 0, 15, 10 ],
-                                "type": "projector_green"
+                                "rotationformat": "angle",
+                                "type": "projector_green",
+                                "wavelength": 550
+
                 }
-]}
+],
+  "LatticeConst": 7.6
+}

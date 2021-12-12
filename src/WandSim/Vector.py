@@ -49,6 +49,7 @@ class Vector():
 
     def normalize(self):
         normalizer = math.sqrt(math.pow(self.x, 2) + math.pow(self.y, 2) + math.pow(self.z, 2))
+        length = self.length()
         self.x = self.x/normalizer
         self.y = self.y/normalizer
         self.z = self.z/normalizer
@@ -63,6 +64,19 @@ class Vector():
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar, self.z * scalar)
 
+    def angle_vector_converter(self, conversiondirection):
+        alpha, beta, gamma = 0, 0, 0
+        if conversiondirection != "angle":
+            alpha = math.acos(self.x/self.length())
+            beta = math.acos(self.y/self.length())
+            gamma = math.acos(self.z/self.length())
+        else:
+            self.x = math.sin(self.x)
+            self.y = math.sin(self.y)
+            self.z = math.cos(self.z)
+            self.normalize()
+
+        return Vector(alpha, beta, gamma)
 
 
 

@@ -13,7 +13,6 @@ class WindowLens(Surface):
     IsRayInWindow = False
 
     def __init__(self, _windowname=None, _thickness=None, _centralpoint=None, _normal=None, _refractiveindex=None):
-
         super().__init__(_windowname, _centralpoint, _normal)
         self.Thickness = 0 if _thickness is None else _thickness
         self.RefractiveIndexDictionary = 0 if _refractiveindex is None else _refractiveindex
