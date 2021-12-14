@@ -30,17 +30,15 @@ def startSimulator():
     # plot_coordinates(xcoord, ycoord)
 
 
+    windowsList, projectorsList, reflectivesurface = create_object_lists()
 
-    windowList = create_windows()
-    reflectivesurface = create_surfaces()
-    projectors = create_projectors()
 
-    sampleprojector = projectors[0]
+    sampleprojector = projectorsList[0]
     sampleprojector.generate_projector_rays(3)
 
-    print(projectors[0])
+    print(projectorsList[0])
     print("Number of projector rays is:")
-    print(projectors[0].NoOfProjectorRays)
+    print(projectorsList[0].NoOfProjectorRays)
     print(Projector.NoOfProjectorRays)
 
     #rayA = Ray((0, 0, 2), (0, 0, -1), 8, 'proj1')
@@ -50,13 +48,21 @@ def startSimulator():
     # todo rayList = create_rays()
     # print("before")
     # print(rayA)
-    rayA.ray_surface_intersection(windowList[0])
-    windowList[0].transmit_ray_through_window(rayA)
+    rayA.ray_surface_intersection(windowsList[0])
+    windowsList[0].transmit_ray_through_window(rayA)
     # print("after refraction at window surface", rayA)
     rayA.ray_surface_intersection(reflectivesurface[0])
     rayA.get_reflection_from_surface(reflectivesurface[0])
     print("after reflection at surface", rayA)
     return
+
+
+
+def create_object_lists():
+    windowList = create_windows()
+    reflectivesurface = create_surfaces()
+    projectors = create_projectors()
+    return windowList, projectors, reflectivesurface
 
 
 def create_windows():
@@ -99,9 +105,9 @@ def get_surface_parameters_from_json(surface):
 def create_projectors():
     projectorList = []
     for projector in config["lights"]:
-        name, center, rotation, rotationformat, wavelength, projtype = get_projector_parameters_from_json(projector)
+        name, center, direction, rotation, rotationformat, wavelength, projtype = get_projector_parameters_from_json(projector)
 
-        projectorobject = Projector(name, (center[0], center[1], center[2]),
+        projectorobject = Projector(name, (center[0], center[1], center[2]),(direction[0], direction[1], direction[2]),
                                     (rotation[0], rotation[1], rotation[2]), wavelength, projtype)
         projectorList.append(projectorobject)
     return projectorList
@@ -112,6 +118,7 @@ def get_projector_parameters_from_json(projector):
     rotation = projector["rotation"]
     rotationformat = projector["rotationformat"]
     center = projector["center"]
+    direction = projector["direction"]
     wavelength = projector["wavelength"]
     projtype = projector["type"]
-    return name, center, rotation, rotationformat, wavelength, projtype
+    return name, center, direction, rotation, rotationformat, wavelength, projtype

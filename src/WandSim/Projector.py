@@ -40,6 +40,7 @@ class Projector():
 
     projectorName = "Blue projector 1"
     center = Vector(0, 0, 0)
+    direction = Vector(0, 0, 0)
     rotationDirection = Vector(0, 0, 0)  # todo: change from vector direction to angle direction
     projectorType = "projector_blue"
     wavelength = 450
@@ -48,9 +49,10 @@ class Projector():
     NoOfProjectors = 0
     NoOfProjectorRays = 0
 
-    def __init__(self, _name, _center, _rotation, _wavelength, _type):
+    def __init__(self, _name, _center,_direction, _rotation, _wavelength, _type):
         self.projectorName = "noName" if _name is None else _name
         self.center = Vector(0, 0, 0) if _center is None else Vector(_center[0], _center[1], _center[2])
+        self.direction = Vector(0, 0, 0) if _direction is None else Vector(_direction[0], _direction[1], _direction[2])
         self.rotationDirection = Vector(0, 0, 0) if _rotation is None else Vector(_rotation[0], _rotation[1], _rotation[2])
         self.wavelength = 0 if _wavelength is None else _wavelength*1e-9
         self.projectorType = "noType" if _type is None else _type
