@@ -85,16 +85,48 @@ class Projector():
         rotationangle = rotatingangle * suborder
         print(rotationangle)
         # get_rotation_matrix(rotationangle, 'z')
-        return
+        return rotationangle
+
+    def addray(self, ray, raylist):
+        raylist.append(ray)
+        Projector.NoOfProjectorRays += 1
+        self.NoOfProjectorRays += 1
+        return raylist
 
     def generate_projector_rays(self, order):
-        for i in range(order+1):
-            print(self.get_grating_equation_angle(i))
-            for j in range(i*6):
-                self.get_ray_angle_direction(6, i, j)
-                #self.ProjectorRayList.append(Ray((0, 0, 0), (0, 0, order), 1, self))
-                #self.NoOfProjectorRays += 1
-                Projector.NoOfProjectorRays += 1
+        directionlist = [np.array([self.direction.get_x(), self.direction.get_y(), self.direction.get_z()])]  # get central ray
+        projectordirection = directionlist[0]
+        for orderindex in range(1, order + 1):                         # create zero order column
+            xangle = self.get_grating_equation_angle(orderindex)
+            xrotated = np.matmul(get_rotation_matrix(xangle, 'x'), projectordirection)
+            zrotated = np.matmul(get_rotation_matrix(-60, 'z'), xrotated)
+            differencevec = zrotated - xrotated
+            directionlist.append(xrotated)
+            for j in range(1, orderindex):                              # create suborder values
+                directionlist.append(xrotated + (j*differencevec/orderindex))
+        print(len(directionlist))
+
+        fulldirectionlist = []
+        fulldirectionlist.extend(directionlist)
+        newdirectionlist = []
+
+
+        for j in range(1, 6):      # rotate around each quadrant/septant
+            for direction in directionlist:
+                # print(direction)
+                newdirectionlist.append(np.matmul(get_rotation_matrix(-60*j, 'z'), direction))
+
+            fulldirectionlist.extend(newdirectionlist)
+            print(len(fulldirectionlist))
+        nplist = np.vstack(fulldirectionlist)
+        print(len(nplist))
+        nplist = np.unique(nplist, axis=0)
+        print(len(nplist))
+
         return
 
 
+
+
+
+#rotatedXYZ = np.matmul(get_rotation_matrix(angle, direction), stackFlattenXYZ)

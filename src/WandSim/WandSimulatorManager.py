@@ -29,9 +29,7 @@ def startSimulator():
     # print(ycoord)
     # plot_coordinates(xcoord, ycoord)
 
-
     windowsList, projectorsList, reflectivesurface = create_object_lists()
-
 
     sampleprojector = projectorsList[0]
     sampleprojector.generate_projector_rays(3)

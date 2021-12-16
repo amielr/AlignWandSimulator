@@ -56,21 +56,11 @@ class Ray():
     def get_ray_wavelength(self):
         return self.Wavelength
 
-    # def snell_law(self, _windownormalvector, _refractivmuratio):
-    #     s2 = (_windownormalvector.cross_product((_windownormalvector*(-1)).cross_product(self.Direction))) * \
-    #          _refractivmuratio - _windownormalvector * (math.sqrt(1 - math.pow(_refractivmuratio, 2) *
-    #                                            _windownormalvector.cross_product(self.Direction).
-    #                                            dot_product(_windownormalvector.cross_product(self.Direction))))
-    #
-    #     self.set_direction(s2.x, s2.y, s2.z)
-    #     return self
-
     def snell_law_v2(self, _windownormalvector, _refractivmuratio):
         s2 = _windownormalvector*math.sqrt(1-math.pow(_refractivmuratio, 2)*(1-math.pow(_windownormalvector.dot_product(self.Direction), 2)))\
              + (self.Direction - _windownormalvector*(_windownormalvector.dot_product(self.Direction)))*_refractivmuratio
 
         self.set_direction(s2.x, s2.y, s2.z)
-
 
     def ray_surface_intersection(self, _surface, epsilon=1e-6):
 
@@ -103,3 +93,11 @@ class Ray():
     def register_event(self,_objectname):
         self.EventRegister += str(_objectname)
         return
+    # def propRays(self, distance):
+    #     newRay = self
+    #     newRay[0] = getOrigin(ray) + getDirection(ray)*distance
+    #     return newRay
+    #
+    # def propogate_rays_in_free_space(self, distance):
+    #     propogatedRays = [propRays(ray, distance) for ray in rayList]
+    #     return propogatedRays
