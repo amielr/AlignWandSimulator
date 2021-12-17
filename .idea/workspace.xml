@@ -4,7 +4,6 @@
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Projector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/Ray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -80,7 +79,7 @@
       <workItem from="1636458015363" duration="7520000" />
       <workItem from="1637055729178" duration="43308000" />
       <workItem from="1637609568649" duration="108814000" />
-      <workItem from="1639479051470" duration="34581000" />
+      <workItem from="1639479051470" duration="36683000" />
     </task>
     <servers />
   </component>
@@ -100,38 +99,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="324" y="136" key="#com.intellij.ide.fileTemplates.ui.ConfigureTemplatesDialog/0.0.1366.738@0.0.1366.738" timestamp="1637059960464" />
-    <state width="1323" height="246" key="GridCell.Tab.0.bottom" timestamp="1639694161246">
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom" timestamp="1639730820180">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1639694161246" />
-    <state width="1323" height="246" key="GridCell.Tab.0.center" timestamp="1639694161246">
+    <state width="1323" height="223" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1639730820180" />
+    <state width="1323" height="223" key="GridCell.Tab.0.center" timestamp="1639730820179">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1639694161246" />
-    <state width="1323" height="246" key="GridCell.Tab.0.left" timestamp="1639694161246">
+    <state width="1323" height="223" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1639730820179" />
+    <state width="1323" height="223" key="GridCell.Tab.0.left" timestamp="1639730820179">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1639694161246" />
-    <state width="1323" height="246" key="GridCell.Tab.0.right" timestamp="1639694161246">
+    <state width="1323" height="223" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1639730820179" />
+    <state width="1323" height="223" key="GridCell.Tab.0.right" timestamp="1639730820179">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1639694161246" />
-    <state width="1323" height="246" key="GridCell.Tab.1.bottom" timestamp="1639694164146">
+    <state width="1323" height="223" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1639730820179" />
+    <state width="1323" height="246" key="GridCell.Tab.1.bottom" timestamp="1639718242212">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1639694164146" />
-    <state width="1323" height="246" key="GridCell.Tab.1.center" timestamp="1639694164146">
+    <state width="1323" height="246" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1639718242212" />
+    <state width="1323" height="246" key="GridCell.Tab.1.center" timestamp="1639718242212">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1639694164146" />
-    <state width="1323" height="246" key="GridCell.Tab.1.left" timestamp="1639694164146">
+    <state width="1323" height="246" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1639718242212" />
+    <state width="1323" height="246" key="GridCell.Tab.1.left" timestamp="1639718242212">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1639694164146" />
-    <state width="1323" height="246" key="GridCell.Tab.1.right" timestamp="1639694164146">
+    <state width="1323" height="246" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1639718242212" />
+    <state width="1323" height="246" key="GridCell.Tab.1.right" timestamp="1639718242212">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="246" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1639694164146" />
+    <state width="1323" height="246" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1639718242212" />
     <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1638914819137">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -157,11 +156,6 @@
           <line>22</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/WandSim/Projector.py</url>
-          <line>116</line>
-          <option name="timeStamp" value="27" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -173,6 +167,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1639694161089" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1639730820167" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

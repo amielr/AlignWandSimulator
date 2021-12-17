@@ -1,6 +1,8 @@
 from src.WandSim.Ray import *
 import json
 import numpy as np
+import matplotlib.pyplot as plt
+
 
 
 with open('../src/config.json') as config_file:
@@ -116,12 +118,19 @@ class Projector():
                 # print(direction)
                 newdirectionlist.append(np.matmul(get_rotation_matrix(-60*j, 'z'), direction))
 
-            fulldirectionlist.extend(newdirectionlist)
-            print(len(fulldirectionlist))
+        fulldirectionlist.extend(newdirectionlist)
+        print(len(fulldirectionlist))
         nplist = np.vstack(fulldirectionlist)
         print(len(nplist))
         nplist = np.unique(nplist, axis=0)
         print(len(nplist))
+
+        x, y, z = nplist.T
+
+        # plot our list in X,Y coordinates
+        plt.scatter(x, y)
+        plt.show()
+
 
         return
 

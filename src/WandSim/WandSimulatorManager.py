@@ -32,7 +32,7 @@ def startSimulator():
     windowsList, projectorsList, reflectivesurface = create_object_lists()
 
     sampleprojector = projectorsList[0]
-    sampleprojector.generate_projector_rays(3)
+    sampleprojector.generate_projector_rays(11)
 
     print(projectorsList[0])
     print("Number of projector rays is:")
