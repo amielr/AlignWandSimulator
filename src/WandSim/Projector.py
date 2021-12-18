@@ -1,7 +1,7 @@
 from src.WandSim.Ray import *
+from src.WandSim.PlotFunctions import *
 import json
 import numpy as np
-import matplotlib.pyplot as plt
 
 
 
@@ -13,30 +13,36 @@ def get_lattice_distance():
     return config["LatticeConst"]*1e-6
 
 
-def get_rotation_matrix(angle, direction):
-    angleInRadians = np.deg2rad(angle)
-    angleSin = np.sin(angleInRadians)
-    angleCos = np.cos(angleInRadians)
+def get_rotation_matrix(Xangle, Yangle, Zangle):
+    XangleInRadians = np.deg2rad(Xangle)
+    YangleInRadians = np.deg2rad(Yangle)
+    ZangleInRadians = np.deg2rad(Zangle)
+    XangleSin = np.sin(XangleInRadians)
+    XangleCos = np.cos(XangleInRadians)
+    YangleSin = np.sin(YangleInRadians)
+    YangleCos = np.cos(YangleInRadians)
+    ZangleSin = np.sin(ZangleInRadians)
+    ZangleCos = np.cos(ZangleInRadians)
 
-    if direction == 'x':
-        return [
+    XrotationMatrix = np.array([
             [1, 0, 0],
-            [0, angleCos, -angleSin],
-            [0, angleSin, angleCos]
-        ]
+            [0, XangleCos, -XangleSin],
+            [0, XangleSin, XangleCos]
+        ])
 
-    if direction == 'y':
-        return [
-            [angleCos, 0, angleSin],
+    YrotationMatrix = np.array([
+            [YangleCos, 0, YangleSin],
             [0, 1, 0],
-            [-angleSin, 0, angleCos]
-        ]
+            [-YangleSin, 0, YangleCos]
+        ])
 
-    return [
-        [angleCos, -angleSin, 0],
-        [angleSin, angleCos, 0],
+    ZrotationMatrix= np.array([
+        [ZangleCos, -ZangleSin, 0],
+        [ZangleSin, ZangleCos, 0],
         [0, 0, 1]
-    ]
+    ])
+
+    return np.matmul(np.matmul(XrotationMatrix, YrotationMatrix), ZrotationMatrix)
 
 class Projector():
 
@@ -96,16 +102,16 @@ class Projector():
         return raylist
 
     def generate_projector_rays(self, order):
-        directionlist = [np.array([self.direction.get_x(), self.direction.get_y(), self.direction.get_z()])]  # get central ray
-        projectordirection = directionlist[0]
-        for orderindex in range(1, order + 1):                         # create zero order column
-            xangle = self.get_grating_equation_angle(orderindex)
-            xrotated = np.matmul(get_rotation_matrix(xangle, 'x'), projectordirection)
-            zrotated = np.matmul(get_rotation_matrix(-60, 'z'), xrotated)
+        centraldirection = np.array([self.direction.get_x(), self.direction.get_y(), self.direction.get_z()])
+        directionlist = [centraldirection]  # get central ray
+        for gratingorderindex in range(1, order + 1):                         # create zero order column
+            xangle = self.get_grating_equation_angle(gratingorderindex)
+            xrotated = np.matmul(get_rotation_matrix(xangle, 0, 0), centraldirection)
+            zrotated = np.matmul(get_rotation_matrix(0, 0, -60), xrotated)
             differencevec = zrotated - xrotated
             directionlist.append(xrotated)
-            for j in range(1, orderindex):                              # create suborder values
-                directionlist.append(xrotated + (j*differencevec/orderindex))
+            for j in range(1, gratingorderindex):                              # create suborder values
+                directionlist.append(xrotated + (j*differencevec/gratingorderindex))
         print(len(directionlist))
 
         fulldirectionlist = []
@@ -116,22 +122,16 @@ class Projector():
         for j in range(1, 6):      # rotate around each quadrant/septant
             for direction in directionlist:
                 # print(direction)
-                newdirectionlist.append(np.matmul(get_rotation_matrix(-60*j, 'z'), direction))
+                newdirectionlist.append(np.matmul(get_rotation_matrix(0, 0, -60*j), direction))
 
         fulldirectionlist.extend(newdirectionlist)
         print(len(fulldirectionlist))
-        nplist = np.vstack(fulldirectionlist)
+        npraylist = np.vstack(fulldirectionlist)
+        print(len(npraylist))
+        nplist = np.unique(npraylist, axis=0)
         print(len(nplist))
-        nplist = np.unique(nplist, axis=0)
-        print(len(nplist))
 
-        x, y, z = nplist.T
-
-        # plot our list in X,Y coordinates
-        plt.scatter(x, y)
-        plt.show()
-
-
+        plot_scatter(npraylist)
         return
 
 

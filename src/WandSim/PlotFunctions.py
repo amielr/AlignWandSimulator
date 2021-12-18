@@ -7,7 +7,8 @@ from matplotlib import cm
 from matplotlib.ticker import LinearLocator
 
 
-def plot_coordinates(xcoords, ycoords):
+def plot_scatter(data):
+    xcoords, ycoords, zcoords = data.T
     plt.scatter(xcoords, ycoords)
     plt.show()
     return
