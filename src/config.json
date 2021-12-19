@@ -74,7 +74,7 @@
                                 "name": "Blue projector 2",
                                 "center": [ 8, 0, 3.2 ],
                                 "direction": [0, 0, -1],
-                                "rotation": [ 0, 0, 1 ],
+                                "rotation": [  0, -15, -10 ],
                                 "rotationformat": "angle",
                                 "type": "projector_green",
                                 "wavelength": 450

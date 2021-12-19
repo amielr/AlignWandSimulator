@@ -55,28 +55,11 @@ class Vector():
         self.z = self.z/normalizer
         return
 
-    def __sub__(self, vector):
-        return Vector(self.x - vector.x, self.y - vector.y, self.z - vector.z)
+    #def __sub__(self, vector):
+    #    return Vector(self.x - vector.x, self.y - vector.y, self.z - vector.z)
 
     def __add__(self, vector):
         return Vector(self.x + vector.x, self.y + vector.y, self.z + vector.z)
 
     def __mul__(self, scalar):
         return Vector(self.x * scalar, self.y * scalar, self.z * scalar)
-
-    def angle_vector_converter(self, conversiondirection):
-        alpha, beta, gamma = 0, 0, 0
-        if conversiondirection != "angle":
-            alpha = math.acos(self.x/self.length())
-            beta = math.acos(self.y/self.length())
-            gamma = math.acos(self.z/self.length())
-        else:
-            self.x = math.sin(self.x)
-            self.y = math.sin(self.y)
-            self.z = math.cos(self.z)
-            self.normalize()
-
-        return Vector(alpha, beta, gamma)
-
-
-

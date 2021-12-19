@@ -47,9 +47,9 @@ def get_rotation_matrix(Xangle, Yangle, Zangle):
 class Projector():
 
     projectorName = "Blue projector 1"
-    center = Vector(0, 0, 0)
-    direction = Vector(0, 0, 0)
-    rotationDirection = Vector(0, 0, 0)  # todo: change from vector direction to angle direction
+    center = np.array([0, 0, 0])
+    direction = np.array([0, 0, 0])
+    rotationDirection = np.array([0, 0, 0])  # todo: change from vector direction to angle direction
     projectorType = "projector_blue"
     wavelength = 450
     ParentRay = Ray((0, 0, 0), (0, 0, 1), 1)
@@ -59,9 +59,9 @@ class Projector():
 
     def __init__(self, _name, _center,_direction, _rotation, _wavelength, _type):
         self.projectorName = "noName" if _name is None else _name
-        self.center = Vector(0, 0, 0) if _center is None else Vector(_center[0], _center[1], _center[2])
-        self.direction = Vector(0, 0, 0) if _direction is None else Vector(_direction[0], _direction[1], _direction[2])
-        self.rotationDirection = Vector(0, 0, 0) if _rotation is None else Vector(_rotation[0], _rotation[1], _rotation[2])
+        self.center = np.array([0, 0, 0]) if _center is None else np.array([_center[0], _center[1], _center[2]])
+        self.direction = np.array([0, 0, 0]) if _direction is None else np.array([_direction[0], _direction[1], _direction[2]])
+        self.rotationDirection = np.array([0, 0, 0]) if _rotation is None else np.array([_rotation[0], _rotation[1], _rotation[2]])
         self.wavelength = 0 if _wavelength is None else _wavelength*1e-9
         self.projectorType = "noType" if _type is None else _type
         self.central_parent_ray()
@@ -69,13 +69,13 @@ class Projector():
 
     def __str__(self):
         return "Projector Name: %s - Origin x %s, y %s , z %s - Direction x %s, y %s , z %s - Wavelength: %s, NoOfProj: %s"\
-               % (self.projectorName, self.center.get_x(), self.center.get_y(), self.center.get_z(),
-                  self.rotationDirection.get_x(), self.rotationDirection.get_y(), self.rotationDirection.get_z(),
+               % (self.projectorName, self.center[0], self.center[1], self.center[2],
+                  self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2],
                   self.wavelength, self.NoOfProjectors)
 
     def central_parent_ray(self):
-        self.ParentRay = Ray((self.center.x, self.center.y, self.center.z),
-                             (self.rotationDirection.x, self.rotationDirection.y, self.rotationDirection.z), 1, self)
+        self.ParentRay = Ray((self.center[0], self.center[1], self.center[2]),
+                             (self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2]), 1, self)
         self.NoOfProjectorRays += 1
         Projector.NoOfProjectorRays += 1
         # print(self.ParentRay)
@@ -102,7 +102,7 @@ class Projector():
         return raylist
 
     def generate_projector_rays(self, order):
-        centraldirection = np.array([self.direction.get_x(), self.direction.get_y(), self.direction.get_z()])
+        centraldirection = np.array([self.direction[0], self.direction[1], self.direction[2]])
         directionlist = [centraldirection]  # get central ray
         for gratingorderindex in range(1, order + 1):                         # create zero order column
             xangle = self.get_grating_equation_angle(gratingorderindex)
@@ -131,7 +131,10 @@ class Projector():
         nplist = np.unique(npraylist, axis=0)
         print(len(nplist))
 
-        plot_scatter(npraylist)
+
+        finaldirections = np.matmul(get_rotation_matrix(self.rotationDirection[0],self.rotationDirection[1],self.rotationDirection[2]), nplist.T).T
+
+        plot_scatter(finaldirections)
         return
 
 

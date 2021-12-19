@@ -17,18 +17,6 @@ with open('../src/config.json') as config_file:
 
 def startSimulator():
 
-    #sf = ScalarField()
-    #xgrid, ygrid, zgrid = sf.grating_grid()
-    #xcoord, ycoord, zcoord = sf.grating_degree(5, 5, get_lattice_const())
-    #print(zcoord)
-    # xcoord, ycoord = sf.grating_degree(5, 5, config["LatticeConst"])
-
-    # xxcoords, yycoords = np.meshgrid(xcoord, ycoord)
-
-    # print(xcoord)
-    # print(ycoord)
-    # plot_coordinates(xcoord, ycoord)
-
     windowsList, projectorsList, reflectivesurface = create_object_lists()
 
     sampleprojector = projectorsList[0]
@@ -67,8 +55,8 @@ def create_windows():
     windowlist = []
     for window in config["windows"]:
         name, normal, center, thickness, refractiveindex = get_window_parameters_from_json(window)
-        windowobject = WindowLens(name, thickness, Vector(center[0], center[1], center[2]),
-                                  Vector(normal[0], normal[1], normal[2]), refractiveindex)
+        windowobject = WindowLens(name, thickness, np.array([center[0], center[1], center[2]]),
+                                  np.array([normal[0], normal[1], normal[2]]), refractiveindex)
         windowlist.append(windowobject)
     return windowlist
 
@@ -87,8 +75,8 @@ def create_surfaces():
     surfaceList = []
     for surface in config["surfaces"]:
         name, normal, center = get_surface_parameters_from_json(surface)
-        surfaceobject = Surface(name, Vector(center[0], center[1], center[2]),
-                                  Vector(normal[0], normal[1], normal[2]))
+        surfaceobject = Surface(name, np.array([center[0], center[1], center[2]]),
+                                  np.array([normal[0], normal[1], normal[2]]))
         surfaceList.append(surfaceobject)
     return surfaceList
 
