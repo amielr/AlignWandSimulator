@@ -1,12 +1,13 @@
-from src.WandSim.Vector import *
+import numpy as np
+import math
 
 class Ray():
 
     ParentSource = 'string'
     EventRegister = 'string'
     NumberOfRays = 0
-    Origin = np.array([0, 0, 0])
-    Direction = np.array([0, 0, 0])
+    #Origin = np.empty((1, 3))
+    #Direction = np.empty((1, 3))
     Amplitude = 1
     Wavelength = 450
 

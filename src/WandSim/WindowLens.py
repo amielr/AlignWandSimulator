@@ -1,4 +1,3 @@
-from src.WandSim.Vector import Vector
 from src.WandSim.Surface import Surface
 from src.WandSim.Ray import Ray
 

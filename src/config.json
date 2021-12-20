@@ -97,7 +97,7 @@
                                 "rotation": [ 0, 0, -5 ],
                                 "rotationformat": "angle",
                                 "type": "projector_blue",
-                                "wavelength": 450
+                                "wavelength": 550
 
                 },
 
@@ -108,7 +108,7 @@
                                 "rotation": [ 0, 0, 5 ],
                                 "rotationformat": "angle",
                                 "type": "projector_blue",
-                                "wavelength": 450
+                                "wavelength": 550
 
                 },
                 {
@@ -118,7 +118,7 @@
                                 "rotation": [ 0, 15, 10 ],
                                 "rotationformat": "angle",
                                 "type": "projector_green",
-                                "wavelength": 550
+                                "wavelength": 450
 
                 }
 ],

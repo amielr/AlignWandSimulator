@@ -1,5 +1,3 @@
-from src.WandSim.Vector import Vector
-from src.WandSim.Ray import Ray
 import numpy as np
 
 
