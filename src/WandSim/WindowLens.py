@@ -49,8 +49,6 @@ class WindowLens(Surface):
     def propogate_ray_to_endof_window(self, _incidentray):
         windowS2Point = self.CenterPoint + self.Normal * self.Thickness
         surface = Surface("s2", windowS2Point, self.Normal)
-        print(_incidentray)
-        print(surface)
         _incidentray.ray_surface_intersection(surface)
 
     def transmit_ray_through_window(self, _incidentray):
