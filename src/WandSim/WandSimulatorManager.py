@@ -21,16 +21,17 @@ def startSimulator():
 
 
     #rayA = Ray((0, 0, 2), (0, 0, -1), 8, 'proj1')
-    rayA = Ray((-1, -2, 2), (0.3, 0, -1), 1, "proj2")
-
-    # print("before")
-    # print(rayA)
-    rayA.ray_surface_intersection(windowsList[0])
-    windowsList[0].transmit_ray_through_window(rayA)
-    # print("after refraction at window surface", rayA)
-    rayA.ray_surface_intersection(reflectivesurface[0])
-    rayA.get_reflection_from_surface(reflectivesurface[0])
-    print("after reflection at surface", rayA)
+    # rayA = Ray((-1, -2, 2), (0, 1, -1), 1, "proj2")
+    #
+    # print("before", rayA)
+    #
+    # rayA.ray_surface_intersection(windowsList[0])
+    # print("ray at window s1 surface", rayA)
+    # windowsList[0].transmit_ray_through_window(rayA)
+    # print("after transmission at window surface", rayA)
+    # rayA.ray_surface_intersection(reflectivesurface[0])
+    # rayA.get_reflection_from_surface(reflectivesurface[0])
+    # print("after reflection at surface", rayA)
     return
 
 

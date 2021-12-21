@@ -5,9 +5,7 @@ from src.WandSim.WindowLens import *
 
 def run_projectors(projectorsList):
     for projector in projectorsList:
-        projector.generate_projector_rays(0)
-        # origins = projector.get_projector_ray_origins()
-        # directions = projector.get_projector_ray_directions()
+        projector.generate_projector_rays(1)
         plot_quiver(projector.ProjectorRayList)
 
 
