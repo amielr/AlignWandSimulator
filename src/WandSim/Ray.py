@@ -63,10 +63,14 @@ class Ray():
         return self.Wavelength
 
     def snell_law_v2(self, _windownormalvector, _refractivmuratio):
-        s2 = _windownormalvector*math.sqrt(1-math.pow(_refractivmuratio, 2)*(1-math.pow(np.dot(_windownormalvector, self.Direction), 2)))\
-             + (self.Direction - _windownormalvector*(np.dot(_windownormalvector, self.Direction)))*_refractivmuratio
-
-        self.set_direction(s2[0], s2[1], s2[2])
+        #print(self.Direction)
+        index = 1-math.pow(_refractivmuratio, 2)*(1 - math.pow(np.dot(_windownormalvector, self.Direction), 2))
+        if (index) < 0:
+            print("total internal reflection", index)
+        else:
+            s2 = math.sqrt(1-math.pow(_refractivmuratio, 2)*(1-math.pow(np.dot(_windownormalvector, self.Direction), 2)))*_windownormalvector\
+                 + _refractivmuratio*(self.Direction - (np.dot(_windownormalvector, self.Direction))*_windownormalvector)
+            self.set_direction(s2[0], s2[1], s2[2])
 
     def ray_surface_intersection(self, _surface, epsilon=1e-6):
 

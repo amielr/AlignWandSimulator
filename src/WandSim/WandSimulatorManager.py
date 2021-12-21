@@ -9,29 +9,29 @@ with open('../src/config.json') as config_file:
 def startSimulator():
 
     windowsList, projectorsList, reflectivesurface = create_object_lists()
-    #
-    # run_projectors(projectorsList)
-    #
-    # print("Number of projector rays is:")
-    # print(Projector.NoOfProjectorRays)
-    #
-    #
-    # propagate_rays_through_system(Projector.ProjectorRayList, windowsList, reflectivesurface)
+
+    run_projectors(projectorsList)
+
+    print("Number of projector rays is:")
+    print(Projector.NoOfProjectorRays)
+
+
+    propagate_rays_through_system(Projector.ProjectorRayList, windowsList, reflectivesurface)
 
 
 
     #rayA = Ray((0, 0, 2), (0, 0, -1), 8, 'proj1')
-    rayA = Ray((-1, -2, 2), (0, 1, -1), 1, "proj2")
-
-    print("before", rayA)
-
-    rayA.ray_surface_intersection(windowsList[0])
-    print("after refraction at window surface", rayA)
-    windowsList[0].transmit_ray_through_window(rayA)
-    print("after transmission at window surface", rayA)
-    rayA.ray_surface_intersection(reflectivesurface[0])
-    rayA.get_reflection_from_surface(reflectivesurface[0])
-    print("after reflection at surface", rayA)
+    # rayA = Ray((-1, -2, 2), (0, 1, -1), 1, "proj2")
+    #
+    # print("before", rayA)
+    #
+    # rayA.ray_surface_intersection(windowsList[0])
+    # print("ray at window s1 surface", rayA)
+    # windowsList[0].transmit_ray_through_window(rayA)
+    # print("after transmission at window surface", rayA)
+    # rayA.ray_surface_intersection(reflectivesurface[0])
+    # rayA.get_reflection_from_surface(reflectivesurface[0])
+    # print("after reflection at surface", rayA)
     return
 
 

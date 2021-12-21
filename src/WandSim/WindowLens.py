@@ -53,8 +53,12 @@ class WindowLens(Surface):
 
     def transmit_ray_through_window(self, _incidentray):
         self.refract_ray_at_window_surface(_incidentray)
+        #print("after s1 incidence", _incidentray)
         self.propogate_ray_to_endof_window(_incidentray)
+        #print("at s2 incidence", _incidentray)
         self.refract_ray_at_window_surface(_incidentray)
+        #print("after s2 transmittance", _incidentray)
+
         return _incidentray
 
 
