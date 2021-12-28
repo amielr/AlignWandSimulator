@@ -38,19 +38,20 @@ def startSimulator():
 def propagate_rays_through_system(rayList, windowsList, reflectiveSurface):
     for ray in rayList:
         ray.ray_surface_intersection(windowsList[0])
-    plot_quiver(rayList)
+    plot_quiver(rayList, windowsList[0].SurfaceName + " before")
+    beforelist = rayList.copy()
     for ray in rayList:
         windowsList[0].transmit_ray_through_window(ray)
         # print("after refraction at window surface", rayA)
-    plot_quiver(rayList)
+    plot_quiver(rayList, windowsList[0].SurfaceName + " after" )
 
     for ray in rayList:
         ray.ray_surface_intersection(reflectiveSurface[0])
-    plot_quiver(rayList)
+    plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
 
     for ray in rayList:
         ray.get_reflection_from_surface(reflectiveSurface[0])
-    plot_quiver(rayList)
+    plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
 
     return
 

@@ -3,13 +3,10 @@ from src.WandSim.Ray import Ray
 
 
 class WindowLens(Surface):
-
-    #todo change refractive index to dictionary for different wavelengths
     RefractiveIndexDictionary = 0
     Thickness = 0
     MuIn = 0
     MuOut = 0
-    IsRayInWindow = False
 
     def __init__(self, _windowname=None, _thickness=None, _centralpoint=None, _normal=None, _refractiveindex=None):
         super().__init__(_windowname, _centralpoint, _normal)
@@ -20,9 +17,6 @@ class WindowLens(Surface):
     def __str__(self):
         return "The Window values are: WindowName - %s Thickness - %s  RefractiveIndex - %s" \
                % (Surface.SurfaceName, self.Thickness, self.RefractiveIndexDictionary)
-
-    # todo def create_refractive_index_dictionary(self):
-    #     return
 
     def calculate_mu(self, raymu):
         self.MuIn = 1/raymu
@@ -39,11 +33,11 @@ class WindowLens(Surface):
 
         raymuu = self.RefractiveIndexDictionary.get(str(_incidentray.get_ray_wavelength()))
         self.calculate_mu(raymuu)
-        if not (self.IsRayInWindow):
+        if not (_incidentray.IsRayInWindow):
             _incidentray.snell_law_v2(self.get_surface_normal(), self.get_mu_in())
         else:
             _incidentray.snell_law_v2(self.get_surface_normal(), self.get_mu_out())
-        self.IsRayInWindow = not self.IsRayInWindow
+        _incidentray.IsRayInWindow = not _incidentray.IsRayInWindow
 
 
     def propogate_ray_to_endof_window(self, _incidentray):

@@ -5,8 +5,8 @@ from src.WandSim.WindowLens import *
 
 def run_projectors(projectorsList):
     for projector in projectorsList:
-        projector.generate_projector_rays(1)
-        plot_quiver(projector.ProjectorRayList)
+        projector.generate_projector_rays(config["GratingOrder"])
+    plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
 
 
 def create_object_lists():
@@ -56,7 +56,7 @@ def get_surface_parameters_from_json(surface):
 def create_projectors():
     projectorList = []
     for projector in config["lights"]:
-        name, center, direction, rotation, rotationformat, wavelength, projtype = get_projector_parameters_from_json(projector)
+        name, center, direction, rotation, wavelength, projtype = get_projector_parameters_from_json(projector)
 
         projectorobject = Projector(name, center, direction,
                                     rotation, wavelength, projtype)
@@ -67,9 +67,8 @@ def create_projectors():
 def get_projector_parameters_from_json(projector):
     name = projector["name"]
     rotation = projector["rotation"]
-    rotationformat = projector["rotationformat"]
     center = projector["center"]
     direction = projector["direction"]
     wavelength = projector["wavelength"]
     projtype = projector["type"]
-    return name, center, direction, rotation, rotationformat, wavelength, projtype
+    return name, center, direction, rotation, wavelength, projtype

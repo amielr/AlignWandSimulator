@@ -10,6 +10,7 @@ class Ray():
     #Direction = np.empty((1, 3))
     Amplitude = 1
     Wavelength = 450
+    IsRayInWindow = False
 
     def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None):
 
