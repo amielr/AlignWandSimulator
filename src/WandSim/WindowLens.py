@@ -49,10 +49,10 @@ class WindowLens(Surface):
         self.refract_ray_at_window_surface(_incidentray)
         #print("after s1 incidence", _incidentray)
         self.propogate_ray_to_endof_window(_incidentray)
+        #_incidentray.tell_the_story(self.SurfaceName, _incidentray.Origin)
         #print("at s2 incidence", _incidentray)
         self.refract_ray_at_window_surface(_incidentray)
         #print("after s2 transmittance", _incidentray)
-
         return _incidentray
 
 

@@ -3,8 +3,8 @@ import math
 
 class Ray():
 
-    ParentSource = 'string'
-    EventRegister = 'string'
+    ParentSource = ''
+    RayStory = ''
     NumberOfRays = 0
     #Origin = np.empty((1, 3))
     #Direction = np.empty((1, 3))
@@ -19,6 +19,7 @@ class Ray():
         self.Direction = self.normalize(self.Direction)
         self.Amplitude = 0 if _amplitude is None else _amplitude
         self.ParentSource = 'NoName' if _parentsource is None else _parentsource
+        self.tell_the_story(_parentsource.projectorName,self.Origin)
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
         Ray.NumberOfRays += 1
 
@@ -31,9 +32,6 @@ class Ray():
         normal_array = an_array / norm
         return normal_array
 
-    def set_parent_source(self, _parentsource):
-        self.ParentSource = _parentsource
-        return
 
     def get_parent_source(self):
         return self.ParentSource
@@ -80,7 +78,8 @@ class Ray():
         raydirection = self.get_direction()
         originplanepointvector = _surface.CenterPoint - rayorigin
 
-        lineplanetest =  np.dot(surfacenormal, raydirection)
+        lineplanetest = \
+            np.dot(surfacenormal, raydirection)
 
         if abs(lineplanetest) < epsilon:
             print("we have an intersection error: no intersection or line is within plane")
@@ -90,6 +89,7 @@ class Ray():
             if kfactor >= 0:
                 intersectionpoint = rayorigin + raydirection * kfactor
                 self.set_origin(intersectionpoint[0], intersectionpoint[1], intersectionpoint[2])
+                self.tell_the_story(_surface.SurfaceName, self.Origin)
                 # print("The intersection point is: %s" % (self.get_origin()))
             else:
                 print("the intersection point is behind us, ray does not meet plane")
@@ -101,14 +101,9 @@ class Ray():
 
         return self.set_direction(reflectedRayDirection[0], reflectedRayDirection[1], reflectedRayDirection[2])
 
-    def register_event(self,_objectname):
-        self.EventRegister += str(_objectname)
+    def tell_the_story(self,_objectname, coordinates):
+        self.RayStory += str(_objectname+ "," + str(coordinates) + ",")
         return
-    # def propRays(self, distance):
-    #     newRay = self
-    #     newRay[0] = getOrigin(ray) + getDirection(ray)*distance
-    #     return newRay
-    #
-    # def propogate_rays_in_free_space(self, distance):
-    #     propogatedRays = [propRays(ray, distance) for ray in rayList]
-    #     return propogatedRays
+
+    def print_story(self):
+        print(self.RayStory)

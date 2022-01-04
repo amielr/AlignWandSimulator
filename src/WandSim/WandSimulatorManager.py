@@ -53,6 +53,9 @@ def propagate_rays_through_system(rayList, windowsList, reflectiveSurface):
         ray.get_reflection_from_surface(reflectiveSurface[0])
     plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
 
+    for ray in rayList:
+        ray.print_story()
+
     return
 
 
