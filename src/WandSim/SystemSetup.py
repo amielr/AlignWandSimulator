@@ -1,6 +1,7 @@
 from src.WandSim.Projector import *
 from src.WandSim.PlotFunctions import *
 from src.WandSim.WindowLens import *
+from src.WandSim.Camera import *
 
 
 def run_projectors(projectorsList):
@@ -13,7 +14,8 @@ def create_object_lists():
     windowList = create_windows()
     reflectivesurface = create_surfaces()
     projectors = create_projectors()
-    return windowList, projectors, reflectivesurface
+    cameras = create_cameras()
+    return windowList, projectors, reflectivesurface, cameras
 
 
 def create_windows():
@@ -72,3 +74,23 @@ def get_projector_parameters_from_json(projector):
     wavelength = projector["wavelength"]
     projtype = projector["type"]
     return name, center, direction, rotation, wavelength, projtype
+
+
+def create_cameras():
+    cameraList = []
+    for camera in config["cameras"]:
+        name, center, direction, rotation, cameratype = get_camera_parameters_from_json(camera)
+
+        cameraobject = Camera(name, center, direction,
+                                    rotation, cameratype)
+        cameraList.append(cameraobject)
+    return cameraList
+
+
+def get_camera_parameters_from_json(camera):
+    name = camera["name"]
+    center = camera["center"]
+    direction = camera["direction"]
+    rotation = camera["rotation"]
+    cameratype = camera["type"]
+    return name, center, direction, rotation, cameratype

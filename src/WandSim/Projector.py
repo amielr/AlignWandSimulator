@@ -135,7 +135,7 @@ class Projector():
             self.NoOfProjectorRays += 1
             Projector.NoOfProjectorRays += 1
 
-        # plot_scatter(finaldirections)
+        plot_scatter(finaldirections)
         print(self)
         return
 

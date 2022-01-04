@@ -1,22 +1,19 @@
 from src.WandSim.SystemSetup import *
-import json
-
-
-with open('../src/config.json') as config_file:
-    config = json.load(config_file)
 
 
 def startSimulator():
 
-    windowsList, projectorsList, reflectivesurface = create_object_lists()
+    windowsList, projectorsList, reflectivesurface, cameraList = create_object_lists()
 
-    run_projectors(projectorsList)
+    #run_projectors(projectorsList)
 
     print("Number of projector rays is:")
     print(Projector.NoOfProjectorRays)
 
 
-    propagate_rays_through_system(Projector.ProjectorRayList, windowsList, reflectivesurface)
+    print(cameraList[0])
+
+    #propagate_rays_through_system(Projector.ProjectorRayList, windowsList, reflectivesurface)
 
 
 
@@ -53,8 +50,8 @@ def propagate_rays_through_system(rayList, windowsList, reflectiveSurface):
         ray.get_reflection_from_surface(reflectiveSurface[0])
     plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
 
-    for ray in rayList:
-        ray.print_story()
+    # for ray in rayList:
+    #     ray.print_story()
 
     return
 
