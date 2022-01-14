@@ -9,18 +9,22 @@ class Ray():
     #Origin = np.empty((1, 3))
     #Direction = np.empty((1, 3))
     Amplitude = 1
+    IndexI = 0
+    IndexJ = 0
     Wavelength = 450
     IsRayInWindow = False
 
-    def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None):
+    def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None):
 
         self.Origin = np.array([0, 0, 0]) if _origin is None else np.array([_origin[0], _origin[1], _origin[2]])
         self.Direction = np.array([0, 0, 0]) if _direction is None else np.array([_direction[0], _direction[1], _direction[2]])
         self.Direction = self.normalize(self.Direction)
         self.Amplitude = 0 if _amplitude is None else _amplitude
         self.ParentSource = 'NoName' if _parentsource is None else _parentsource
-        self.tell_the_story(_parentsource.projectorName,self.Origin)
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
+        self.IndexI = _Iindex
+        self.IndexJ = _Jindex
+        self.tell_the_story(_parentsource.projectorName, self.IndexI, self.IndexJ, self.Origin)
         Ray.NumberOfRays += 1
 
     def __str__(self):
@@ -54,8 +58,8 @@ class Ray():
     def set_origin(self, _x, _y, _z):
         self.Origin = np.array([_x, _y, _z])
 
-    def set_direction(self, _dx, _dy, _dz):
-        self.Direction = np.array([_dx, _dy, _dz])
+    def set_direction(self, _direction):
+        self.Direction = _direction
         self.Direction = self.normalize(self.Direction)
 
     def get_ray_wavelength(self):
@@ -69,7 +73,8 @@ class Ray():
         else:
             s2 = math.sqrt(1-math.pow(_refractivmuratio, 2)*(1-math.pow(np.dot(_windownormalvector, self.Direction), 2)))*_windownormalvector\
                  + _refractivmuratio*(self.Direction - (np.dot(_windownormalvector, self.Direction))*_windownormalvector)
-            self.set_direction(s2[0], s2[1], s2[2])
+            self.set_direction(np.array([s2[0], s2[1], s2[2]]))
+
 
     def ray_surface_intersection(self, _surface, epsilon=1e-6):
 
@@ -89,7 +94,7 @@ class Ray():
             if kfactor >= 0:
                 intersectionpoint = rayorigin + raydirection * kfactor
                 self.set_origin(intersectionpoint[0], intersectionpoint[1], intersectionpoint[2])
-                self.tell_the_story(_surface.SurfaceName, self.Origin)
+                self.tell_the_story(_surface.SurfaceName, self.IndexI, self.IndexJ, self.Origin)
                 # print("The intersection point is: %s" % (self.get_origin()))
             else:
                 print("the intersection point is behind us, ray does not meet plane")
@@ -99,10 +104,10 @@ class Ray():
         ndot = np.dot(self.Direction, surfacenormal)
         reflectedRayDirection = self.Direction - surfacenormal * (2 * ndot)
 
-        return self.set_direction(reflectedRayDirection[0], reflectedRayDirection[1], reflectedRayDirection[2])
+        return self.set_direction(np.array([reflectedRayDirection[0], reflectedRayDirection[1], reflectedRayDirection[2]]))
 
-    def tell_the_story(self,_objectname, coordinates):
-        self.RayStory += str(_objectname+ "," + str(coordinates) + ",")
+    def tell_the_story(self, _objectname, i, j, coordinates):
+        self.RayStory += str(_objectname + "," + str(i) + ',' + str(j) + ',' + str(coordinates) + ",")
         return
 
     def print_story(self):

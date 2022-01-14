@@ -5,15 +5,19 @@ def startSimulator():
 
     windowsList, projectorsList, reflectivesurface, cameraList = create_object_lists()
 
-    #run_projectors(projectorsList)
+    run_projectors(projectorsList)
+
 
     print("Number of projector rays is:")
     print(Projector.NoOfProjectorRays)
 
+    # print(cameraList[0])
+    #
+    # print(cameraList[0].worldToCamera)
+    #
+    # print(np.matmul(cameraList[0].cameraLocalToWorld, cameraList[0].worldToCamera))
 
-    print(cameraList[0])
-
-    #propagate_rays_through_system(Projector.ProjectorRayList, windowsList, reflectivesurface)
+    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList)
 
 
 
@@ -32,26 +36,29 @@ def startSimulator():
     return
 
 
-def propagate_rays_through_system(rayList, windowsList, reflectiveSurface):
-    for ray in rayList:
-        ray.ray_surface_intersection(windowsList[0])
-    plot_quiver(rayList, windowsList[0].SurfaceName + " before")
-    beforelist = rayList.copy()
-    for ray in rayList:
-        windowsList[0].transmit_ray_through_window(ray)
-        # print("after refraction at window surface", rayA)
-    plot_quiver(rayList, windowsList[0].SurfaceName + " after" )
+def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList):
 
-    for ray in rayList:
-        ray.ray_surface_intersection(reflectiveSurface[0])
-    plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
+    #rayList = Projector.AllProjectorRaysList
+    Projector.AllProjectorRaysList.clear()
+    for projector in projectorList:
+        for ray in projector.ProjectorRayList:
+            ray.ray_surface_intersection(windowsList[0])
+            #windowsList[0].transmit_ray_through_window(ray)
+            #ray.ray_surface_intersection(reflectiveSurface[0])
 
-    for ray in rayList:
-        ray.get_reflection_from_surface(reflectiveSurface[0])
-    plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
+
+            Projector.AllProjectorRaysList.append(ray)
+        plot_projector_ray_locations_scatter(projector)
+    #plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
+    plot_quiver(Projector.AllProjectorRaysList, windowsList[0].SurfaceName+"full raylist")
+
 
     # for ray in rayList:
-    #     ray.print_story()
+    #     ray.get_reflection_from_surface(reflectiveSurface[0])
+    # plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
+
+    for ray in Projector.AllProjectorRaysList:
+        ray.print_story()
 
     return
 

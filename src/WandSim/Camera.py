@@ -15,7 +15,7 @@ class Camera():
     direction = np.array([0, 0, 0])
     rotationDirection = np.array([0, 0, 0])
     cameraLocalToWorld = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
-    #worldToCamera = np.linalg.inv(cameraLocalToWorld)
+    worldToCamera = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
     PixelXsize = 450
     PixelYsize = 0
     NoOfXPixels = 0
@@ -32,6 +32,7 @@ class Camera():
         #self.direction = np.matmul(get_rotation_matrix(_rotation[0], _rotation[1], _rotation[2]), self.direction)
         self.cameraType = "noType" if _type is None else _type
         self.set_Camera_to_World_Transformation()
+        self.worldToCamera = np.linalg.inv(self.cameraLocalToWorld)
         #self.NoOfProjectors += 1
         return
 
@@ -45,5 +46,22 @@ class Camera():
         B = np.vstack((B, self.center))
         B = np.hstack((B,np.array([[0],[0],[0],[1]])))
         self.cameraLocalToWorld = B
+
+        Inverse = np.linalg.inv(self.cameraLocalToWorld)
+        #print(Inverse)
+
         #print(self.cameraLocalToWorld)
         return
+
+    #def set_World_to_Camera_Transformation(self):
+
+    def fermatManager(self, ray):
+        DistanceD = self.center - ray.Origin
+        return
+
+    def get_incident_ray_angle(self, rayList):
+        for ray in rayList:
+            self.fermatManager(ray)
+        return
+
+

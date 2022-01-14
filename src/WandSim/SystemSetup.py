@@ -6,16 +6,17 @@ from src.WandSim.Camera import *
 
 def run_projectors(projectorsList):
     for projector in projectorsList:
-        projector.generate_projector_rays(config["GratingOrder"])
-    plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
+        projector.generate_projector_rays()
+        plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
+    plot_quiver(Projector.AllProjectorRaysList, str(Projector.projectorName))
 
 
 def create_object_lists():
     windowList = create_windows()
     reflectivesurface = create_surfaces()
     projectors = create_projectors()
-    cameras = create_cameras()
-    return windowList, projectors, reflectivesurface, cameras
+    camerasList = create_cameras()
+    return windowList, projectors, reflectivesurface, camerasList
 
 
 def create_windows():
@@ -58,10 +59,9 @@ def get_surface_parameters_from_json(surface):
 def create_projectors():
     projectorList = []
     for projector in config["lights"]:
-        name, center, direction, rotation, wavelength, projtype = get_projector_parameters_from_json(projector)
+        name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant = get_projector_parameters_from_json(projector)
 
-        projectorobject = Projector(name, center, direction,
-                                    rotation, wavelength, projtype)
+        projectorobject = Projector(name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant)
         projectorList.append(projectorobject)
     return projectorList
 
@@ -73,7 +73,9 @@ def get_projector_parameters_from_json(projector):
     direction = projector["direction"]
     wavelength = projector["wavelength"]
     projtype = projector["type"]
-    return name, center, direction, rotation, wavelength, projtype
+    gratingorder = projector["GratingOrder"]
+    latticConstant = projector["LatticeConst"]
+    return name, center, direction, rotation, wavelength, projtype, gratingorder, latticConstant
 
 
 def create_cameras():

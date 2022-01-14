@@ -5,17 +5,33 @@ from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 
-def plot_scatter(data):
+def plot_scatter(name, data):
     xcoords, ycoords, zcoords = data.T
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title(name)
     plt.scatter(xcoords, ycoords)
-    plt.show()
+    plt.savefig(str(name)+".jpg")
+    plt.show(block=True)
     return
 
-def plot_scalar_field(xcoords, ycoords, zcoords):
-    plt.contourf(xcoords, ycoords, zcoords, cmap='jet')
 
-    plt.colorbar()
-    plt.show()
+def plot_projector_ray_locations_scatter(projector):
+    rayLocationList = []
+    print(projector.NoOfProjectorRays)
+    print(len(projector.ProjectorRayList))
+    for ray in projector.ProjectorRayList:
+        rayLocationList.append(ray.Origin)
+    npraylocationlist = np.vstack(rayLocationList)
+    xcoords, ycoords, zcoords = npraylocationlist.T
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title(projector.projectorName)
+    plt.scatter(xcoords, ycoords)
+
+    plt.savefig(str(projector.projectorName) + "_raylocations"+ ".jpg")
+    plt.show(block = True)
     return
 
 def plot_quiver(rayList, title):
@@ -39,5 +55,4 @@ def plot_quiver(rayList, title):
     ax.set_xlim(-2, 18)
     ax.set_ylim(-10, 10)
     ax.set_zlim(-30, 3.3)
-
     plt.show(block = True)

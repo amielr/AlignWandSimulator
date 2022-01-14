@@ -4,7 +4,7 @@
         {
           "name": "window1",
           "normal": [0,0,-1],
-          "center": [0,0,-6],
+          "center": [0,0,0],
           "thickness": 1,
           "refractiveindex": {"450":10,
                               "550":10 }
@@ -71,52 +71,62 @@
 ],
 "lights":        [
                 {
-                                "name": "blue projector 2",
+                                "name": "bp2",
                                 "center": [ 8, 0, 3.2 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [  0, 0, 0 ],
                                 "type": "projector_green",
-                                "wavelength": 450
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3
 
                 },
                       {
-                                "name": "blue projector 1",
+                                "name": "bp1",
                                 "center": [ -1.35, 0, 2.55 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 0, -15, -10 ],
                                 "type": "projector_blue",
-                                "wavelength": 450
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3
                 },
 
                 {
-                                "name": "green projector 1",
+                                "name": "gp1",
                                 "center": [ 3, 0, 3.2 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 0, 0, -5 ],
                                 "type": "projector_blue",
-                                "wavelength": 550
+                                "wavelength": 550,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3
 
                 },
 
                 {
-                                "name": "green projector 2",
+                                "name": "gp2",
                                 "center": [ 13, 0, 3.2 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 0, 0, 5 ],
                                 "type": "projector_blue",
-                                "wavelength": 550
+                                "wavelength": 550,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3
 
                 },
                 {
-                                "name": "blue projector 3",
+                                "name": "bp3",
                                 "center": [ 17.75, 0, 2.6 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 0, 15, 10 ],
                                 "type": "projector_green",
-                                "wavelength": 450
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3
 
                 }
 ],
   "LatticeConst": 7.6,
-  "GratingOrder": 3
+  "GratingOrder": 11
 }
