@@ -7,10 +7,12 @@ class WindowLens(Surface):
     Thickness = 0
     MuIn = 0
     MuOut = 0
+    WindowsThickness = 0
 
     def __init__(self, _windowname=None, _thickness=None, _centralpoint=None, _normal=None, _refractiveindex=None):
         super().__init__(_windowname, _centralpoint, _normal)
         self.Thickness = 0 if _thickness is None else _thickness
+        WindowLens.WindowsThickness =+ self.Thickness
         self.RefractiveIndexDictionary = 0 if _refractiveindex is None else _refractiveindex
         return
 

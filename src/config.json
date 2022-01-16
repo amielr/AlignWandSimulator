@@ -6,8 +6,8 @@
           "normal": [0,0,-1],
           "center": [0,0,0],
           "thickness": 1,
-          "refractiveindex": {"450":10,
-                              "550":10 }
+          "refractiveindex": {"450":1.65,
+                              "550":1.5 }
         },
     {
           "name": "window2",
@@ -78,7 +78,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 3
+                                "GratingOrder": 0
 
                 },
                       {
@@ -89,7 +89,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 3
+                                "GratingOrder": 0
                 },
 
                 {
@@ -100,7 +100,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 3
+                                "GratingOrder": 0
 
                 },
 
@@ -112,7 +112,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 3
+                                "GratingOrder": 0
 
                 },
                 {
@@ -123,7 +123,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 3
+                                "GratingOrder": 0
 
                 }
 ],

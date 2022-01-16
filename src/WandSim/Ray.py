@@ -1,5 +1,7 @@
 import numpy as np
 import math
+import csv
+
 
 class Ray():
 
@@ -24,7 +26,7 @@ class Ray():
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
         self.IndexI = _Iindex
         self.IndexJ = _Jindex
-        self.tell_the_story(_parentsource.projectorName, self.IndexI, self.IndexJ, self.Origin)
+        self.write_the_story(_parentsource.projectorName, self.IndexI, self.IndexJ, self.Origin)
         Ray.NumberOfRays += 1
 
     def __str__(self):
@@ -94,7 +96,7 @@ class Ray():
             if kfactor >= 0:
                 intersectionpoint = rayorigin + raydirection * kfactor
                 self.set_origin(intersectionpoint[0], intersectionpoint[1], intersectionpoint[2])
-                self.tell_the_story(_surface.SurfaceName, self.IndexI, self.IndexJ, self.Origin)
+                self.write_the_story(_surface.SurfaceName, self.IndexI, self.IndexJ, self.Origin)
                 # print("The intersection point is: %s" % (self.get_origin()))
             else:
                 print("the intersection point is behind us, ray does not meet plane")
@@ -106,9 +108,17 @@ class Ray():
 
         return self.set_direction(np.array([reflectedRayDirection[0], reflectedRayDirection[1], reflectedRayDirection[2]]))
 
-    def tell_the_story(self, _objectname, i, j, coordinates):
+    def write_the_story(self, _objectname, i, j, coordinates):
         self.RayStory += str(_objectname + "," + str(i) + ',' + str(j) + ',' + str(coordinates) + ",")
         return
 
-    def print_story(self):
+    def tell_the_story(self):
         print(self.RayStory)
+
+    def print_the_story(self):
+        #RESULT = ['apple', 'cherry', 'orange', 'pineapple', 'strawberry']
+        with open('output.csv', 'w') as result_file:
+            wr = csv.writer(result_file, dialect='excel')
+            wr.writerow(self.RayStory)
+            wr.writerow('/n')
+

@@ -7,7 +7,7 @@ from src.WandSim.Camera import *
 def run_projectors(projectorsList):
     for projector in projectorsList:
         projector.generate_projector_rays()
-        plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
+    #    plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
     plot_quiver(Projector.AllProjectorRaysList, str(Projector.projectorName))
 
 
