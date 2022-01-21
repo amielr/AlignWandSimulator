@@ -2,6 +2,7 @@ from src.WandSim.Ray import *
 from src.WandSim.PlotFunctions import *
 from src.WandSim.Projector import get_rotation_matrix
 from src.WandSim.WindowLens import *
+from copy import deepcopy
 import json
 import numpy as np
 
@@ -59,6 +60,7 @@ class Camera():
     def get_fermat_parameters(self, ray, window):
         print("ray Origin", ray.Origin)
         print("camera center", self.center)
+        DistanceVector = self.center[:2] - ray.Origin[:2]
         DistanceD = np.linalg.norm(self.center[:2] - ray.Origin[:2])
         print(DistanceD)
         height = abs(self.center[2]-ray.Origin[2])
@@ -66,7 +68,7 @@ class Camera():
         x = height - y
         N1 = 1
         N2 = window.RefractiveIndexDictionary.get(str(ray.get_ray_wavelength()))
-        return N1, N2, DistanceD, x, y
+        return N1, N2, DistanceD, DistanceVector, x, y
 
     def find_fermat_root(self,N1, N2, DistanceD, x, y ):
         z4 = math.pow(N1, 2) - math.pow(N2, 2)
@@ -77,28 +79,49 @@ class Camera():
         z1 = 2 * DistanceD * math.pow(N2, 2) * math.pow(x, 2)
         z0 = -math.pow(N2, 2) * math.pow(DistanceD, 2) * math.pow(x, 2)
 
-        print([z4, z3, z2, z1, z0])
+        #print([z4, z3, z2, z1, z0])
 
         FermatPolynomial = np.poly1d([z4, z3, z2, z1, z0])
         FermatRoots = FermatPolynomial.roots
-        print(N1, N2, DistanceD, x, y)
+        #print(N1, N2, DistanceD, x, y)
 
-        print(FermatPolynomial)
-        print(FermatRoots)
+        #print(FermatPolynomial)
+        #print(FermatRoots)
 
 
         for root in FermatRoots:
             if abs(root) < DistanceD:
                 print("This is the chosen distance: ", root)
-            else:
-                print("We threw this distance out: ", root, abs(root))
+                return root
+            # else:
+            #     print("We threw this distance out: ", root, abs(root))
 
         return
 
-    def fermatManager(self, ray, window):
-        N1, N2, DistanceD, x, y = self.get_fermat_parameters(ray, window)
+    def fermatManager(self, rayList, window):
+        rootList = []
+        self.cameraRayList = deepcopy(rayList)
+        for ray in self.cameraRayList:
+            N1, N2, DistanceD, DistanceVector, x, y = self.get_fermat_parameters(ray, window)
+            rootList.append(self.find_fermat_root(N1, N2, DistanceD, x, y))
+            DistanceVector = DistanceVector / np.linalg.norm(DistanceVector)
+            print("vector Direction: ", DistanceVector)
+            location = ray.Origin[:2] + DistanceVector*DistanceD
+            print("vector location: ", location)
+            print("comparison camera location: ", self.center)
+            windowincident = ray.Origin[:2] + DistanceVector*rootList[-1]
+            windowincident = np.insert(windowincident, 2, ray.Origin[2]+x)
+            print("window location root:", windowincident)
+            rayDirection = windowincident - ray.Origin
+            print("ray direction: ", rayDirection)
+            ray.set_origin(self.center)
+            ray.set_direction(rayDirection)
+            ray.write_the_story(self.cameraName, 0, 0, ray.Direction)
+        print(len(self.cameraRayList))
+        plot_quiver(self.cameraRayList, self.cameraName)
+        print(rootList)
+        print("End of camera: ", self.cameraName)
 
-        self.find_fermat_root(N1, N2, DistanceD, x, y)
 
         return
 

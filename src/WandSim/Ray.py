@@ -57,8 +57,8 @@ class Ray():
     def get_direction(self):
         return self.Direction
 
-    def set_origin(self, _x, _y, _z):
-        self.Origin = np.array([_x, _y, _z])
+    def set_origin(self, _origin):
+        self.Origin = _origin
 
     def set_direction(self, _direction):
         self.Direction = _direction
@@ -95,7 +95,8 @@ class Ray():
 
             if kfactor >= 0:
                 intersectionpoint = rayorigin + raydirection * kfactor
-                self.set_origin(intersectionpoint[0], intersectionpoint[1], intersectionpoint[2])
+                #fixing
+                self.set_origin(intersectionpoint)
                 self.write_the_story(_surface.SurfaceName, self.IndexI, self.IndexJ, self.Origin)
                 # print("The intersection point is: %s" % (self.get_origin()))
             else:

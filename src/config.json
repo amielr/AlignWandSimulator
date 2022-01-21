@@ -78,7 +78,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1
 
                 },
                       {
@@ -89,7 +89,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1
                 },
 
                 {
@@ -100,7 +100,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1
 
                 },
 
@@ -112,7 +112,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1
 
                 },
                 {
@@ -123,7 +123,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1
 
                 }
 ],

@@ -19,9 +19,6 @@ class ScalarField:
         self._yGrid = []
         self._zScalarField = []
 
-    def grating_kernel(self):
-        return
-
 
     def grating_grid(self):
         coordinateConstant = get_lattice_const()

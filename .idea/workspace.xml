@@ -5,15 +5,10 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Ray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/ScalarField.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/ScalarField.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/WindowLens.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WindowLens.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bp1_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/bp1_raylocations.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bp2_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/bp2_raylocations.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/bp3_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/bp3_raylocations.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gp1_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/gp1_raylocations.jpg" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/gp2_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/gp2_raylocations.jpg" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -92,7 +87,9 @@
       <workItem from="1639479051470" duration="41540000" />
       <workItem from="1639867846625" duration="57114000" />
       <workItem from="1641289178923" duration="20419000" />
-      <workItem from="1641899917034" duration="47190000" />
+      <workItem from="1641899917034" duration="50743000" />
+      <workItem from="1642489519718" duration="3850000" />
+      <workItem from="1642540711496" duration="10222000" />
     </task>
     <servers />
   </component>
@@ -120,38 +117,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="487" height="466" key="DebuggerActiveHint/0.0.1366.738@0.0.1366.738" timestamp="1639951588773" />
-    <state width="1323" height="218" key="GridCell.Tab.0.bottom" timestamp="1642290892384">
+    <state width="1323" height="209" key="GridCell.Tab.0.bottom" timestamp="1642776369367">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="218" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1642290892384" />
-    <state width="1323" height="218" key="GridCell.Tab.0.center" timestamp="1642290892384">
+    <state width="1323" height="209" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1642776369367" />
+    <state width="1323" height="209" key="GridCell.Tab.0.center" timestamp="1642776369367">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="218" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1642290892384" />
-    <state width="1323" height="218" key="GridCell.Tab.0.left" timestamp="1642290892384">
+    <state width="1323" height="209" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1642776369367" />
+    <state width="1323" height="209" key="GridCell.Tab.0.left" timestamp="1642776369367">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="218" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1642290892384" />
-    <state width="1323" height="218" key="GridCell.Tab.0.right" timestamp="1642290892384">
+    <state width="1323" height="209" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1642776369367" />
+    <state width="1323" height="209" key="GridCell.Tab.0.right" timestamp="1642776369367">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="218" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1642290892384" />
-    <state width="1323" height="275" key="GridCell.Tab.1.bottom" timestamp="1642281077449">
+    <state width="1323" height="209" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1642776369367" />
+    <state width="1323" height="275" key="GridCell.Tab.1.bottom" timestamp="1642489504087">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="275" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1642281077449" />
-    <state width="1323" height="275" key="GridCell.Tab.1.center" timestamp="1642281077449">
+    <state width="1323" height="275" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1642489504087" />
+    <state width="1323" height="275" key="GridCell.Tab.1.center" timestamp="1642489504086">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="275" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1642281077449" />
-    <state width="1323" height="275" key="GridCell.Tab.1.left" timestamp="1642281077449">
+    <state width="1323" height="275" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1642489504086" />
+    <state width="1323" height="275" key="GridCell.Tab.1.left" timestamp="1642489504086">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="275" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1642281077449" />
-    <state width="1323" height="275" key="GridCell.Tab.1.right" timestamp="1642281077449">
+    <state width="1323" height="275" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1642489504086" />
+    <state width="1323" height="275" key="GridCell.Tab.1.right" timestamp="1642489504087">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="275" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1642281077449" />
+    <state width="1323" height="275" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1642489504087" />
     <state x="184" y="11" key="SettingsEditor" timestamp="1639946337953">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -164,10 +161,14 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="244" y="105" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.738@0.0.1366.738" timestamp="1638060947108" />
-    <state x="679" y="145" width="607" height="536" key="find.popup" timestamp="1642154836302">
+    <state x="679" y="145" width="607" height="536" key="find.popup" timestamp="1642775816788">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="679" y="145" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1642154836302" />
+    <state x="679" y="145" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1642775816788" />
+    <state x="424" y="12" key="refactoring.ChangeSignatureDialog" timestamp="1642710950617">
+      <screen x="0" y="0" width="1366" height="738" />
+    </state>
+    <state x="424" y="12" key="refactoring.ChangeSignatureDialog/0.0.1366.738@0.0.1366.738" timestamp="1642710950617" />
     <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1641904834510">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -192,6 +193,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1642290892369" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1642775818069" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

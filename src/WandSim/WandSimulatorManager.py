@@ -13,7 +13,9 @@ def startSimulator():
     print("Number of projector rays is:")
     print(Projector.NoOfProjectorRays)
 
-    print(cameraList[0].fermatManager(Projector.AllProjectorRaysList[1], windowsList[0]))
+    for camera in cameraList:
+        camera.CameraDotRayList = camera.fermatManager(Projector.AllProjectorRaysList, windowsList[0])
+
 
     # print(cameraList[0])
     #
