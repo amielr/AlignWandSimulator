@@ -102,22 +102,21 @@ class Ray():
             else:
                 print("the intersection point is behind us, ray does not meet plane")
 
-    def get_reflection_from_surface(self, _surface):
-        surfacenormal = _surface.get_surface_normal()
-        ndot = np.dot(self.Direction, surfacenormal)
-        reflectedRayDirection = self.Direction - surfacenormal * (2 * ndot)
-
-        return self.set_direction(np.array([reflectedRayDirection[0], reflectedRayDirection[1], reflectedRayDirection[2]]))
 
     def write_the_story(self, _objectname, i, j, coordinates):
-        self.RayStory += str(_objectname + "," + str(i) + ',' + str(j) + ',' + str(coordinates) + ",")
+        if len(self.RayStory) == 0:
+            self.RayStory += str(str(i) + ',' + str(j) + "," +_objectname + ",")
+            self.RayStoryCoordinates = coordinates
+        else:
+            self.RayStory += str(_objectname + ",")
+            self.RayStoryCoordinates = np.vstack((self.RayStoryCoordinates, coordinates))
         return
 
     def tell_the_story(self):
         print(self.RayStory)
+        print(self.RayStoryCoordinates)
 
     def print_the_story(self):
-        #RESULT = ['apple', 'cherry', 'orange', 'pineapple', 'strawberry']
         with open('output.csv', 'w') as result_file:
             wr = csv.writer(result_file, dialect='excel')
             wr.writerow(self.RayStory)

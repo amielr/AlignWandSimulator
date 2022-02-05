@@ -34,6 +34,46 @@ def plot_projector_ray_locations_scatter(projector):
     plt.show(block = True)
     return
 
+
+def plot_ray_locations(rays):
+    rayLocationList = []
+    for ray in rays:
+        rayLocationList.append(ray.Origin)
+    npraylocationlist = np.vstack(rayLocationList)
+    xcoords, ycoords, zcoords = npraylocationlist.T
+
+    fig = plt.figure()
+    ax = fig.add_subplot(111, projection='3d')
+
+    ax.set_xlabel('$X$')
+    ax.set_ylabel('$Y$')
+    ax.set_zlabel('$Z$')
+
+    ax.scatter(xcoords, ycoords, zcoords)
+    plt.show(block=True)
+    return
+
+def plot_ray_path_line(rays):
+    #x,y,z = ray.Origin
+    fig = plt.figure()
+    plt.subplot(projection='3d')
+    for ray in rays:
+        x, y, z = [], [], []
+        for rayCoordinates in ray.RayStoryCoordinates:
+            print(rayCoordinates)
+            x.append(rayCoordinates[0])
+            y.append(rayCoordinates[1])
+            z.append(rayCoordinates[2])
+        plt.plot(x, y, z)
+
+    plt.xlabel("X")
+    plt.ylabel("Y")
+    plt.show(block=True)
+    # ax = fig.add_subplot(111, projection='3d')
+    # ax.plot(x, y, z)
+    # plt.show()
+
+
 def plot_quiver(rayList, title):
     Origins, Directions =  rayList[0].Origin, rayList[0].Direction
     colours = []

@@ -121,9 +121,8 @@ class Camera():
         plot_quiver(self.cameraRayList, self.cameraName)
         print(rootList)
         print("End of camera: ", self.cameraName)
-
-
         return
+
 
     def get_incident_ray_angle(self, rayList):
         for ray in rayList:

@@ -9,12 +9,14 @@ def startSimulator():
 
     propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList)
 
+    plot_ray_path_line(Projector.AllProjectorRaysList)
+
 
     print("Number of projector rays is:")
     print(Projector.NoOfProjectorRays)
 
-    for camera in cameraList:
-        camera.CameraDotRayList = camera.fermatManager(Projector.AllProjectorRaysList, windowsList[0])
+    #for camera in cameraList:
+    #    camera.CameraDotRayList = camera.fermatManager(Projector.AllProjectorRaysList, windowsList[0])
 
 
     # print(cameraList[0])
@@ -52,8 +54,11 @@ def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, pro
             ray.ray_surface_intersection(reflectiveSurface[0])
 
 
+
             Projector.AllProjectorRaysList.append(ray)
-    plot_projector_ray_locations_scatter(projector)
+
+    plot_ray_locations(Projector.AllProjectorRaysList)
+    #plot_projector_ray_locations_scatter(projector)
     #plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
     plot_quiver(Projector.AllProjectorRaysList, windowsList[0].SurfaceName+"full raylist")
 
