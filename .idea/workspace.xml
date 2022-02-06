@@ -3,12 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/PlotFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/PlotFunctions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/Ray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/ScalarField.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/ScalarField.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/bp3_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/bp3_raylocations.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/output.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/output.csv" afterDir="false" />
     </list>
@@ -93,7 +88,7 @@
       <workItem from="1642489519718" duration="3850000" />
       <workItem from="1642540711496" duration="10222000" />
       <workItem from="1642876601561" duration="19375000" />
-      <workItem from="1643836475127" duration="6417000" />
+      <workItem from="1643836475127" duration="7721000" />
     </task>
     <servers />
   </component>
@@ -121,22 +116,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="487" height="466" key="DebuggerActiveHint/0.0.1366.738@0.0.1366.738" timestamp="1639951588773" />
-    <state width="1323" height="209" key="GridCell.Tab.0.bottom" timestamp="1644102005151">
+    <state width="1323" height="209" key="GridCell.Tab.0.bottom" timestamp="1644179155635">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="209" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1644102005151" />
-    <state width="1323" height="209" key="GridCell.Tab.0.center" timestamp="1644102005151">
+    <state width="1323" height="209" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1644179155635" />
+    <state width="1323" height="209" key="GridCell.Tab.0.center" timestamp="1644179155635">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="209" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1644102005151" />
-    <state width="1323" height="209" key="GridCell.Tab.0.left" timestamp="1644102005151">
+    <state width="1323" height="209" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1644179155635" />
+    <state width="1323" height="209" key="GridCell.Tab.0.left" timestamp="1644179155635">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="209" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1644102005151" />
-    <state width="1323" height="209" key="GridCell.Tab.0.right" timestamp="1644102005151">
+    <state width="1323" height="209" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1644179155635" />
+    <state width="1323" height="209" key="GridCell.Tab.0.right" timestamp="1644179155635">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="209" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1644102005151" />
+    <state width="1323" height="209" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1644179155635" />
     <state width="1323" height="275" key="GridCell.Tab.1.bottom" timestamp="1643749023890">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -186,11 +181,6 @@
           <line>148</line>
           <option name="timeStamp" value="9" />
         </line-breakpoint>
-        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py</url>
-          <line>59</line>
-          <option name="timeStamp" value="10" />
-        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -202,6 +192,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1644102005136" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1644179155619" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

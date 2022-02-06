@@ -7,7 +7,7 @@ def startSimulator():
 
     run_projectors(projectorsList)
 
-    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList)
+    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
 
     plot_ray_path_line(Projector.AllProjectorRaysList)
 
@@ -15,54 +15,37 @@ def startSimulator():
     print("Number of projector rays is:")
     print(Projector.NoOfProjectorRays)
 
-    #for camera in cameraList:
-    #    camera.CameraDotRayList = camera.fermatManager(Projector.AllProjectorRaysList, windowsList[0])
 
-
-    # print(cameraList[0])
-    #
-    # print(cameraList[0].worldToCamera)
-    #
-    # print(np.matmul(cameraList[0].cameraLocalToWorld, cameraList[0].worldToCamera))
-
-
-
-
-    #rayA = Ray((0, 0, 2), (0, 0, -1), 8, 'proj1')
-    # rayA = Ray((-1, -2, 2), (0, 1, -1), 1, "proj2")
-    #
-    # print("before", rayA)
-    #
-    # rayA.ray_surface_intersection(windowsList[0])
-    # print("ray at window s1 surface", rayA)
-    # windowsList[0].transmit_ray_through_window(rayA)
-    # print("after transmission at window surface", rayA)
-    # rayA.ray_surface_intersection(reflectivesurface[0])
-    # rayA.get_reflection_from_surface(reflectivesurface[0])
-    # print("after reflection at surface", rayA)
     return
 
 
-def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList):
 
-    #rayList = Projector.AllProjectorRaysList
+def propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList):
+    # rayList = Projector.AllProjectorRaysList
     Projector.AllProjectorRaysList.clear()
     for projector in projectorList:
         for ray in projector.ProjectorRayList:
-            ray.ray_surface_intersection(windowsList[0])
-            windowsList[0].transmit_ray_through_window(ray)
+            for window in windowsList:
+                ray.ray_surface_intersection(window)
+                window.transmit_ray_through_window(ray)
             ray.ray_surface_intersection(reflectiveSurface[0])
-
-
 
             Projector.AllProjectorRaysList.append(ray)
 
     plot_ray_locations(Projector.AllProjectorRaysList)
-    #plot_projector_ray_locations_scatter(projector)
-    #plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
-    plot_quiver(Projector.AllProjectorRaysList, windowsList[0].SurfaceName+"full raylist")
+    # plot_projector_ray_locations_scatter(projector)
+    # plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
+    plot_quiver(Projector.AllProjectorRaysList, windowsList[0].SurfaceName + "full raylist")
+
+def propagate_rays_back_to_cameras(cameraList, windowsList):
+    for camera in cameraList:
+        camera.CameraDotRayList = camera.fermatManager(Projector.AllProjectorRaysList, windowsList)
 
 
+def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):
+
+    propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList)
+    propagate_rays_back_to_cameras(cameraList, windowsList)
     # for ray in rayList:
     #     ray.get_reflection_from_surface(reflectiveSurface[0])
     # plot_quiver(rayList, reflectiveSurface[0].SurfaceName)

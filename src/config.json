@@ -11,7 +11,7 @@
     {
           "name": "window2",
           "normal": [0,0,-1],
-          "center": [0,0,0],
+          "center": [0,0,-5],
           "thickness": 2,
           "refractiveindex": {"450":1.7,
                               "550":1.75}
