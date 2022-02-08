@@ -60,7 +60,7 @@ def plot_ray_path_line(rays):
     for ray in rays:
         x, y, z = [], [], []
         for rayCoordinates in ray.RayStoryCoordinates:
-            print(rayCoordinates)
+            #print(rayCoordinates)
             x.append(rayCoordinates[0])
             y.append(rayCoordinates[1])
             z.append(rayCoordinates[2])
