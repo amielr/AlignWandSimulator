@@ -1,3 +1,4 @@
+#from src.WandSim.WindowLens import *
 import numpy as np
 import math
 import csv
@@ -15,6 +16,8 @@ class Ray():
     IndexJ = 0
     Wavelength = 450
     IsRayInWindow = False
+    RayMuuValue = 1
+    RayPathDistance = 0
 
     def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None):
 
@@ -26,7 +29,7 @@ class Ray():
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
         self.IndexI = _Iindex
         self.IndexJ = _Jindex
-        self.write_the_story(_parentsource.projectorName, self.IndexI, self.IndexJ, self.Origin)
+        self.write_the_story(_parentsource.projectorName, self.Origin, 1)
         Ray.NumberOfRays += 1
 
     def __str__(self):
@@ -80,6 +83,7 @@ class Ray():
 
     def ray_surface_intersection(self, _surface, epsilon=1e-6):
 
+        #print(isinstance(_surface, WindowLens))
         surfacenormal = _surface.get_surface_normal()
         rayorigin = self.get_origin()
         raydirection = self.get_direction()
@@ -97,24 +101,29 @@ class Ray():
                 intersectionpoint = rayorigin + raydirection * kfactor
                 #fixing
                 self.set_origin(intersectionpoint)
-                self.write_the_story(_surface.SurfaceName, self.IndexI, self.IndexJ, self.Origin)
+                self.write_the_story(_surface.Name, self.Origin, self.RayMuuValue)
                 # print("The intersection point is: %s" % (self.get_origin()))
             else:
+
                 print("the intersection point is behind us, ray does not meet plane")
 
 
-    def write_the_story(self, _objectname, i, j, coordinates):
+    def write_the_story(self, _objectname, coordinates, refractiveIndex):
         if len(self.RayStory) == 0:
-            self.RayStory += str(str(i) + ',' + str(j) + "," +_objectname + ",")
+            self.RayStory += str(_objectname + ",")
             self.RayStoryCoordinates = coordinates
+            self.RayrefractiveIndexList = np.array([refractiveIndex])
         else:
             self.RayStory += str(_objectname + ",")
             self.RayStoryCoordinates = np.vstack((self.RayStoryCoordinates, coordinates))
+            self.RayrefractiveIndexList = np.vstack((self.RayrefractiveIndexList, self.RayMuuValue))
+
         return
 
     def tell_the_story(self):
         print(self.RayStory)
         print(self.RayStoryCoordinates)
+        print(self.RayrefractiveIndexList)
 
     def print_the_story(self):
         with open('output.csv', 'w') as result_file:

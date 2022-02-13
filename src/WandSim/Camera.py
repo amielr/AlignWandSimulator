@@ -3,8 +3,11 @@ from src.WandSim.PlotFunctions import *
 from src.WandSim.Projector import get_rotation_matrix
 from src.WandSim.WindowLens import *
 from copy import deepcopy
+from src.WandSim.WandSimulatorManager import *
 import json
 import numpy as np
+
+#import cupy as np
 
 with open('../src/config.json') as config_file:
     config = json.load(config_file)
@@ -25,6 +28,7 @@ class Camera():
     AperatureAngle = 0
     CameraDotRayList = []
     NoOfCameras = 0
+    #Camerawindow = WindowLens()
 
     def __init__(self, _name, _center, _direction, _rotation, _type):
         self.cameraName = "noName" if _name is None else _name
@@ -33,7 +37,7 @@ class Camera():
         self.rotationDirection = np.array([0, 0, 0]) if _rotation is None else np.array([_rotation[0], _rotation[1], _rotation[2]])
         #self.direction = np.matmul(get_rotation_matrix(_rotation[0], _rotation[1], _rotation[2]), self.direction)
         self.cameraType = "noType" if _type is None else _type
-        self.window = WindowLens()
+        #self.window = WindowLens()
         #self.set_Camera_to_World_Transformation()
         #self.worldToCamera = np.linalg.inv(self.cameraLocalToWorld)
         #self.NoOfProjectors += 1
@@ -43,17 +47,72 @@ class Camera():
         return "Camera Name: %s - Origin %s, - Direction  %s, - Rotation %s cameraLocalToWorld - %s "\
                % (self.cameraName, self.center, self.direction, self.rotationDirection, self.cameraLocalToWorld)
 
-    def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowList):
-        for ray in rayList:
+    def reorder_list_from_closest_to_furthest(self, ray, surfaceList):
+        distanceList = []
+        flag = False
+        for surface in surfaceList:
+            distance = np.linalg.norm(ray.Origin - surface.CenterPoint)
+            distanceList.append(distance)
+            print(str(surface.Name) + " distance from ray origin to surface camera module: " + str(distance))
+
+        sortedSurfacesList = [x for _, x in sorted(zip(distanceList, surfaceList))]
+        [print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
+        return sortedSurfacesList
+
+
+
+    def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
+
+        self.cameraRayList = deepcopy(rayList)
+
+        print("we are here", self.cameraRayList)
+        for ray in self.cameraRayList:
             ray.Direction = ray.normalize(self.center - ray.Origin)
-            print("ray surface camera direction", ray.Direction)
-            for window in windowList:
-                ray.ray_surface_intersection(window)
-                window.propogate_ray_to_endof_window(ray)
-            print(self.cameraName, " ray window intersection", ray.Origin)
+            #print("ray surface camera direction", ray.Direction, ray.Origin)
+            sortedwindowsList = self.reorder_list_from_closest_to_furthest(ray, windowsList)
+
+            for window in sortedwindowsList:
+                sortedSurfaceList = self.reorder_list_from_closest_to_furthest(ray, window.surfaceList)
+
+                ray.IsRayInWindow = not ray.IsRayInWindow
+                window.ray_window_refractive_registration(ray)
+                for surface in sortedSurfaceList:
+                    print("the closest surface to ray from camera mode is : " + str(surface.Name) + " " + str(surface.CenterPoint))
+
+                    ray.ray_surface_intersection(surface)
+                    ray.IsRayInWindow = not ray.IsRayInWindow
+                    window.ray_window_refractive_registration(ray)
+
+                print(self.cameraName, " ray surface intersection", ray.Origin)
+
+            ray.IsRayInWindow = not ray.IsRayInWindow
+            window.ray_window_refractive_registration(ray)
+            ray.set_origin(self.center)
+            ray.write_the_story(self.cameraName, ray.Origin, ray.RayMuuValue)
+
+        return self.cameraRayList
+
+
+
+
+
+    def determine_time_distance_path_length(self):
+        distance = 0
+        for ray in self.cameraRayList:
+            print("ray to be determined", ray)
+            distancesList = np.linalg.norm(np.diff(ray.RayStoryCoordinates, axis=0), axis=1)
+            print("distance list: ", distancesList)
+            ray.RayrefractiveIndexList = np.delete(ray.RayrefractiveIndexList, 0)
+            print("refractive index list = ", ray.RayrefractiveIndexList)
+            ray.RayPathDistance = np.sum(distancesList)
+            print("total path distance before index correction = ", ray.RayPathDistance)
+            products = [a * b for a, b in zip(distancesList, ray.RayrefractiveIndexList)]
+            ray.RayPathDistance = np.sum(products)
+            print("total path distance after index correction= ", ray.RayPathDistance)
         return
 
-    def get_intersectionpoints_with_window_surfaces(self):
+    def optimize_Camera_rays(self):
+        self.determine_time_distance_path_length()
         return
 
     # def get_fermat_parameters(self, ray, window):

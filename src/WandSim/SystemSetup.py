@@ -4,6 +4,7 @@ from src.WandSim.WindowLens import *
 from src.WandSim.Camera import *
 
 
+
 def run_projectors(projectorsList):
     for projector in projectorsList:
         projector.generate_projector_rays()
@@ -16,6 +17,7 @@ def create_object_lists():
     reflectivesurface = create_surfaces()
     projectors = create_projectors()
     camerasList = create_cameras()
+
     return windowList, projectors, reflectivesurface, camerasList
 
 
@@ -26,17 +28,19 @@ def create_windows():
         windowobject = WindowLens(name, thickness, np.array([center[0], center[1], center[2]]),
                                   np.array([normal[0], normal[1], normal[2]]), refractiveindex)
         windowlist.append(windowobject)
+
     return windowlist
 
 
 def get_window_parameters_from_json(window):
 
-        name = window["name"]
-        normal = window["normal"]
-        center = window["center"]
-        thickness = window["thickness"]
-        refractiveindex = window["refractiveindex"]
-        return name, normal, center, thickness, refractiveindex
+    name = window["name"]
+    normal = window["normal"]
+    center = window["center"]
+    thickness = window["thickness"]
+    refractiveindex = window["refractiveindex"]
+
+    return name, normal, center, thickness, refractiveindex
 
 
 def create_surfaces():
