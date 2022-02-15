@@ -18,6 +18,7 @@ class Ray():
     IsRayInWindow = False
     RayMuuValue = 1
     RayPathDistance = 0
+    RayStoryCoordinates = np.array(0)
 
     def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None):
 
@@ -103,26 +104,36 @@ class Ray():
                 self.set_origin(intersectionpoint)
                 self.write_the_story(_surface.Name, self.Origin, self.RayMuuValue)
                 # print("The intersection point is: %s" % (self.get_origin()))
+                return(self.Origin)
             else:
 
                 print("the intersection point is behind us, ray does not meet plane")
 
 
+    def get_reflection_from_surface(self, _surface):
+        surfacenormal = _surface.get_surface_normal()
+        ndot = np.dot(self.Direction, surfacenormal)
+        reflectedRayDirection = self.Direction - surfacenormal * (2 * ndot)
+        self.set_direction(reflectedRayDirection)
+
+        #self.write_the_story(_surface.Name, self.Origin, self.RayMuuValue)
+        return
+
     def write_the_story(self, _objectname, coordinates, refractiveIndex):
         if len(self.RayStory) == 0:
             self.RayStory += str(_objectname + ",")
+            self.RayrefractiveIndexList = np.array(refractiveIndex)
             self.RayStoryCoordinates = coordinates
-            self.RayrefractiveIndexList = np.array([refractiveIndex])
         else:
             self.RayStory += str(_objectname + ",")
+            self.RayrefractiveIndexList = np.hstack((self.RayrefractiveIndexList, self.RayMuuValue))
             self.RayStoryCoordinates = np.vstack((self.RayStoryCoordinates, coordinates))
-            self.RayrefractiveIndexList = np.vstack((self.RayrefractiveIndexList, self.RayMuuValue))
 
         return
 
     def tell_the_story(self):
-        print(self.RayStory)
         print(self.RayStoryCoordinates)
+        print(self.RayStory)
         print(self.RayrefractiveIndexList)
 
     def print_the_story(self):

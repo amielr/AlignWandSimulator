@@ -16,10 +16,14 @@ def startSimulator():
 
 
 def ray_window_manager(ray, window):
+    ray.IsRayInWindow = not ray.IsRayInWindow
+    window.ray_window_refractive_registration(ray)
     ray.ray_surface_intersection(window.surfaceList[0])
     # print("our object type is: ", type(window))
     # print(isinstance(window, WindowLens))
     window.transmit_ray_through_window(ray)
+    # ray.IsRayInWindow = not ray.IsRayInWindow
+    # window.ray_window_refractive_registration(ray)
     return
 
 
@@ -36,7 +40,9 @@ def propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, project
 
                 ray_window_manager(ray, window)
 
+
             ray.ray_surface_intersection(reflectiveSurface[0])
+            ray.get_reflection_from_surface(reflectiveSurface[0])
             #print("our object type is: ", type(reflectiveSurface[0]))
             #print(isinstance(reflectiveSurface[0], WindowLens))
             Projector.AllProjectorRaysList.append(ray)
@@ -75,11 +81,11 @@ def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, pro
     # for ray in rayList:
     #     ray.get_reflection_from_surface(reflectiveSurface[0])
     # plot_quiver(rayList, reflectiveSurface[0].SurfaceName)
-    for camera in cameraList:
-        for ray in camera.cameraRayList:
-    #for ray in Projector.AllProjectorRaysList:
-            ray.tell_the_story()
-            ray.print_the_story()
+    # for camera in cameraList:
+    #     for ray in camera.cameraRayList:
+    # #for ray in Projector.AllProjectorRaysList:
+    #         ray.tell_the_story()
+    #         ray.print_the_story()
     return
 
 

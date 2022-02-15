@@ -57,21 +57,25 @@ class WindowLens:
             _incidentray.snell_law_v2(self.Normal, self.get_mu_in())
         else:
             _incidentray.snell_law_v2(self.Normal, self.get_mu_out())
-        _incidentray.IsRayInWindow = not _incidentray.IsRayInWindow
+        # _incidentray.IsRayInWindow = not _incidentray.IsRayInWindow
 
     def ray_window_refractive_registration(self, _incidentray):
-        raymuu = self.RefractiveIndexDictionary.get(str(_incidentray.get_ray_wavelength()))
-        self.calculate_mu(raymuu)
+
         if not (_incidentray.IsRayInWindow):
-            _incidentray.RayMuuValue = raymuu
+            _incidentray.RayMuuValue =  1
         else:
-            _incidentray.RayMuuValue = 1
+            raymuu = self.RefractiveIndexDictionary.get(str(_incidentray.get_ray_wavelength()))
+            self.calculate_mu(raymuu)
+            _incidentray.RayMuuValue = raymuu
 
 
 
 
     def propogate_ray_to_endof_window(self, _incidentray):
         surface = self.surfaceList[1]
+
+        _incidentray.IsRayInWindow = not _incidentray.IsRayInWindow
+        self.ray_window_refractive_registration(_incidentray)
         _incidentray.ray_surface_intersection(surface)
 
 

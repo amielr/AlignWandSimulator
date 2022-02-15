@@ -19,3 +19,11 @@ class Surface:
 
     def get_surface_normal(self):
         return self.Normal
+
+    def determine_surface_z_given_xy(self, XY):
+        x = XY[0]
+        y = XY[1]
+        surfacXYZ = self.Normal
+        Dfactor = -np.dot(self.Normal, self.CenterPoint)
+        z = (surfacXYZ[0]*x +surfacXYZ[1]*y - Dfactor)/surfacXYZ[2]
+        return z
