@@ -69,9 +69,9 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
     for camera in cameraList:
         camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
         camera.optimize_Camera_rays()
-
-    # for camera in cameraList:
-    #     plot_ray_path_line(camera.cameraRayList)
+        
+    for camera in cameraList:
+        plot_ray_path_line(camera.cameraRayList)
 
 
 def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):

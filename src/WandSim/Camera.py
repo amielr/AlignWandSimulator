@@ -102,7 +102,7 @@ class Camera():
         products = [a * b for a, b in zip(distancesList, ray.RayrefractiveIndexList)]
         ray.RayPathDistance = np.sum(products)
         print("total path distance after index correction= ", ray.RayPathDistance)
-        return
+        return ray.RayPathDistance
 
 
     def slice_XY_intersect_of_Surfaces(self, arr):
@@ -115,7 +115,8 @@ class Camera():
     def objective_function_to_minimize_ray_path_distance(self, surfaceXYmatrix, *args):
         ray = args[0]
         adjustedXYZList = []
-        for index, surfaceXY in enumerate(surfaceXYmatrix):
+        reshapedsurfaceXYmatrix = np.reshape(surfaceXYmatrix, (-1, 2))
+        for index, surfaceXY in enumerate(reshapedsurfaceXYmatrix):
             # surfaceXY = [10,10]
             z = ray.windowSurfaceList[index].determine_surface_z_given_xy(surfaceXY)
             print("xy locations are: ", surfaceXY, "z location: ", z)
@@ -131,7 +132,8 @@ class Camera():
         ray.RayStoryCoordinates[-len(ray.DottoCameraRayList):len(ray.RayStoryCoordinates), :] = ray.DottoCameraRayList
         print("Full ray story: ", ray.RayStoryCoordinates)
         # surfaceXY[index] =
-        return self.determine_time_distance_path_length(ray)
+        pathresult = self.determine_time_distance_path_length(ray)
+        return pathresult
 
 
 
@@ -143,11 +145,17 @@ class Camera():
 
             print("sliced: ", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             #[[5,7],[10,10],[11,11],[1,1]]
-            initialConditions = self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList)
+            initialConditions = self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList).flatten()
+            print(type(initialConditions))
             self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
-
+            boundsx = (-20, 20)
+            boundsy = (-20, 20)
+            bounds = [boundsx for i in range(len(initialConditions))]
+            print("function type is: ", type(self.objective_function_to_minimize_ray_path_distance), type(ray))
+            result = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
                 #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
                 #print(z)
+            print("the result is", result)
 
         return
 
