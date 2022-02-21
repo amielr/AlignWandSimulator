@@ -39,6 +39,7 @@ def get_window_parameters_from_json(window):
     center = window["center"]
     thickness = window["thickness"]
     refractiveindex = window["refractiveindex"]
+    #print("refractive index is: ", refractiveindex)
 
     return name, normal, center, thickness, refractiveindex
 
@@ -85,10 +86,11 @@ def get_projector_parameters_from_json(projector):
 def create_cameras():
     cameraList = []
     for camera in config["cameras"]:
-        name, center, direction, rotation, cameratype = get_camera_parameters_from_json(camera)
+        name, center, direction, rotation, cameratype, windowthickness, refractiveindex  = get_camera_parameters_from_json(camera)
 
         cameraobject = Camera(name, center, direction,
-                                    rotation, cameratype)
+                                    rotation, cameratype, windowthickness, refractiveindex)
+        #windowobject = WindowLens(name+"window", windowthickness, center+direction, direction, refractiveindex)
         cameraList.append(cameraobject)
     return cameraList
 
@@ -99,4 +101,7 @@ def get_camera_parameters_from_json(camera):
     direction = camera["direction"]
     rotation = camera["rotation"]
     cameratype = camera["type"]
-    return name, center, direction, rotation, cameratype
+    windowthickness = camera["thickness"]
+    refractiveindex = camera["refractiveindex"]
+
+    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex

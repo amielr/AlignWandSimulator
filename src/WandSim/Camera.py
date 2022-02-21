@@ -17,31 +17,31 @@ class Camera():
     center = np.array([0, 0, 0])
     direction = np.array([0, 0, 0])
     rotationDirection = np.array([0, 0, 0])
-    cameraLocalToWorld = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
-    worldToCamera = np.array([[0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0], [0, 0, 0, 0]])
-    PixelXsize = 450
-    PixelYsize = 0
-    NoOfXPixels = 0
-    NoOfYPixels = 0
-    AperatureAngle = 0
     NoOfCameras = 0
     const = 1
     #Camerawindow = WindowLens()
 
-    def __init__(self, _name, _center, _direction, _rotation, _type):
+    def __init__(self, _name, _center, _direction, _rotation, _type, _windowthickness, _refractiveindex):
         self.cameraName = "noName" if _name is None else _name
         self.center = np.array([0, 0, 0]) if _center is None else np.array([_center[0], _center[1], _center[2]])
         self.direction = np.array([0, 0, 0]) if _direction is None else np.array([_direction[0], _direction[1], _direction[2]])
         self.rotationDirection = np.array([0, 0, 0]) if _rotation is None else np.array([_rotation[0], _rotation[1], _rotation[2]])
         #self.direction = np.matmul(get_rotation_matrix(_rotation[0], _rotation[1], _rotation[2]), self.direction)
         self.cameraType = "noType" if _type is None else _type
-        self.window = WindowLens(self.cameraName+"window", 0.2, self.center+self.const*self.direction, self.direction, 1.5)
-        #self.window = WindowLens()
+        self.windowthickness = 0 if _windowthickness is None else _windowthickness
+        self.refractiveindex = _refractiveindex if _refractiveindex is None else _refractiveindex
+        self.window = WindowLens(self.cameraName+"window", self.windowthickness, self.center+self.direction, self.direction, self.refractiveindex)
+
         return
 
     def __str__(self):
-        return "Camera Name: %s - Origin %s, - Direction  %s, - Rotation %s cameraLocalToWorld - %s "\
-               % (self.cameraName, self.center, self.direction, self.rotationDirection, self.cameraLocalToWorld)
+        return "Camera Name: %s - Origin %s, - Direction  %s, - Rotation %s "\
+               % (self.cameraName, self.center, self.direction, self.rotationDirection)
+
+
+    def setupwindowlens(self):
+        WindowLens(self.cameraName+"window", 0.2, self.center+self.const*self.direction, self.direction, 1.5)
+
 
     def reorder_list_from_closest_to_furthest(self, ray, surfaceList):
         distanceList = []
@@ -49,7 +49,7 @@ class Camera():
         for surface in surfaceList:
             distance = np.linalg.norm(ray.Origin - surface.CenterPoint)
             distanceList.append(distance)
-            #print(str(surface.Name) + " distance from ray origin to surface camera module: " + str(distance))
+            print(str(surface.Name) + " distance from ray origin to surface camera module: " + str(distance))
 
         sortedSurfacesList = [x for _, x in sorted(zip(distanceList, surfaceList))]
         #[print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
@@ -64,7 +64,19 @@ class Camera():
         ray.DottoCameraRayList.append(ray.Origin)
         return
 
+    def add_camera_window_to_window_list(self, windowList):
+        windowList.append(self.window)
+        return windowList
+
     def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
+
+        # self.windowListholder = deepcopy(windowsList)
+        # self.add_camera_window_to_window_list(windowsList)
+        # self.add_camera_window_to_window_list(self.windowListholder)
+        # print(windowsList)
+        # print("camera window list", self.windowListholder)
+
+
 
         self.cameraRayList = deepcopy(rayList)
         #print("we are here", self.cameraRayList)
@@ -159,7 +171,7 @@ class Camera():
             result = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
                 #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
                 #print(z)
-            print("the result is", result)
+            #print("the result is", result)
 
         return
 

@@ -67,7 +67,9 @@ def reorder_list_from_closest_to_furthest(ray, surfaceList):
 
 def propagate_rays_back_to_cameras(cameraList, windowsList):
     for camera in cameraList:
+        windowsList.append(camera.window)
         camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
+        windowsList.remove(camera.window)
         camera.optimize_Camera_rays()
 
     for camera in cameraList:

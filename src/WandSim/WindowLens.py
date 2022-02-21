@@ -27,7 +27,7 @@ class WindowLens:
 
     def __str__(self):
         return "The Window values are: WindowName - %s Thickness - %s  RefractiveIndex - %s" \
-               % (Surface.Name, self.Thickness, self.RefractiveIndexDictionary)
+               % (self.Name, self.Thickness, self.RefractiveIndexDictionary)
 
     def create_surface_List(self):
         self.surfaceList = []

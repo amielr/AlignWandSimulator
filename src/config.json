@@ -30,42 +30,61 @@
                                 "center": [ -1.5,  5, 3.5 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ -15, -12.5, 90 ],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 },
+
                 {
                                 "name": "camera_2",
                                 "center": [ -1.5, -5, 3.5 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, -12.5, -90 ],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 },
                 {
                                 "name": "camera_3",
                                 "center": [ 7.5, 5, 4.7],
                                 "direction": [0, 0, -1],
                                 "rotation": [ -15, 0, 90 ],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 },
                 {
                                 "name": "camera_4",
                                 "center": [ 7.5, -5, 4.7 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, 0, -90 ],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 },
                 {
                                 "name": "camera_5",
                                 "center": [ 16.5, 5, 4.2  ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ -15, 12.5, 90],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 },
                 {
                                 "name": "camera_6",
                                 "center": [ 16.5, -5, 4.2 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, 12.5, -90 ],
-                                "type": "Misumi_Camera"
+                                "type": "Misumi_Camera",
+                                "thickness": 0.2,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
                 }
 ],
 "lights":        [

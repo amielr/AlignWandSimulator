@@ -4,7 +4,10 @@
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/WindowLens.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WindowLens.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/config.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +93,7 @@
       <workItem from="1643836475127" duration="75045000" />
       <workItem from="1644815930149" duration="17810000" />
       <workItem from="1644920238971" duration="18177000" />
-      <workItem from="1645134440647" duration="6109000" />
+      <workItem from="1645134440647" duration="15747000" />
     </task>
     <servers />
   </component>
@@ -114,38 +117,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="681" height="466" key="DebuggerActiveHint/0.0.1366.738@0.0.1366.738" timestamp="1644901648940" />
-    <state width="1323" height="221" key="GridCell.Tab.0.bottom" timestamp="1645141473697">
+    <state width="1323" height="214" key="GridCell.Tab.0.bottom" timestamp="1645486915538">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="221" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1645141473697" />
-    <state width="1323" height="221" key="GridCell.Tab.0.center" timestamp="1645141473697">
+    <state width="1323" height="214" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1645486915538" />
+    <state width="1323" height="214" key="GridCell.Tab.0.center" timestamp="1645486915538">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="221" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1645141473697" />
-    <state width="1323" height="221" key="GridCell.Tab.0.left" timestamp="1645141473697">
+    <state width="1323" height="214" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1645486915538" />
+    <state width="1323" height="214" key="GridCell.Tab.0.left" timestamp="1645486915538">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="221" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1645141473697" />
-    <state width="1323" height="221" key="GridCell.Tab.0.right" timestamp="1645141473697">
+    <state width="1323" height="214" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1645486915538" />
+    <state width="1323" height="214" key="GridCell.Tab.0.right" timestamp="1645486915538">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="221" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1645141473697" />
-    <state width="1323" height="308" key="GridCell.Tab.1.bottom" timestamp="1645136691357">
+    <state width="1323" height="214" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1645486915538" />
+    <state width="1323" height="308" key="GridCell.Tab.1.bottom" timestamp="1645483570131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="308" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1645136691357" />
-    <state width="1323" height="308" key="GridCell.Tab.1.center" timestamp="1645136691357">
+    <state width="1323" height="308" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1645483570131" />
+    <state width="1323" height="308" key="GridCell.Tab.1.center" timestamp="1645483570131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="308" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1645136691357" />
-    <state width="1323" height="308" key="GridCell.Tab.1.left" timestamp="1645136691357">
+    <state width="1323" height="308" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1645483570131" />
+    <state width="1323" height="308" key="GridCell.Tab.1.left" timestamp="1645483570131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="308" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1645136691357" />
-    <state width="1323" height="308" key="GridCell.Tab.1.right" timestamp="1645136691357">
+    <state width="1323" height="308" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1645483570131" />
+    <state width="1323" height="308" key="GridCell.Tab.1.right" timestamp="1645483570131">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="308" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1645136691357" />
+    <state width="1323" height="308" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1645483570131" />
     <state x="184" y="11" key="SettingsEditor" timestamp="1639946337953">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -162,10 +165,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="244" y="105" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.0.1366.738@0.0.1366.738" timestamp="1638060947108" />
-    <state x="478" y="202" width="607" height="536" key="find.popup" timestamp="1644920655788">
+    <state x="478" y="202" width="607" height="536" key="find.popup" timestamp="1645483631315">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="478" y="202" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1644920655788" />
+    <state x="478" y="202" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1645483631315" />
     <state x="424" y="12" key="refactoring.ChangeSignatureDialog" timestamp="1642710950617">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -188,6 +191,11 @@
           <line>76</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/WandSim/Camera.py</url>
+          <line>53</line>
+          <option name="timeStamp" value="19" />
+        </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
         <breakpoint type="python-exception">
@@ -199,6 +207,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1645141473697" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1645486915506" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>
