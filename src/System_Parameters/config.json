@@ -1,0 +1,154 @@
+{
+  "windows":[
+        {
+          "name": "window1",
+          "normal": [0,0,-1],
+          "center": [0,0,0],
+          "thickness": 1,
+          "refractiveindex": {"450":1.65,
+                              "550":1.5 }
+        },
+    {
+          "name": "window2",
+          "normal": [0,0,-1],
+          "center": [0,0,-5],
+          "thickness": 2,
+          "refractiveindex": {"450":1.7,
+                              "550":1.75}
+
+    }],
+
+  "surfaces": [{
+          "name": "surface1",
+          "normal": [0,0,1],
+          "center": [0,0,-20]
+  }],
+
+  "cameras": [
+                {
+                                "name": "camera_1",
+                                "center": [ -1.5,  5, 3.5 ],
+                                "direction": [0, 0, 1],
+                                "rotation": [ -15, -12.5, 90 ],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55},
+                                "sensordimenstions": {"x": 2.688,
+                                                        "y": 1.512},
+                                "pixeldimension": {"x": 1.4e-3,
+                                                    "y": 1.4e-3}
+                },
+
+                {
+                                "name": "camera_2",
+                                "center": [ -1.5, -5, 3.5 ],
+                                "direction": [0, 0, 1],
+                                "rotation": [ 15, -12.5, -90 ],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
+                },
+                {
+                                "name": "camera_3",
+                                "center": [ 7.5, 5, 4.7],
+                                "direction": [0, 0, 1],
+                                "rotation": [ -15, 0, 90 ],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
+                },
+                {
+                                "name": "camera_4",
+                                "center": [ 7.5, -5, 4.7 ],
+                                "direction": [0, 0, 1],
+                                "rotation": [ 15, 0, -90 ],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
+                },
+                {
+                                "name": "camera_5",
+                                "center": [ 16.5, 5, 4.2  ],
+                                "direction": [0, 0, 1],
+                                "rotation": [ -15, 12.5, 90],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
+                },
+                {
+                                "name": "camera_6",
+                                "center": [ 16.5, -5, 4.2 ],
+                                "direction": [0, 0, 1],
+                                "rotation": [ 15, 12.5, -90 ],
+                                "type": "Misumi_Camera",
+                                "thickness": 0.4,
+                                "refractiveindex": {"450": 1.5,
+                                                    "550": 1.55}
+                }
+],
+"lights":        [
+                {
+                                "name": "bp2",
+                                "center": [ 8, 0, 3.2 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [  0, 0, 0 ],
+                                "type": "projector_green",
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 1
+
+                },
+                      {
+                                "name": "bp1",
+                                "center": [ -1.35, 0, 2.55 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [ 0, -15, -10 ],
+                                "type": "projector_blue",
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 1
+                },
+
+                {
+                                "name": "gp1",
+                                "center": [ 3, 0, 3.2 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [ 0, 0, -5 ],
+                                "type": "projector_blue",
+                                "wavelength": 550,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 1
+
+                },
+
+                {
+                                "name": "gp2",
+                                "center": [ 13, 0, 3.2 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [ 0, 0, 5 ],
+                                "type": "projector_blue",
+                                "wavelength": 550,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 1
+
+                },
+                {
+                                "name": "bp3",
+                                "center": [ 17.75, 0, 2.6 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [ 0, 15, 10 ],
+                                "type": "projector_green",
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 1
+
+                }
+],
+  "LatticeConst": 7.6,
+  "GratingOrder": 11
+}

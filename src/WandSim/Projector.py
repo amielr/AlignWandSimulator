@@ -1,15 +1,10 @@
 from src.WandSim.Ray import *
-from src.WandSim.PlotFunctions import *
 import json
 import math
 import numpy as np
 
-
-
-with open('../src/config.json') as config_file:
+with open('../src/System_Parameters/config.json') as config_file:
     config = json.load(config_file)
-
-
 
 def get_rotation_matrix(Xangle, Yangle, Zangle):
     XangleInRadians = np.deg2rad(Xangle)

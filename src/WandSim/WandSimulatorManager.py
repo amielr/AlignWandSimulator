@@ -1,6 +1,7 @@
 from src.WandSim.SystemSetup import *
 
 
+
 def startSimulator():
     print("start of round")
     windowsList, projectorsList, reflectivesurface, cameraList = create_object_lists()
@@ -8,6 +9,8 @@ def startSimulator():
     run_projectors(projectorsList)
 
     propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+
+    #reflectivesurface[0].load_profile_file()
 
     #plot_ray_path_line(Projector.AllProjectorRaysList)
     #print("Number of projector rays is:")
@@ -71,9 +74,10 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
         camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
         windowsList.remove(camera.window)
         camera.optimize_Camera_rays()
+        camera.determine_pixel_locations()
 
-    for camera in cameraList:
-        plot_ray_path_line(camera.cameraRayList)
+    # for camera in cameraList:
+    #     plot_ray_path_line(camera.cameraRayList)
 
 
 def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):

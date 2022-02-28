@@ -1,14 +1,30 @@
 from copy import deepcopy
 import json
-import numpy as np
 from scipy.optimize import minimize
 from src.WandSim.WindowLens import *
+from src.WandSim.Projector import get_rotation_matrix
+import math
+from src.visuliaztion.PlotFunctions import plot_xy_scatter
 
 
-#import cupy as np
 
-with open('../src/config.json') as config_file:
+with open('../src/System_Parameters/config.json') as config_file:
     config = json.load(config_file)
+
+def get_interpolated_sensor_location_given_angle(angleInput):
+    # with open('../src/System_Parameters/CameraAngleSensorRelation.csv', newline='') as csvfile:
+    #     AngleSensorRelation = csv.reader(csvfile, delimiter=' ', quotechar='|')
+    #     for row in AngleSensorRelation:
+    #         print(', '.join(row))
+
+    holder = np.genfromtxt('../src/System_Parameters/CameraAngleSensorRelation.csv', delimiter=',')
+    Angle = holder[1::, 0]
+    Sensorlocation = holder[1::, 1]
+    # print(Angle)
+    # print(Sensorlocation)
+
+    print(np.interp(angleInput, Angle, Sensorlocation))
+    return np.interp(angleInput, Angle, Sensorlocation)
 
 
 class Camera():
@@ -19,6 +35,7 @@ class Camera():
     rotationDirection = np.array([0, 0, 0])
     NoOfCameras = 0
     const = 1
+
     #Camerawindow = WindowLens()
 
     def __init__(self, _name, _center, _direction, _rotation, _type, _windowthickness, _refractiveindex):
@@ -26,7 +43,7 @@ class Camera():
         self.center = np.array([0, 0, 0]) if _center is None else np.array([_center[0], _center[1], _center[2]])
         self.direction = np.array([0, 0, 0]) if _direction is None else np.array([_direction[0], _direction[1], _direction[2]])
         self.rotationDirection = np.array([0, 0, 0]) if _rotation is None else np.array([_rotation[0], _rotation[1], _rotation[2]])
-        #self.direction = np.matmul(get_rotation_matrix(_rotation[0], _rotation[1], _rotation[2]), self.direction)
+        self.direction = np.matmul(get_rotation_matrix(_rotation[0], _rotation[1], _rotation[2]), self.direction)
         self.cameraType = "noType" if _type is None else _type
         self.windowthickness = 0 if _windowthickness is None else _windowthickness
         self.refractiveindex = _refractiveindex if _refractiveindex is None else _refractiveindex
@@ -37,10 +54,6 @@ class Camera():
     def __str__(self):
         return "Camera Name: %s - Origin %s, - Direction  %s, - Rotation %s "\
                % (self.cameraName, self.center, self.direction, self.rotationDirection)
-
-
-    def setupwindowlens(self):
-        WindowLens(self.cameraName+"window", 0.2, self.center+self.const*self.direction, self.direction, 1.5)
 
 
     def reorder_list_from_closest_to_furthest(self, ray, surfaceList):
@@ -64,19 +77,7 @@ class Camera():
         ray.DottoCameraRayList.append(ray.Origin)
         return
 
-    def add_camera_window_to_window_list(self, windowList):
-        windowList.append(self.window)
-        return windowList
-
     def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
-
-        # self.windowListholder = deepcopy(windowsList)
-        # self.add_camera_window_to_window_list(windowsList)
-        # self.add_camera_window_to_window_list(self.windowListholder)
-        # print(windowsList)
-        # print("camera window list", self.windowListholder)
-
-
 
         self.cameraRayList = deepcopy(rayList)
         #print("we are here", self.cameraRayList)
@@ -168,90 +169,49 @@ class Camera():
             boundsy = (-20, 20)
             bounds = [boundsx for i in range(len(initialConditions))]
             #print("function type is: ", type(self.objective_function_to_minimize_ray_path_distance), type(ray))
-            result = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
+            minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
                 #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
                 #print(z)
             #print("the result is", result)
 
         return
 
+    def pixelIndexing(self, XLocations, YLocations):
+        holder = np.genfromtxt('../src/System_Parameters/CameraAngleSensorRelation.csv', delimiter=',')
+        Sensorlocation = holder[1::, 1]
+        XLocations/0.0014
+        YLocations/0.0014
+        Xindex = np.interp(XLocations, (-1.344, 1.344), (-1, 1921))
+        Yindex = np.interp(YLocations, (-0.756, 0.756), (-1, 1081))
+        Xindex = np.asarray(Xindex, dtype=int)
+        Yindex = np.asarray(Yindex, dtype=int)
+        print("Our pixel indexing:", Xindex, Yindex)
+        return
 
+    def determine_pixel_locations(self):
+        XanglesList = []
+        YanglesList = []
+        for ray in self.cameraRayList:
+            ray.Direction = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])),ray.Direction)
+            if np.dot(ray.Direction, self.direction)<0:
+                angleresult = 180-math.degrees(math.acos(np.dot(ray.Direction, self.direction)))
+                xangle = math.degrees(math.asin(ray.Direction[0]/np.linalg.norm(ray.Direction)))
+                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(ray.Direction)))
+                XanglesList.append(xangle)
+                YanglesList.append(yangle)
+            else:
+                angleresult = math.degrees(math.acos(np.dot(ray.Direction, self.direction)))
+                xangle = math.degrees(math.asin(ray.Direction[0] / np.linalg.norm(ray.Direction)))
+                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(ray.Direction)))
+                XanglesList.append(xangle)
+                YanglesList.append(yangle)
 
+            print("The angle between camera and ray is: ",self.direction,ray.Direction, angleresult, xangle, yangle)
+        print(XanglesList, YanglesList)
+        XLocations = get_interpolated_sensor_location_given_angle(XanglesList)
+        YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
 
+        plot_xy_scatter(XLocations, YLocations)
+        self.pixelIndexing(XLocations, YLocations)
 
-
-
-
-    # def get_fermat_parameters(self, ray, window):
-    #     print("ray Origin", ray.Origin)
-    #     print("camera center", self.center)
-    #     DistanceVector = self.center[:2] - ray.Origin[:2]
-    #     DistanceD = np.linalg.norm(self.center[:2] - ray.Origin[:2])
-    #     print(DistanceD)
-    #     height = abs(self.center[2]-ray.Origin[2])
-    #     y = window.Thickness
-    #     x = height - y
-    #     N1 = 1
-    #     N2 = window.RefractiveIndexDictionary.get(str(ray.get_ray_wavelength()))
-    #     return N1, N2, DistanceD, DistanceVector, x, y
-    #
-    # def find_fermat_root(self,N1, N2, DistanceD, x, y ):
-    #     z4 = math.pow(N1, 2) - math.pow(N2, 2)
-    #     z3 = 2 * DistanceD * (math.pow(N2, 2) - math.pow(N1, 2))
-    #     z2 = (math.pow(N1, 2) * math.pow(y, 2) + math.pow(N1, 2) * math.pow(DistanceD, 2) - math.pow(N2, 2) * math.pow(
-    #         x, 2)
-    #           - math.pow(N2, 2) * math.pow(DistanceD, 2))
-    #     z1 = 2 * DistanceD * math.pow(N2, 2) * math.pow(x, 2)
-    #     z0 = -math.pow(N2, 2) * math.pow(DistanceD, 2) * math.pow(x, 2)
-    #
-    #     #print([z4, z3, z2, z1, z0])
-    #
-    #     FermatPolynomial = np.poly1d([z4, z3, z2, z1, z0])
-    #     FermatRoots = FermatPolynomial.roots
-    #     #print(N1, N2, DistanceD, x, y)
-    #
-    #     #print(FermatPolynomial)
-    #     #print(FermatRoots)
-    #
-    #
-    #     for root in FermatRoots:
-    #         if abs(root) < DistanceD:
-    #             print("This is the chosen distance: ", root)
-    #             return root
-    #         # else:
-    #         #     print("We threw this distance out: ", root, abs(root))
-    #
-    #     return
-    #
-    # def fermatManager(self, rayList, window):
-    #     rootList = []
-    #     self.cameraRayList = deepcopy(rayList)
-    #     for ray in self.cameraRayList:
-    #         N1, N2, DistanceD, DistanceVector, x, y = self.get_fermat_parameters(ray, window)
-    #         rootList.append(self.find_fermat_root(N1, N2, DistanceD, x, y))
-    #         DistanceVector = DistanceVector / np.linalg.norm(DistanceVector)
-    #         print("vector Direction: ", DistanceVector)
-    #         location = ray.Origin[:2] + DistanceVector*DistanceD
-    #         print("vector location: ", location)
-    #         print("comparison camera location: ", self.center)
-    #         windowincident = ray.Origin[:2] + DistanceVector*rootList[-1]
-    #         windowincident = np.insert(windowincident, 2, ray.Origin[2]+x)
-    #         print("window location root:", windowincident)
-    #         rayDirection = windowincident - ray.Origin
-    #         print("ray direction: ", rayDirection)
-    #         ray.set_origin(self.center)
-    #         ray.set_direction(rayDirection)
-    #         ray.write_the_story(self.cameraName, 0, 0, ray.Direction)
-    #     print(len(self.cameraRayList))
-    #     plot_quiver(self.cameraRayList, self.cameraName)
-    #     print(rootList)
-    #     print("End of camera: ", self.cameraName)
-    #     return
-    #
-    #
-    # def get_incident_ray_angle(self, rayList):
-    #     for ray in rayList:
-    #         self.fermatManager(ray, window[0])
-    #     return
-
-
+        return
