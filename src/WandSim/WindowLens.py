@@ -1,5 +1,4 @@
 from src.WandSim.Surface import Surface
-from src.WandSim.Ray import Ray
 import numpy as np
 
 

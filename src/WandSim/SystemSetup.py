@@ -1,6 +1,4 @@
 from src.WandSim.Projector import *
-from src.WandSim.PlotFunctions import *
-from src.WandSim.WindowLens import *
 from src.WandSim.Camera import *
 
 
@@ -9,7 +7,7 @@ def run_projectors(projectorsList):
     for projector in projectorsList:
         projector.generate_projector_rays()
     #    plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
-    plot_quiver(Projector.AllProjectorRaysList, str(Projector.projectorName))
+    #plot_quiver(Projector.AllProjectorRaysList, str(Projector.projectorName))
 
 
 def create_object_lists():
