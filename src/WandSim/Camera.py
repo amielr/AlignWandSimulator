@@ -4,7 +4,7 @@ from scipy.optimize import minimize
 from src.WandSim.WindowLens import *
 from src.WandSim.Projector import get_rotation_matrix
 import math
-from src.visuliaztion.PlotFunctions import plot_xy_scatter
+from src.visuliazation.PlotFunctions import plot_xy_scatter, plot_ray_path_line
 
 
 
@@ -47,7 +47,9 @@ class Camera():
         self.cameraType = "noType" if _type is None else _type
         self.windowthickness = 0 if _windowthickness is None else _windowthickness
         self.refractiveindex = _refractiveindex if _refractiveindex is None else _refractiveindex
-        self.window = WindowLens(self.cameraName+"window", self.windowthickness, self.center+self.direction, self.direction, self.refractiveindex)
+        print("initialising camera -        center, direction",self.center, self.direction)
+        self.window = WindowLens(self.cameraName+"window", self.windowthickness, self.center+self.windowthickness*self.direction, self.direction, self.refractiveindex)
+        print("initialising camera window- center , direction",self.window.CenterPoint, self.window.Normal)
 
         return
 
@@ -62,10 +64,11 @@ class Camera():
         for surface in surfaceList:
             distance = np.linalg.norm(ray.Origin - surface.CenterPoint)
             distanceList.append(distance)
-            print(str(surface.Name) + " distance from ray origin to surface camera module: " + str(distance))
+            #print(str(surface.Name) + " distance from ray origin to surface camera module: " + str(distance))
 
         sortedSurfacesList = [x for _, x in sorted(zip(distanceList, surfaceList))]
-        #[print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
+        print("window order from surface to camera: ", [surfaceholder.Name for surfaceholder in sortedSurfacesList])
+        #print("sorted window list:", sortedSurfacesList)
         return sortedSurfacesList
 
     def camera_windows_transfer_manager(self, window, ray):
@@ -76,6 +79,10 @@ class Camera():
         ray.ray_surface_intersection(window.surfaceList[1])
         ray.DottoCameraRayList.append(ray.Origin)
         return
+
+    def add_camera_window_to_window_list(self, windowList):
+        windowList.append(self.window)
+        return windowList
 
     def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
 
@@ -92,16 +99,19 @@ class Camera():
                 ray.IsRayInWindow = not ray.IsRayInWindow
                 window.ray_window_refractive_registration(ray)
                 self.camera_windows_transfer_manager(window, ray)
-                #print(self.cameraName, " ray surface intersection", ray.Origin)
-            #print("window surface list length: ", str(len(ray.windowSurfaceList)))
+            # print(self.cameraName, " ray surface intersection", ray.Origin)
+            # print(self.cameraName, "ray surfaces intersection points", ray.DottoCameraRayList)
+            # print("window surface list length: ", str(len(ray.windowSurfaceList)))
             ray.set_origin(self.center)
 
             ray.DottoCameraRayList.append(ray.Origin)
             ray.DottoCameraRayList = np.asarray(ray.DottoCameraRayList)
+            print(ray.DottoCameraRayList)
+
 
             ray.write_the_story(self.cameraName, ray.Origin, ray.RayMuuValue)
             ray.windowSurfaceList = [item for sublist in ray.windowSurfaceList for item in sublist]
-
+        #plot_ray_path_line(self.cameraRayList)
         return self.cameraRayList
 
     def determine_time_distance_path_length(self, ray):
@@ -133,6 +143,10 @@ class Camera():
         ray = args[0]
         adjustedXYZList = []
         reshapedsurfaceXYmatrix = np.reshape(surfaceXYmatrix, (-1, 2))
+        #print("reshapedXYmatrix", reshapedsurfaceXYmatrix)
+        #print("window surface length is:", len(ray.windowSurfaceList))
+        #plot_ray_path_line([ray])
+
         for index, surfaceXY in enumerate(reshapedsurfaceXYmatrix):
             # surfaceXY = [10,10]
             z = ray.windowSurfaceList[index].determine_surface_z_given_xy(surfaceXY)
@@ -149,7 +163,10 @@ class Camera():
         ray.RayStoryCoordinates[-len(ray.DottoCameraRayList):len(ray.RayStoryCoordinates), :] = ray.DottoCameraRayList
         #print("Full ray story: ", ray.RayStoryCoordinates)
         # surfaceXY[index] =
+        #print("path distance is: ", self.determine_time_distance_path_length(ray))
         pathresult = self.determine_time_distance_path_length(ray)
+        #plot_ray_path_line([ray])
+
         return pathresult
 
 
@@ -157,19 +174,23 @@ class Camera():
     def optimize_Camera_rays(self):
         for ray in self.cameraRayList:
             self.determine_time_distance_path_length(ray)
-
-            #print("our camera intersection points are: ", ray.DottoCameraRayList)
+            #print("our camera intersection points before are: ", ray.DottoCameraRayList)
 
             #print("sliced: ", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             #[[5,7],[10,10],[11,11],[1,1]]
+            #print(self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             initialConditions = self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList).flatten()
-            #print(type(initialConditions))
-            self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
+            print("flattened", initialConditions)
+            print("Original", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
+            #self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
             boundsx = (-20, 20)
             boundsy = (-20, 20)
             bounds = [boundsx for i in range(len(initialConditions))]
             #print("function type is: ", type(self.objective_function_to_minimize_ray_path_distance), type(ray))
-            minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
+            res = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
+            print("Optimization results: ",res)
+            print("our camera intersection points after are: ", ray.DottoCameraRayList)
+
                 #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
                 #print(z)
             #print("the result is", result)
@@ -183,35 +204,37 @@ class Camera():
         YLocations/0.0014
         Xindex = np.interp(XLocations, (-1.344, 1.344), (-1, 1921))
         Yindex = np.interp(YLocations, (-0.756, 0.756), (-1, 1081))
-        Xindex = np.asarray(Xindex, dtype=int)
-        Yindex = np.asarray(Yindex, dtype=int)
+        Xindex = np.asarray(Xindex, dtype=float)
+        Yindex = np.asarray(Yindex, dtype=float)
         print("Our pixel indexing:", Xindex, Yindex)
+
         return
 
     def determine_pixel_locations(self):
         XanglesList = []
         YanglesList = []
         for ray in self.cameraRayList:
-            ray.Direction = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])),ray.Direction)
+            directionHolder = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])),ray.Direction)
+            print("directionholder", directionHolder)
+            #ray.Direction =
             if np.dot(ray.Direction, self.direction)<0:
-                angleresult = 180-math.degrees(math.acos(np.dot(ray.Direction, self.direction)))
-                xangle = math.degrees(math.asin(ray.Direction[0]/np.linalg.norm(ray.Direction)))
-                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(ray.Direction)))
+                angleresult = 180-math.degrees(math.acos(np.dot(directionHolder, self.direction)))
+                xangle = math.degrees(math.asin(ray.Direction[0]/np.linalg.norm(directionHolder)))
+                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(directionHolder)))
                 XanglesList.append(xangle)
                 YanglesList.append(yangle)
             else:
-                angleresult = math.degrees(math.acos(np.dot(ray.Direction, self.direction)))
-                xangle = math.degrees(math.asin(ray.Direction[0] / np.linalg.norm(ray.Direction)))
-                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(ray.Direction)))
+                angleresult = math.degrees(math.acos(np.dot(directionHolder, self.direction)))
+                xangle = math.degrees(math.asin(ray.Direction[0] / np.linalg.norm(directionHolder)))
+                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(directionHolder)))
                 XanglesList.append(xangle)
                 YanglesList.append(yangle)
 
-            print("The angle between camera and ray is: ",self.direction,ray.Direction, angleresult, xangle, yangle)
-        print(XanglesList, YanglesList)
+            print("The angle between camera and ray is: ", self.direction,ray.Direction, angleresult, xangle, yangle)
+        print("angle list", XanglesList, YanglesList)
         XLocations = get_interpolated_sensor_location_given_angle(XanglesList)
         YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
-
-        plot_xy_scatter(XLocations, YLocations)
+        #plot_xy_scatter(XLocations, YLocations)
         self.pixelIndexing(XLocations, YLocations)
 
         return

@@ -26,8 +26,8 @@ class Surface:
         x = XY[0]
         y = XY[1]
         surfacXYZ = self.Normal
-        Dfactor = -np.dot(self.Normal, self.CenterPoint)
-        z = (surfacXYZ[0]*x +surfacXYZ[1]*y - Dfactor)/surfacXYZ[2]
+        Dfactor = np.dot(self.Normal, self.CenterPoint)
+        z = (-surfacXYZ[0]*x -surfacXYZ[1]*y + Dfactor)/surfacXYZ[2]
         return z
 
     def load_profile_file(self):

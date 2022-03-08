@@ -1,4 +1,5 @@
 from src.WandSim.SystemSetup import *
+from src.visuliazation.PlotFunctions import plot_ray_path_line
 
 
 
@@ -62,22 +63,31 @@ def reorder_list_from_closest_to_furthest(ray, surfaceList):
     for surface in surfaceList:
         distance = np.linalg.norm(ray.Origin-surface.CenterPoint)
         distanceList.append(distance)
-        print(str(surface.Name) + " distance from ray origin to surface: " + str(distance))
+        # print(str(surface.Name) + " distance from ray origin to surface: " + str(distance))
 
     sortedSurfacesList = [x for _, x in sorted(zip(distanceList, surfaceList))]
-    [print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
+    # [print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
     return sortedSurfacesList
 
 def propagate_rays_back_to_cameras(cameraList, windowsList):
-    for camera in cameraList:
-        windowsList.append(camera.window)
-        camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
-        windowsList.remove(camera.window)
-        camera.optimize_Camera_rays()
-        camera.determine_pixel_locations()
+#for camera in cameraList:
+    camera = cameraList[0]
+    windowsList.append(camera.window)
+    print("camera window parameters", camera.window)
+    print("camera direction: ",camera.center, camera.direction)
+    #invdir = np.linalg.inv(camera.direction)
+    #print(np.matmul(np.linalg.inv(get_rotation_matrix(camera.rotationDirection[0], camera.rotationDirection[1],camera.rotationDirection[2])),camera.window.Normal))
+    camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
+    print("Ray Initial conditions", [ray.RayStoryCoordinates for ray in camera.cameraRayList])
+    plot_ray_path_line(camera.cameraRayList)
+    camera.optimize_Camera_rays()
+    windowsList.remove(camera.window)
 
-    # for camera in cameraList:
-    #     plot_ray_path_line(camera.cameraRayList)
+
+    camera.determine_pixel_locations()
+
+#for camera in cameraList:
+    plot_ray_path_line(camera.cameraRayList)
 
 
 def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):

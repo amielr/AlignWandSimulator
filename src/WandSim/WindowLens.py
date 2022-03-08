@@ -25,8 +25,8 @@ class WindowLens:
         return
 
     def __str__(self):
-        return "The Window values are: WindowName - %s Thickness - %s  RefractiveIndex - %s" \
-               % (self.Name, self.Thickness, self.RefractiveIndexDictionary)
+        return "The Window values are: WindowName - %s WindowCenter - %s WindowNormal - %s Thickness - %s  RefractiveIndex - %s" \
+               % (self.Name, self.CenterPoint, self.Normal, self.Thickness, self.RefractiveIndexDictionary)
 
     def create_surface_List(self):
         self.surfaceList = []
@@ -36,7 +36,7 @@ class WindowLens:
 
     def create_window_surfaces(self):
         windowS2Point = self.CenterPoint + self.Normal * self.Thickness
-        surface = Surface(self.Name + "s2", windowS2Point, self.Normal)
+        surface = Surface(self.Name + "S2", windowS2Point, self.Normal)
         return surface
 
     def calculate_mu(self, raymu):
@@ -61,7 +61,7 @@ class WindowLens:
     def ray_window_refractive_registration(self, _incidentray):
 
         if not (_incidentray.IsRayInWindow):
-            _incidentray.RayMuuValue =  1
+            _incidentray.RayMuuValue = 1
         else:
             raymuu = self.RefractiveIndexDictionary.get(str(_incidentray.get_ray_wavelength()))
             self.calculate_mu(raymuu)

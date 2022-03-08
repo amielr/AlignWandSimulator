@@ -90,8 +90,7 @@ class Ray():
         raydirection = self.get_direction()
         originplanepointvector = _surface.CenterPoint - rayorigin
 
-        lineplanetest = \
-            np.dot(surfacenormal, raydirection)
+        lineplanetest = np.dot(surfacenormal, raydirection)
 
         if abs(lineplanetest) < epsilon:
             print("we have an intersection error: no intersection or line is within plane")
