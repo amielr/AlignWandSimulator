@@ -23,7 +23,7 @@ def get_interpolated_sensor_location_given_angle(angleInput):
     # print(Angle)
     # print(Sensorlocation)
 
-    print(np.interp(angleInput, Angle, Sensorlocation))
+    print("location checker", np.interp(angleInput, Angle, Sensorlocation))
     return np.interp(angleInput, Angle, Sensorlocation)
 
 
@@ -208,33 +208,40 @@ class Camera():
         Yindex = np.asarray(Yindex, dtype=float)
         print("Our pixel indexing:", Xindex, Yindex)
 
-        return
+        return Xindex, Yindex
 
     def determine_pixel_locations(self):
         XanglesList = []
         YanglesList = []
         for ray in self.cameraRayList:
-            directionHolder = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])),ray.Direction)
-            print("directionholder", directionHolder)
+            #print("before directionholder", ray.Direction)
+            directionHolder = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])), ray.Direction) #
+            ray.Direction = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],self.rotationDirection[2])), ray.Direction)
+            #directionHolder = ray.Direction
+            #print("directionholder", directionHolder)
             #ray.Direction =
-            if np.dot(ray.Direction, self.direction)<0:
-                angleresult = 180-math.degrees(math.acos(np.dot(directionHolder, self.direction)))
-                xangle = math.degrees(math.asin(ray.Direction[0]/np.linalg.norm(directionHolder)))
-                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(directionHolder)))
+            if np.dot(ray.Direction, self.direction) < 0:
+                angleresult = math.degrees(math.acos(np.dot(directionHolder, self.direction)))
+                #print("x value: ", ray.Direction[0])
+                xangle = math.degrees(math.asin(directionHolder[0]/np.linalg.norm(directionHolder)))
+                #print("y value: ", ray.Direction[1])
+                yangle = math.degrees(math.asin(directionHolder[1]/np.linalg.norm(directionHolder)))
                 XanglesList.append(xangle)
                 YanglesList.append(yangle)
             else:
                 angleresult = math.degrees(math.acos(np.dot(directionHolder, self.direction)))
-                xangle = math.degrees(math.asin(ray.Direction[0] / np.linalg.norm(directionHolder)))
-                yangle = math.degrees(math.asin(ray.Direction[1]/np.linalg.norm(directionHolder)))
+                #print("x value: ", directionHolder[0])
+                xangle = math.degrees(math.asin(directionHolder[0] / np.linalg.norm(directionHolder)))
+                #print("y value: ", ray.Direction[1])
+                yangle = math.degrees(math.asin(directionHolder[1] / np.linalg.norm(directionHolder)))
                 XanglesList.append(xangle)
                 YanglesList.append(yangle)
 
-            print("The angle between camera and ray is: ", self.direction,ray.Direction, angleresult, xangle, yangle)
+            print("The angle between camera and ray is: ", angleresult, xangle, yangle)
         print("angle list", XanglesList, YanglesList)
         XLocations = get_interpolated_sensor_location_given_angle(XanglesList)
         YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
-        #plot_xy_scatter(XLocations, YLocations)
-        self.pixelIndexing(XLocations, YLocations)
+        Xindexed, Yindexed = self.pixelIndexing(XLocations, YLocations)
+        plot_xy_scatter(Xindexed, Yindexed)
 
         return

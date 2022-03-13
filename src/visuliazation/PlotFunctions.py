@@ -21,9 +21,12 @@ def plot_xy_scatter(X,Y):
     ax.set_title("scatter XY")
     plt.scatter(X, Y,s=4)
     plt.grid(True, 'both', 'both')
-    major_ticks = np.arange(-1.344,1.344,0.14)
-    ax.set_xticks(major_ticks)
-    ax.set_yticks(major_ticks)
+    major_ticks_x = np.arange(0, 1920, 100)
+    major_ticks_y = np.arange(0, 1080, 100)
+    ax.set_xticks(major_ticks_x)
+    ax.set_yticks(major_ticks_y)
+    ax.set_xlim([0,1920])
+    ax.set_ylim([0,1080])
     #plt.savefig(str(name) + ".jpg")
     plt.show(block=True)
     return
@@ -70,6 +73,12 @@ def plot_ray_path_line(rays):
     #x,y,z = ray.Origin
     fig = plt.figure()
     plt.subplot(projection='3d')
+
+    # x = np.linspace(-1, 1, 10)
+    # y = np.linspace(-1, 1, 10)
+    # X, Y = np.meshgrid(x, y)
+    # Z = 0.12861723162963065 * X + 0.0014024845304814665 * Y + 1.0964608113924048
+
     for ray in rays:
         x, y, z = [], [], []
         #print("we are in ray path line plot: ", ray.RayStoryCoordinates)

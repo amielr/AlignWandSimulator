@@ -1,5 +1,6 @@
 from src.WandSim.Projector import *
 from src.WandSim.Camera import *
+from src.WandSim.STL import load_profile_file
 
 
 
@@ -15,8 +16,13 @@ def create_object_lists():
     reflectivesurface = create_surfaces()
     projectors = create_projectors()
     camerasList = create_cameras()
+    STLobject = create_STL_object()
 
-    return windowList, projectors, reflectivesurface, camerasList
+
+    return windowList, projectors, reflectivesurface,STLobject, camerasList
+
+def create_STL_object():
+    return 1
 
 
 def create_windows():
