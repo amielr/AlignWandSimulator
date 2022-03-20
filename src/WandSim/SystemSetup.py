@@ -1,6 +1,6 @@
 from src.WandSim.Projector import *
 from src.WandSim.Camera import *
-from src.WandSim.STL import load_profile_file
+from src.WandSim.STL import STL
 
 
 
@@ -19,10 +19,14 @@ def create_object_lists():
     STLobject = create_STL_object()
 
 
+
     return windowList, projectors, reflectivesurface,STLobject, camerasList
 
 def create_STL_object():
-    return 1
+    STLobject = STL()
+    STLobject.translate_STL((18, 20, -15))
+    print("have we translated", np.asarray(STLobject.mesh.vertices))
+    return STLobject
 
 
 def create_windows():

@@ -1,15 +1,18 @@
 from src.WandSim.SystemSetup import *
-from src.visuliazation.PlotFunctions import plot_ray_path_line
+from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations,plot_projector_ray_locations_scatter
 
 
 
 def startSimulator():
     print("start of round")
-    windowsList, projectorsList, reflectivesurface,STLsurface, cameraList = create_object_lists()
+    windowsList, projectorsList, reflectivesurface, STLsurface, cameraList = create_object_lists()
 
     run_projectors(projectorsList)
 
-    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    #STLsurface.cast_rays_on_the_3D_mesh(STLsurface.load_profile_file(), Projector.AllProjectorRaysList)
+
+    #propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    propagate_rays_through_system(Projector, windowsList, STLsurface, projectorsList, cameraList)
 
     # propagate_rays_with_surface()
 
@@ -47,14 +50,18 @@ def propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, project
                 ray_window_manager(ray, window)
 
 
-            ray.ray_surface_intersection(reflectiveSurface[0])
-            ray.get_reflection_from_surface(reflectiveSurface[0])
+            #ray.ray_surface_intersection(reflectiveSurface[0])
+            #ray.get_reflection_from_surface(reflectiveSurface[0])
             #print("our object type is: ", type(reflectiveSurface[0]))
             #print(isinstance(reflectiveSurface[0], WindowLens))
             Projector.AllProjectorRaysList.append(ray)
-
-    #plot_ray_locations(Projector.AllProjectorRaysList)
-    # plot_projector_ray_locations_scatter(projector)
+    mesh = reflectiveSurface.load_profile_file()
+    print("our mesh is", mesh)
+    Projector.AllProjectorRaysList = reflectiveSurface.cast_rays_on_the_3D_mesh(Projector.AllProjectorRaysList)
+    print("projector rays list: ", Projector.AllProjectorRaysList)
+    print("projector ray origin: ", Projector.AllProjectorRaysList[0].Origin)
+    plot_ray_locations(Projector.AllProjectorRaysList)
+    #plot_projector_ray_locations_scatter(Projector)
     # plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
     #plot_quiver(Projector.AllProjectorRaysList, windowsList[0].Name + "full raylist")
 

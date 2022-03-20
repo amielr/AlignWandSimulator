@@ -55,9 +55,9 @@ def plot_ray_locations(rays):
     rayLocationList = []
     for ray in rays:
         rayLocationList.append(ray.Origin)
+        print("origin is", ray.Origin)
     npraylocationlist = np.vstack(rayLocationList)
     xcoords, ycoords, zcoords = npraylocationlist.T
-
     fig = plt.figure()
     ax = fig.add_subplot(111, projection='3d')
 
@@ -119,3 +119,19 @@ def plot_quiver(rayList, title):
     ax.set_ylim(-10, 10)
     ax.set_zlim(-30, 3.3)
     plt.show(block = True)
+
+
+def plot_STL_object(mesh):
+    # %%
+    # getting vertices and triangles
+    vert = np.asarray(mesh.vertices)
+    tri = np.asarray(mesh.triangles)
+
+    print("triangle data")
+    print(mesh.triangles)
+    print(tri)
+    ax = plt.axes(projection='3d')
+    x, y, z = vert[::100, 0], vert[::100, 1], vert[::100, 2]
+    ax.plot_trisurf(x, y, z,
+                    cmap='viridis', edgecolor='none');
+    return
