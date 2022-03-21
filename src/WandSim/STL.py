@@ -80,9 +80,11 @@ class STL():
         updatedrayList = []
         for index, ray in enumerate(raysList):
             print("our ray direction is:", ray.Direction, "multiplied by hit distance:",ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
-            print(ans['t_hit'][index])
-            ray.Origin = ray.Origin + np.dot(ray.Direction, ans['t_hit'][index].numpy())
-            updatedrayList.append(ray)
+            print(ans['t_hit'][index].numpy())
+            if ans['t_hit'][index].numpy() != np.inf:
+                print("we are in")
+                ray.Origin = ray.Origin + np.dot(ray.Direction, ans['t_hit'][index].numpy())
+                updatedrayList.append(ray)
 
         return updatedrayList
     # primitives uvs = the intersection coordinates of the the ray with the mesh

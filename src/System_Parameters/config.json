@@ -29,7 +29,7 @@
                                 "name": "camera_1",
                                 "center": [ -1.5,  5, 3.5 ],
                                 "direction": [0, 0, -1],
-                                "rotation": [ -15, -20, 180 ],
+                                "rotation": [ -15, -12.5, 90 ],
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
