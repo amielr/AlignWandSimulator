@@ -3,16 +3,16 @@
         {
           "name": "window1",
           "normal": [0,0,-1],
-          "center": [0,0,0],
-          "thickness": 1,
+          "center": [0,0, 0.5],
+          "thickness": 0.5,
           "refractiveindex": {"450":1.65,
                               "550":1.5 }
         },
     {
           "name": "window2",
           "normal": [0,0,-1],
-          "center": [0,0,-5],
-          "thickness": 2,
+          "center": [0,0,-0.2],
+          "thickness": 1,
           "refractiveindex": {"450":1.7,
                               "550":1.75}
     }
@@ -21,15 +21,15 @@
   "surfaces": [{
           "name": "surface1",
           "normal": [0,0,1],
-          "center": [0,0,-20]
+          "center": [0,0,-3]
   }],
 
   "cameras": [
                 {
-                                "name": "camera_1",
+                                "name": "camera_0",
                                 "center": [ -1.5,  5, 3.5 ],
                                 "direction": [0, 0, -1],
-                                "rotation": [ -15, -12.5, 90 ],
+                                "rotation": [ -15, -12.5, 180 ],
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
@@ -38,11 +38,11 @@
                                                         "y": 1.512},
                                 "pixeldimension": {"x": 1.4e-3,
                                                     "y": 1.4e-3},
-                                "OnOff": "On"
+                                "OnOff": "Off"
                 },
 
                 {
-                                "name": "camera_2",
+                                "name": "camera_1",
                                 "center": [ -1.5, -5, 3.5 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, -12.5, -90 ],
@@ -50,10 +50,10 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
                                                     "550": 1.55},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
                 {
-                                "name": "camera_3",
+                                "name": "camera_2",
                                 "center": [ 7.5, 5, 4.7],
                                 "direction": [0, 0, -1],
                                 "rotation": [ -15, 0, 90 ],
@@ -61,10 +61,10 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
                                                     "550": 1.55},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
                 {
-                                "name": "camera_4",
+                                "name": "camera_3",
                                 "center": [ 7.5, -5, 4.7 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, 0, -90 ],
@@ -72,10 +72,10 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
                                                     "550": 1.55},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
                 {
-                                "name": "camera_5",
+                                "name": "camera_4",
                                 "center": [ 16.5, 5, 4.2  ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ -15, 12.5, 90],
@@ -83,10 +83,10 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
                                                     "550": 1.55},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
                 {
-                                "name": "camera_6",
+                                "name": "camera_5",
                                 "center": [ 16.5, -5, 4.2 ],
                                 "direction": [0, 0, -1],
                                 "rotation": [ 15, 12.5, -90 ],
@@ -94,7 +94,7 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
                                                     "550": 1.55},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 }
 ],
 "lights":        [
@@ -106,7 +106,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 1,
+                                "GratingOrder": 0,
                                 "OnOff": "On"
 
                 },
@@ -118,8 +118,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 1,
-                                "OnOff": "Off"
+                                "GratingOrder": 0,
+                                "OnOff": "On"
                 },
 
                 {
@@ -130,8 +130,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 1,
-                                "OnOff": "Off"
+                                "GratingOrder": 0,
+                                "OnOff": "On"
 
                 },
 
@@ -143,8 +143,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 1,
-                                "OnOff": "Off"
+                                "GratingOrder": 0,
+                                "OnOff": "On"
 
                 },
                 {
@@ -155,8 +155,8 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 1,
-                                "OnOff": "Off"
+                                "GratingOrder": 0,
+                                "OnOff": "On"
 
                 }
 ],
