@@ -21,10 +21,12 @@ def plot_xy_scatter(X,Y):
     ax.set_title("scatter XY")
     plt.scatter(X, Y,s=4)
     plt.grid(True, 'both', 'both')
-    major_ticks = np.arange(-1.344,1.344,0.14)
-    ax.set_xticks(major_ticks)
-    ax.set_yticks(major_ticks)
-    #plt.savefig(str(name) + ".jpg")
+    major_ticks_x = np.arange(0, 1920, 100)
+    major_ticks_y = np.arange(0, 1080, 100)
+    ax.set_xticks(major_ticks_x)
+    ax.set_yticks(major_ticks_y)
+    ax.set_xlim([0, 1920])
+    ax.set_ylim([0, 1080])
     plt.show(block=True)
     return
 

@@ -208,7 +208,7 @@ class Camera():
         Yindex = np.asarray(Yindex, dtype=float)
         print("Our pixel indexing:", Xindex, Yindex)
 
-        return
+        return Xindex, Yindex
 
     def determine_pixel_locations(self):
         XanglesList = []
@@ -234,7 +234,8 @@ class Camera():
         print("angle list", XanglesList, YanglesList)
         XLocations = get_interpolated_sensor_location_given_angle(XanglesList)
         YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
-        #plot_xy_scatter(XLocations, YLocations)
-        self.pixelIndexing(XLocations, YLocations)
+        Xindexed, Yindexed = self.pixelIndexing(XLocations, YLocations)
+        plot_xy_scatter(Xindexed, Yindexed)
+
 
         return
