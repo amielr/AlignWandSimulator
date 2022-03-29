@@ -37,7 +37,8 @@
                                 "sensordimenstions": {"x": 2.688,
                                                         "y": 1.512},
                                 "pixeldimension": {"x": 1.4e-3,
-                                                    "y": 1.4e-3}
+                                                    "y": 1.4e-3},
+                                "OnOff": "On"
                 },
 
                 {
@@ -48,7 +49,8 @@
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
-                                                    "550": 1.55}
+                                                    "550": 1.55},
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "camera_3",
@@ -58,7 +60,8 @@
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
-                                                    "550": 1.55}
+                                                    "550": 1.55},
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "camera_4",
@@ -68,7 +71,8 @@
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
-                                                    "550": 1.55}
+                                                    "550": 1.55},
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "camera_5",
@@ -78,7 +82,8 @@
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
-                                                    "550": 1.55}
+                                                    "550": 1.55},
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "camera_6",
@@ -88,7 +93,8 @@
                                 "type": "Misumi_Camera",
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.5,
-                                                    "550": 1.55}
+                                                    "550": 1.55},
+                                "OnOff": "Off"
                 }
 ],
 "lights":        [
@@ -100,7 +106,8 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1,
+                                "OnOff": "On"
 
                 },
                       {
@@ -111,7 +118,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1,
+                                "OnOff": "Off"
                 },
 
                 {
@@ -122,7 +130,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1,
+                                "OnOff": "Off"
 
                 },
 
@@ -134,7 +143,8 @@
                                 "type": "projector_blue",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1,
+                                "OnOff": "Off"
 
                 },
                 {
@@ -145,7 +155,8 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0
+                                "GratingOrder": 1,
+                                "OnOff": "Off"
 
                 }
 ],

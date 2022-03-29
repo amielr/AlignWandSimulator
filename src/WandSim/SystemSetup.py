@@ -62,10 +62,15 @@ def get_surface_parameters_from_json(surface):
 def create_projectors():
     projectorList = []
     for projector in config["lights"]:
-        name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant = get_projector_parameters_from_json(projector)
+        name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant, OnOff = get_projector_parameters_from_json(projector)
 
-        projectorobject = Projector(name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant)
-        projectorList.append(projectorobject)
+        if OnOff=="On":
+            projectorobject = Projector(name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant)
+            projectorList.append(projectorobject)
+
+    if len(projectorList) == 0:
+        print("Huston we have a problem the projector list is of len:", len(projectorList))
+        exit()
     return projectorList
 
 
@@ -78,18 +83,23 @@ def get_projector_parameters_from_json(projector):
     projtype = projector["type"]
     gratingorder = projector["GratingOrder"]
     latticConstant = projector["LatticeConst"]
-    return name, center, direction, rotation, wavelength, projtype, gratingorder, latticConstant
+    OnOff = projector["OnOff"]
+    return name, center, direction, rotation, wavelength, projtype, gratingorder, latticConstant, OnOff
 
 
 def create_cameras():
     cameraList = []
     for camera in config["cameras"]:
-        name, center, direction, rotation, cameratype, windowthickness, refractiveindex  = get_camera_parameters_from_json(camera)
+        name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff  = get_camera_parameters_from_json(camera)
 
-        cameraobject = Camera(name, center, direction,
-                                    rotation, cameratype, windowthickness, refractiveindex)
-        #windowobject = WindowLens(name+"window", windowthickness, center+direction, direction, refractiveindex)
-        cameraList.append(cameraobject)
+        if OnOff == "On":
+            cameraobject = Camera(name, center, direction,
+                                        rotation, cameratype, windowthickness, refractiveindex)
+            #windowobject = WindowLens(name+"window", windowthickness, center+direction, direction, refractiveindex)
+            cameraList.append(cameraobject)
+    if len(cameraList) == 0:
+        print("Huston we have a problem the Camera list is of len:", len(cameraList))
+        exit()
     return cameraList
 
 
@@ -101,5 +111,7 @@ def get_camera_parameters_from_json(camera):
     cameratype = camera["type"]
     windowthickness = camera["thickness"]
     refractiveindex = camera["refractiveindex"]
+    OnOff = camera["OnOff"]
 
-    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex
+
+    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff
