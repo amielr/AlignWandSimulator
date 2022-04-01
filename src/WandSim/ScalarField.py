@@ -7,11 +7,6 @@ with open('../src/config.json') as config_file:
     config = json.load(config_file)
 
 
-def get_lattice_const():
-    return config["LatticeConst"]
-
-
-
 class ScalarField:
 
     def __init__(self):

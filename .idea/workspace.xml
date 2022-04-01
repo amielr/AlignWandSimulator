@@ -4,6 +4,12 @@
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/System_Parameters/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/System_Parameters/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/Projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Projector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/Ray.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Ray.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/ScalarField.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/ScalarField.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/WindowLens.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WindowLens.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,6 +105,7 @@
       <workItem from="1646066066362" duration="12652000" />
       <workItem from="1646139773701" duration="30514000" />
       <workItem from="1648556352232" duration="4904000" />
+      <workItem from="1648562067517" duration="44990000" />
     </task>
     <servers />
   </component>
@@ -118,38 +125,38 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="110" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1645528808307" />
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom" timestamp="1648561371725">
+    <state width="1323" height="231" key="GridCell.Tab.0.bottom" timestamp="1648774173303">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1648561371725" />
-    <state width="1323" height="185" key="GridCell.Tab.0.center" timestamp="1648561371725">
+    <state width="1323" height="231" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1648774173303" />
+    <state width="1323" height="231" key="GridCell.Tab.0.center" timestamp="1648774173303">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1648561371725" />
-    <state width="1323" height="185" key="GridCell.Tab.0.left" timestamp="1648561371725">
+    <state width="1323" height="231" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1648774173303" />
+    <state width="1323" height="231" key="GridCell.Tab.0.left" timestamp="1648774173303">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1648561371725" />
-    <state width="1323" height="185" key="GridCell.Tab.0.right" timestamp="1648561371725">
+    <state width="1323" height="231" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1648774173303" />
+    <state width="1323" height="231" key="GridCell.Tab.0.right" timestamp="1648774173303">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="185" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1648561371725" />
-    <state width="1323" height="68" key="GridCell.Tab.1.bottom" timestamp="1646691305922">
+    <state width="1323" height="231" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1648774173303" />
+    <state width="1323" height="286" key="GridCell.Tab.1.bottom" timestamp="1648771960377">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="68" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1646691305922" />
-    <state width="1323" height="68" key="GridCell.Tab.1.center" timestamp="1646691305922">
+    <state width="1323" height="286" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1648771960377" />
+    <state width="1323" height="286" key="GridCell.Tab.1.center" timestamp="1648771960377">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="68" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1646691305922" />
-    <state width="1323" height="68" key="GridCell.Tab.1.left" timestamp="1646691305922">
+    <state width="1323" height="286" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1648771960377" />
+    <state width="1323" height="286" key="GridCell.Tab.1.left" timestamp="1648771960377">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="68" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1646691305922" />
-    <state width="1323" height="68" key="GridCell.Tab.1.right" timestamp="1646691305922">
+    <state width="1323" height="286" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1648771960377" />
+    <state width="1323" height="286" key="GridCell.Tab.1.right" timestamp="1648771960377">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1323" height="68" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1646691305922" />
+    <state width="1323" height="286" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1648771960377" />
     <state x="184" y="11" key="SettingsEditor" timestamp="1645535109801">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -162,10 +169,10 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1646740855028" />
-    <state x="714" y="181" width="607" height="536" key="find.popup" timestamp="1648558998766">
+    <state x="714" y="181" width="607" height="536" key="find.popup" timestamp="1648772154973">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="714" y="181" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1648558998766" />
+    <state x="714" y="181" width="607" height="536" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1648772154973" />
     <state x="424" y="12" key="refactoring.ChangeSignatureDialog" timestamp="1642710950617">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -189,9 +196,9 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/WandSim/Camera.py</url>
-          <line>98</line>
-          <option name="timeStamp" value="20" />
+          <url>file://$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py</url>
+          <line>76</line>
+          <option name="timeStamp" value="28" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -204,6 +211,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1648561371715" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1648774173288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

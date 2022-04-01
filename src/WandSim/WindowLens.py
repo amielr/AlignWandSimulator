@@ -40,8 +40,8 @@ class WindowLens:
         return surface
 
     def calculate_mu(self, raymu):
-        self.MuIn = 1 / raymu
-        self.MuOut = raymu / 1
+        self.MuIn = raymu / 1
+        self.MuOut = 1 / raymu
         return
 
     def get_mu_in(self):

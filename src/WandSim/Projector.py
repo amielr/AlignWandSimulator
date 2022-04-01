@@ -78,7 +78,7 @@ class Projector():
         return
 
     def get_lattice_distance(self):
-        return self.LatticeConstant * 1e-6
+        return self.LatticeConstant * 1e-6 * np.cos(np.pi/6)
 
     def get_grating_equation_angle(self, order):
         gratingdistance = self.get_lattice_distance()

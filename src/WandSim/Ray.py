@@ -35,7 +35,7 @@ class Ray():
 
     def __str__(self):
         return "Ray values: Origin - %s Direction - %s Amplitude - %s ParentSource - %s"\
-               % (self.get_origin(), self.get_direction(), self.get_amplitude(), self.get_parent_source())
+               % (self.Origin, self.Direction, self.get_amplitude(), self.get_parent_source())
 
     def normalize(self, an_array):
         norm = np.linalg.norm(an_array)
@@ -55,11 +55,6 @@ class Ray():
     def get_number_of_rays(self):
         return self.NumberOfRays
 
-    def get_origin(self):
-        return self.Origin
-
-    def get_direction(self):
-        return self.Direction
 
     def set_origin(self, _origin):
         self.Origin = _origin
@@ -86,8 +81,8 @@ class Ray():
 
         #print(isinstance(_surface, WindowLens))
         surfacenormal = _surface.get_surface_normal()
-        rayorigin = self.get_origin()
-        raydirection = self.get_direction()
+        rayorigin = self.Origin
+        raydirection = self.Direction
         originplanepointvector = _surface.CenterPoint - rayorigin
 
         lineplanetest = np.dot(surfacenormal, raydirection)
@@ -106,7 +101,7 @@ class Ray():
                 return(self.Origin)
             else:
 
-                print("the intersection point is behind us, ray does not meet plane")
+                print("the intersection point is behind us, ray does not meet plane", self.Origin, _surface.CenterPoint)
 
 
     def get_reflection_from_surface(self, _surface):

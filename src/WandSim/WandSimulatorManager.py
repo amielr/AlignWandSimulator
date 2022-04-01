@@ -69,25 +69,29 @@ def reorder_list_from_closest_to_furthest(ray, surfaceList):
     # [print(surfaceholder.CenterPoint) for surfaceholder in sortedSurfacesList]
     return sortedSurfacesList
 
+
+
 def propagate_rays_back_to_cameras(cameraList, windowsList):
     for camera in cameraList:
         #camera = cameraList[0]
         windowsList.append(camera.window)
         print("camera window parameters", camera.window)
-        print("camera direction: ",camera.center, camera.direction)
+        print("camera direction: ", camera.center, camera.direction)
         #invdir = np.linalg.inv(camera.direction)
         #print(np.matmul(np.linalg.inv(get_rotation_matrix(camera.rotationDirection[0], camera.rotationDirection[1],camera.rotationDirection[2])),camera.window.Normal))
-        camera.cameraRayList = camera.get_initial_intersection_points_from_surface_to_camera(Projector.AllProjectorRaysList, windowsList)
-        print("Ray Initial conditions", [ray.RayStoryCoordinates for ray in camera.cameraRayList])
+        camera.cameraRayList = []
+        for ray in Projector.AllProjectorRaysList:
+            camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(ray, windowsList))
+
+            #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
         plot_ray_path_line(camera.cameraRayList)
         camera.optimize_Camera_rays()
+        #camera.update_ray_directions()
+        plot_ray_path_line(camera.cameraRayList)
         windowsList.remove(camera.window)
-
-
         camera.determine_pixel_locations()
 
     #for camera in cameraList:
-        plot_ray_path_line(camera.cameraRayList)
 
 
 def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):
