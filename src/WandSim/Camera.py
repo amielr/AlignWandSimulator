@@ -106,7 +106,7 @@ class Camera():
                 return (surface, kfactor, intersectionpoint)
             else:
 
-                print("the intersection point is behind us, ray does not meet plane", ray.Origin, surface.CenterPoint)
+                print("the intersection point is behind us, ray does not meet plane-Camera", ray.Origin, surface.CenterPoint)
 
 
 

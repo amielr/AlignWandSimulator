@@ -104,7 +104,7 @@ class Ray():
                 return(self.Origin)
             else:
 
-                print("the intersection point is behind us, ray does not meet plane", self.Origin, _surface.CenterPoint)
+                print("the intersection point is behind us, ray does not meet plane - Ray", self.Origin, _surface.CenterPoint)
 
 
     def get_reflection_from_surface(self, _surface):
