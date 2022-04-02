@@ -13,15 +13,15 @@
           "normal": [0,0,-1],
           "center": [0,0,-0.2],
           "thickness": 1,
-          "refractiveindex": {"450":1.7,
-                              "550":1.75}
+          "refractiveindex": {"450":1,
+                              "550":1}
     }
     ],
 
   "surfaces": [{
           "name": "surface1",
           "normal": [0,0,1],
-          "center": [0,0,-3]
+          "center": [0,0,-10]
   }],
 
   "cameras": [
@@ -38,7 +38,7 @@
                                                         "y": 1.512},
                                 "pixeldimension": {"x": 1.4e-3,
                                                     "y": 1.4e-3},
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
                 {
                                 "name": "camera_1",
@@ -107,7 +107,7 @@
                                 "type": "projector_green",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 10,
+                                "GratingOrder": 3,
                                 "OnOff": "On"
 
                 },

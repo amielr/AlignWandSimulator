@@ -173,48 +173,48 @@ class Camera():
 
 
 
-    def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
-
-        self.cameraRayList = deepcopy(rayList)
-        #print("we are here", self.cameraRayList)
-        for ray in self.cameraRayList:
-            ray.Direction = ray.normalize(self.center - ray.Origin)
-            sortedwindowsList = self.reorder_list_from_closest_to_furthest(ray, windowsList)
-            print("our sorted windowslist is: ", sortedwindowsList)
-            print("our ray Origin in Camera ray list is:", ray.Origin, ray.Direction)
-            ray.DottoCameraRayList = [ray.Origin]
-            print(ray.DottoCameraRayList)
-            ray.windowSurfaceList =[]
-
-            for window in sortedwindowsList:
-                window.surfaceList = self.reorder_list_from_closest_to_furthest(ray, window.surfaceList)
-                print("window surface list", window.surfaceList)
-                ray.windowSurfaceList.extend(window.surfaceList)
-                print("ray surface list", len(ray.windowSurfaceList), ray.windowSurfaceList)
-                [print(surface.Name, surface.CenterPoint) for surface in ray.windowSurfaceList]
-
-
-
-                ray.IsRayInWindow = not ray.IsRayInWindow
-                window.ray_window_refractive_registration(ray)
-                self.camera_windows_transfer_manager(window, ray)
-            print("our ray surface list:", len(ray.windowSurfaceList))
-            # print(self.cameraName, " ray surface intersection", ray.Origin)
-            # print(self.cameraName, "ray surfaces intersection points", ray.DottoCameraRayList)
-            # print("window surface list length: ", str(len(ray.windowSurfaceList)))
-            ray.set_origin(self.center)
-
-            ray.DottoCameraRayList.append(ray.Origin)
-            ray.DottoCameraRayList = np.asarray(ray.DottoCameraRayList)
-            print("initial dot to camera is :", ray.DottoCameraRayList)
-
-
-            ray.write_the_story(self.cameraName, ray.Origin, ray.RayMuuValue)
-            #ray.windowSurfaceList = [item for sublist in ray.windowSurfaceList for item in sublist]
-            [print(surface) for surface in ray.windowSurfaceList]
-            print("ray surface list flattened", len(ray.windowSurfaceList), ray.windowSurfaceList)
-        #plot_ray_path_line(self.cameraRayList)
-        return self.cameraRayList
+    # def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
+    #
+    #     self.cameraRayList = deepcopy(rayList)
+    #     #print("we are here", self.cameraRayList)
+    #     for ray in self.cameraRayList:
+    #         ray.Direction = ray.normalize(self.center - ray.Origin)
+    #         sortedwindowsList = self.reorder_list_from_closest_to_furthest(ray, windowsList)
+    #         print("our sorted windowslist is: ", sortedwindowsList)
+    #         print("our ray Origin in Camera ray list is:", ray.Origin, ray.Direction)
+    #         ray.DottoCameraRayList = [ray.Origin]
+    #         print(ray.DottoCameraRayList)
+    #         ray.windowSurfaceList =[]
+    #
+    #         for window in sortedwindowsList:
+    #             window.surfaceList = self.reorder_list_from_closest_to_furthest(ray, window.surfaceList)
+    #             print("window surface list", window.surfaceList)
+    #             ray.windowSurfaceList.extend(window.surfaceList)
+    #             print("ray surface list", len(ray.windowSurfaceList), ray.windowSurfaceList)
+    #             [print(surface.Name, surface.CenterPoint) for surface in ray.windowSurfaceList]
+    #
+    #
+    #
+    #             ray.IsRayInWindow = not ray.IsRayInWindow
+    #             window.ray_window_refractive_registration(ray)
+    #             self.camera_windows_transfer_manager(window, ray)
+    #         print("our ray surface list:", len(ray.windowSurfaceList))
+    #         # print(self.cameraName, " ray surface intersection", ray.Origin)
+    #         # print(self.cameraName, "ray surfaces intersection points", ray.DottoCameraRayList)
+    #         # print("window surface list length: ", str(len(ray.windowSurfaceList)))
+    #         ray.set_origin(self.center)
+    #
+    #         ray.DottoCameraRayList.append(ray.Origin)
+    #         ray.DottoCameraRayList = np.asarray(ray.DottoCameraRayList)
+    #         print("initial dot to camera is :", ray.DottoCameraRayList)
+    #
+    #
+    #         ray.write_the_story(self.cameraName, ray.Origin, ray.RayMuuValue)
+    #         #ray.windowSurfaceList = [item for sublist in ray.windowSurfaceList for item in sublist]
+    #         [print(surface) for surface in ray.windowSurfaceList]
+    #         print("ray surface list flattened", len(ray.windowSurfaceList), ray.windowSurfaceList)
+    #     #plot_ray_path_line(self.cameraRayList)
+    #     return self.cameraRayList
 
     def determine_time_distance_path_length(self, ray):
         distance = 0
@@ -234,15 +234,19 @@ class Camera():
         return ray.RayPathDistance
 
 
-    def slice_XY_intersect_of_Surfaces(self, arr):
-        return arr[1:-1, 0:2]
+    def slice_XY_intersect_of_Surfaces_and_flatten(self, arr):
+        holder = arr[1:-1]
+        holder = [l[0:2] for l in holder]
+        holder = [item for sublist in holder for item in sublist]
+        return holder
 
     def replace_XYZ_sliceintersects_of_Surfaces(self, arr, adjusted):
-        arr[1:-1, 0:3] = adjusted
+        arr[1:-1] = adjusted
         return arr
 
     def objective_function_to_minimize_ray_path_distance(self, surfaceXYmatrix, *args):
         ray = args[0]
+        #ray.DottoCameraRayList = []
         adjustedXYZList = []
         reshapedsurfaceXYmatrix = np.reshape(surfaceXYmatrix, (-1, 2))
         #print("reshapedXYmatrix", reshapedsurfaceXYmatrix)
@@ -263,7 +267,7 @@ class Camera():
         #print(adjustedXYZList)
         ray.DottoCameraRayList = self.replace_XYZ_sliceintersects_of_Surfaces(ray.DottoCameraRayList, adjustedXYZList)
         #print(ray.DottoCameraRayList)
-        ray.RayStoryCoordinates[-len(ray.DottoCameraRayList):len(ray.RayStoryCoordinates), :] = ray.DottoCameraRayList
+        ray.RayStoryCoordinates[-len(ray.DottoCameraRayList):len(ray.RayStoryCoordinates)] = ray.DottoCameraRayList
         #print("Full ray story: ", ray.RayStoryCoordinates)
         # surfaceXY[index] =
         #print("path distance is: ", self.determine_time_distance_path_length(ray))
@@ -287,9 +291,9 @@ class Camera():
             #print("sliced: ", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             #[[5,7],[10,10],[11,11],[1,1]]
             #print(self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
-            initialConditions = self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList).flatten()
+            initialConditions = self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList)
             print("flattened", initialConditions)
-            print("Original", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
+            print("Original", self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList))
             #self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
             boundsx = (-30, 30)
             boundsy = (-20, 20)

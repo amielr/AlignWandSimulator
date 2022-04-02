@@ -74,7 +74,7 @@ def plot_ray_path_line(rays):
     plt.subplot(projection='3d')
     for ray in rays:
         x, y, z = [], [], []
-        #print("we are in ray path line plot: ", ray.RayStoryCoordinates)
+        print("we are in ray path line plot our raystory is: ", ray.RayStoryCoordinates)
         for rayCoordinates in ray.RayStoryCoordinates:
             #print(rayCoordinates)
             x.append(rayCoordinates[0])

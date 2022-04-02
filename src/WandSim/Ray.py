@@ -18,7 +18,7 @@ class Ray():
     IsRayInWindow = False
     RayMuuValue = 1
     RayPathDistance = 0
-    RayStoryCoordinates = np.array(0)
+    #RayStoryCoordinates = np.array(0)
 
     def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None):
 
@@ -30,6 +30,9 @@ class Ray():
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
         self.IndexI = _Iindex
         self.IndexJ = _Jindex
+        self.RayStoryCoordinates = []
+        self.RayStory = []
+        self.RayrefractiveIndexList = []
         self.write_the_story(_parentsource.projectorName, self.Origin, 1)
         Ray.NumberOfRays += 1
 
@@ -115,13 +118,13 @@ class Ray():
 
     def write_the_story(self, _objectname, coordinates, refractiveIndex):
         if len(self.RayStory) == 0:
-            self.RayStory += str(_objectname + ",")
-            self.RayrefractiveIndexList = np.array(refractiveIndex)
-            self.RayStoryCoordinates = coordinates
+            self.RayStory.append(str(_objectname))
+            self.RayrefractiveIndexList.append(refractiveIndex)
+            self.RayStoryCoordinates.append(coordinates)
         else:
-            self.RayStory += str(_objectname + ",")
-            self.RayrefractiveIndexList = np.hstack((self.RayrefractiveIndexList, self.RayMuuValue))
-            self.RayStoryCoordinates = np.vstack((self.RayStoryCoordinates, coordinates))
+            self.RayStory.append(str(_objectname))
+            self.RayrefractiveIndexList.append(self.RayMuuValue)
+            self.RayStoryCoordinates.append(coordinates)
 
         return
 

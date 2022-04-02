@@ -80,10 +80,12 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
         #invdir = np.linalg.inv(camera.direction)
         #print(np.matmul(np.linalg.inv(get_rotation_matrix(camera.rotationDirection[0], camera.rotationDirection[1],camera.rotationDirection[2])),camera.window.Normal))
         camera.cameraRayList = []
-        for ray in Projector.AllProjectorRaysList:
-            camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(ray, windowsList))
 
-            #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
+        for ray in Projector.AllProjectorRaysList:
+            raycopy = deepcopy(ray)
+            camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(raycopy, windowsList))
+
+        #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
         plot_ray_path_line(camera.cameraRayList)
         camera.optimize_Camera_rays()
         #camera.update_ray_directions()
