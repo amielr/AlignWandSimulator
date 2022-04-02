@@ -120,7 +120,7 @@
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
                                 "GratingOrder": 5,
-                                "OnOff": "Off"
+                                "OnOff": "On"
                 },
 
                 {
@@ -132,7 +132,7 @@
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
                                 "GratingOrder": 5,
-                                "OnOff": "Off"
+                                "OnOff": "On"
 
                 },
   {

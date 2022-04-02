@@ -27,13 +27,7 @@ class STL():
         return mesh
 
 
-    def rendering_3D_model(self, mesh):
-        print("Computing normal and rendering it.")
-        mesh.compute_vertex_normals()
-        print(np.asarray(mesh.triangle_normals))
-        #mesh = self.translate_STL(mesh, (18, 31, -15))
-        o3d.visualization.draw_geometries([mesh])
-        return
+
 
         # %%
 
@@ -48,6 +42,28 @@ class STL():
         #o3d.visualization.draw_geometries([Mesh])
         return self.mesh
 
+
+
+    def point_cloud_plot(self, points):
+
+        #hit = ans['t_hit'].isfinite()
+        #points = rays[hit][:, :3] + rays[hit][:, 3:] * ans['t_hit'][hit].reshape((-1, 1))
+        pcd = o3d.t.geometry.PointCloud(points)
+        # Press Ctrl/Cmd-C in the visualization window to copy the current viewpoint
+        o3d.visualization.draw_geometries([pcd.to_legacy()],
+                                          front=[0.5, 0.86, 0.125],
+                                          lookat=[0.23, 0.5, 2],
+                                          up=[-0.63, 0.45, -0.63],
+                                          zoom=0.7)
+        return
+
+    def rendering_3D_model(self, mesh):
+        print("Computing normal and rendering it.")
+        mesh.compute_vertex_normals()
+        print(np.asarray(mesh.triangle_normals))
+        # mesh = self.translate_STL(mesh, (18, 31, -15))
+        o3d.visualization.draw_geometries([mesh])
+        return
 
     def cast_rays_on_the_3D_mesh(self, raysList):
 
@@ -77,16 +93,23 @@ class STL():
         print(ans['t_hit'].numpy(), ans['geometry_ids'].numpy())
         print(ans['primitive_ids'].numpy(), ans['primitive_normals'].numpy(), ans['primitive_uvs'].numpy())
 
+        #plt.imshow(ans['t_hit'].numpy())
+
+
         updatedrayList = []
+        points = []
         for index, ray in enumerate(raysList):
             print("our ray direction is:", ray.Direction, "multiplied by hit distance:",ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
             print(ans['t_hit'][index].numpy())
-            if ans['t_hit'][index].numpy() != np.inf:
+            if ans['t_hit'][index].isfinite().numpy():
                 print("we are in")
                 ray.Origin = ray.Origin + np.dot(ray.Direction, ans['t_hit'][index].numpy())
                 ray.write_the_story(self.ObjectName, ray.Origin, 1)
                 print(ray.Origin)
                 updatedrayList.append(ray)
+                points.append(ray.Origin)
+
+        self.point_cloud_plot(points)
 
         return updatedrayList
     # primitives uvs = the intersection coordinates of the the ray with the mesh

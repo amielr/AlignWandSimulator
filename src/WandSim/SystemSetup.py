@@ -7,6 +7,7 @@ from src.WandSim.STL import STL
 def create_STL_object():
     STLobject = STL()
     STLobject.translate_STL((18, 20, -15))
+
     print("have we translated", np.asarray(STLobject.mesh.vertices))
     return STLobject
 

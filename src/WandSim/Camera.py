@@ -292,8 +292,8 @@ class Camera():
             #[[5,7],[10,10],[11,11],[1,1]]
             #print(self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             initialConditions = self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList)
-            print("flattened", initialConditions)
-            print("Original", self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList))
+            #print("flattened", initialConditions)
+            #print("Original", self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList))
             #self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
             boundsx = (-30, 30)
             boundsy = (-20, 20)
