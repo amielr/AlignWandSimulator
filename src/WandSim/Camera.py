@@ -75,11 +75,11 @@ class Camera():
 
     def camera_windows_transfer_manager(self, window, ray):
         ray.ray_surface_intersection(window.surfaceList[0])
-        ray.DottoCameraRayList.append(ray.Origin)
+        ray.SpottoCameraRayList.append(ray.Origin)
         ray.IsRayInWindow = not ray.IsRayInWindow
         window.ray_window_refractive_registration(ray)
         ray.ray_surface_intersection(window.surfaceList[1])
-        ray.DottoCameraRayList.append(ray.Origin)
+        ray.SpottoCameraRayList.append(ray.Origin)
         return
 
     def add_camera_window_to_window_list(self, windowList):
@@ -167,7 +167,7 @@ class Camera():
         #print("depthcounter", depthCounter)
         ray.depthCounter = depthCounter
         #print(ray.RayStoryCoordinates[])
-        ray.DottoCameraRayList = ray.RayStoryCoordinates[-ray.depthCounter:]
+        ray.SpottoCameraRayList = ray.RayStoryCoordinates[-ray.depthCounter:]
         return ray
 
 
@@ -219,7 +219,7 @@ class Camera():
     def determine_time_distance_path_length(self, ray):
         distance = 0
         #print("ray to be determined", ray)
-        distancesList = np.linalg.norm(np.diff(ray.DottoCameraRayList, axis=0), axis=1)
+        distancesList = np.linalg.norm(np.diff(ray.SpottoCameraRayList, axis=0), axis=1)
         #print("distance list: ", distancesList)
         #ray.RayrefractiveIndexList = np.delete(ray.RayrefractiveIndexList, 0)
         #print("refractive index list = ", ray.RayrefractiveIndexList)
@@ -265,9 +265,9 @@ class Camera():
             #print(slicedList)
         adjustedXYZList = np.asarray(adjustedXYZList)
         #print(adjustedXYZList)
-        ray.DottoCameraRayList = self.replace_XYZ_sliceintersects_of_Surfaces(ray.DottoCameraRayList, adjustedXYZList)
+        ray.SpottoCameraRayList = self.replace_XYZ_sliceintersects_of_Surfaces(ray.SpottoCameraRayList, adjustedXYZList)
         #print(ray.DottoCameraRayList)
-        ray.RayStoryCoordinates[-len(ray.DottoCameraRayList):len(ray.RayStoryCoordinates)] = ray.DottoCameraRayList
+        ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList):len(ray.RayStoryCoordinates)] = ray.SpottoCameraRayList
         #print("Full ray story: ", ray.RayStoryCoordinates)
         # surfaceXY[index] =
         #print("path distance is: ", self.determine_time_distance_path_length(ray))
@@ -291,7 +291,7 @@ class Camera():
             #print("sliced: ", self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
             #[[5,7],[10,10],[11,11],[1,1]]
             #print(self.slice_XY_intersect_of_Surfaces(ray.DottoCameraRayList))
-            initialConditions = self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList)
+            initialConditions = self.slice_XY_intersect_of_Surfaces_and_flatten(ray.SpottoCameraRayList)
             #print("flattened", initialConditions)
             #print("Original", self.slice_XY_intersect_of_Surfaces_and_flatten(ray.DottoCameraRayList))
             #self.objective_function_to_minimize_ray_path_distance(initialConditions, ray)
@@ -327,7 +327,7 @@ class Camera():
         YanglesList = []
         for ray in self.cameraRayList:
             directionHolder = np.matmul(np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2])), ray.Direction)
-            ray.Direction = np.matmul( ray.Direction,np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2])),)
+            ray.Direction = np.matmul( np.linalg.inv(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2])),ray.Direction)
             #print("directionholder", directionHolder)
             #ray.Direction =
             if np.dot(ray.Direction, self.direction)<0:

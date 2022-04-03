@@ -9,8 +9,8 @@ def startSimulator():
 
     run_projectors(projectorsList)
 
-    #propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
-    propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
+    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    #propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
 
     #reflectivesurface[0].load_profile_file()
 
