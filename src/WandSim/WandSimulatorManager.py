@@ -1,6 +1,6 @@
 from src.WandSim.SystemSetup import *
 from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations
-
+from copy import deepcopy
 
 
 def startSimulator():
@@ -136,7 +136,7 @@ def propagate_rays_to_reflective_surface_STL(windowsList, reflectiveSurface, pro
     Projector.AllProjectorRaysList = reflectiveSurface.cast_rays_on_the_3D_mesh(Projector.AllProjectorRaysList)
     print("projector rays list: ", Projector.AllProjectorRaysList)
     print("projector ray origin: ", Projector.AllProjectorRaysList[0].Origin)
-    reflectiveSurface.rendering_3D_model(reflectiveSurface.load_profile_file())
+    reflectiveSurface.rendering_3D_model()
     plot_ray_locations(Projector.AllProjectorRaysList)
     #plot_projector_ray_locations_scatter(Projector)
     # plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
@@ -179,6 +179,8 @@ def propagate_rays_through_system_STL(Projector, windowsList, reflectiveSurface,
 
     propagate_rays_to_reflective_surface_STL(windowsList, reflectiveSurface, projectorList)
     propagate_rays_back_to_cameras(cameraList, windowsList)
+    reflectiveSurface.test_rays_for_blockage(cameraList)
+
     # for ray in rayList:
     #     ray.get_reflection_from_surface(reflectiveSurface[0])
     # plot_quiver(rayList, reflectiveSurface[0].SurfaceName)

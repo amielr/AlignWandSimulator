@@ -15,18 +15,22 @@ def plot_scatter(name, data):
     plt.show(block=True)
     return
 
-def plot_xy_scatter(X,Y):
+def plot_xy_scatter(X,Y, XV, YV):
     fig = plt.figure()
     ax = fig.add_subplot()
     ax.set_title("scatter XY")
-    plt.scatter(X, Y,s=4)
+    #plt.scatter(X, Y, s=4)
+
+    plt.scatter(X, Y, s=6, c='b', marker="s", label='simulation')
+    plt.scatter(XV, YV, s=4, c='g', marker="o", label='validation')
+
     plt.grid(True, 'both', 'both')
     major_ticks_x = np.arange(0, 1920, 100)
     major_ticks_y = np.arange(0, 1080, 100)
     ax.set_xticks(major_ticks_x)
     ax.set_yticks(major_ticks_y)
-    ax.set_xlim([0, 1920])
-    ax.set_ylim([0, 1080])
+    ax.set_xlim([0, 960])
+    ax.set_ylim([0, 540])
     plt.show(block=True)
     return
 

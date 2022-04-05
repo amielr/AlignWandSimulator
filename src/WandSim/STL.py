@@ -44,7 +44,11 @@ class STL():
 
 
 
+
+
     def point_cloud_plot(self, points):
+
+        self.mesh.compute_vertex_normals()
 
         #hit = ans['t_hit'].isfinite()
         #points = rays[hit][:, :3] + rays[hit][:, 3:] * ans['t_hit'][hit].reshape((-1, 1))
@@ -57,12 +61,14 @@ class STL():
                                           zoom=0.7)
         return
 
-    def rendering_3D_model(self, mesh):
+
+
+    def rendering_3D_model(self):
         print("Computing normal and rendering it.")
-        mesh.compute_vertex_normals()
-        print(np.asarray(mesh.triangle_normals))
+        self.mesh.compute_vertex_normals()
+        print(np.asarray(self.mesh.triangle_normals))
         # mesh = self.translate_STL(mesh, (18, 31, -15))
-        o3d.visualization.draw_geometries([mesh])
+        o3d.visualization.draw_geometries([self.mesh])
         return
 
     def cast_rays_on_the_3D_mesh(self, raysList):
@@ -99,7 +105,7 @@ class STL():
         updatedrayList = []
         points = []
         for index, ray in enumerate(raysList):
-            print("our ray direction is:", ray.Direction, "multiplied by hit distance:",ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
+            print("our ray direction is:", ray.Direction, "multiplied by hit distance:", ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
             print(ans['t_hit'][index].numpy())
             if ans['t_hit'][index].isfinite().numpy():
                 print("we are in")
@@ -115,6 +121,73 @@ class STL():
     # primitives uvs = the intersection coordinates of the the ray with the mesh
 
     # %%
+
+    def reverse_ray_infinitesimaly_backwards(self, raysList):
+        for ray in raysList:
+            holder = []
+            raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)-1:-len(ray.SpottoCameraRayList) + 1]
+            print("ray segment ", raysegment)
+            Direction = raysegment[0] - raysegment[1]
+            Direction = Direction/np.linalg.norm(Direction)
+            print("ray before, ", raysegment[1])
+            raysegment[1] = raysegment[1] + 0.0000001 * Direction
+            print("ray after, ", raysegment[1])
+
+            ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)] = raysegment[1]
+            print("updated spot after, ", ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)])
+
+        return
+
+
+    def test_rays_for_blockage(self, cameraslist):
+        for camera in cameraslist:
+            raysList = camera.cameraRayList
+
+            self.reverse_ray_infinitesimaly_backwards(raysList)
+            print("We are testing blocked rays!!!")
+
+            cube = o3d.t.geometry.TriangleMesh.from_legacy(self.mesh)
+            scene = o3d.t.geometry.RaycastingScene()
+            vert = np.asarray(self.mesh.vertices)
+            Rays = []
+            for ray in raysList:
+                holder = []
+                raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList):-len(ray.SpottoCameraRayList)+2]
+                Direction = raysegment[1]-raysegment[0]
+
+                print("raysegment is: ", raysegment, "rayDirection", Direction)
+
+
+
+                holder.extend(ray.Origin.tolist())
+                holder.extend(Direction.tolist())
+                # print("holder", holder)
+                Rays.append(holder)
+
+            rays = o3d.core.Tensor(Rays, dtype=o3d.core.Dtype.Float32)
+            print("our rays list", rays)
+            ans = scene.cast_rays(rays)
+            print("our answer is: ", ans.keys())
+            print(ans['t_hit'].numpy(), ans['geometry_ids'].numpy())
+            print(ans['primitive_ids'].numpy(), ans['primitive_normals'].numpy(), ans['primitive_uvs'].numpy())
+
+            updatedrayList = []
+            blockedRays = []
+            for index, ray in enumerate(raysList):
+                print("our ray direction is:", ray.Direction, "multiplied by hit distance:",
+                      ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
+                print(ans['t_hit'][index].numpy())
+                if ans['t_hit'][index].isfinite().numpy():
+                    print("we are in open field, ", ans['t_hit'][index].numpy(), ans['t_hit'][index].isfinite().numpy())
+                    ray.Origin = ray.Origin #+ np.dot(ray.Direction, ans['t_hit'][index].numpy())
+                    ray.write_the_story(self.ObjectName, ray.Origin, 1)
+                    print(ray.Origin)
+                    updatedrayList.append(ray)
+                else:
+                    print("we are in not blocked, ", ans['t_hit'][index].numpy(), ans['t_hit'][index].isfinite().numpy())
+                    blockedRays.append(ray)
+        return
+
 
 
 

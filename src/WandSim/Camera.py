@@ -1,12 +1,10 @@
-from copy import deepcopy
 import json
 from scipy.optimize import minimize
 from src.WandSim.WindowLens import *
 from src.WandSim.Projector import get_rotation_matrix
 import math
 from src.visuliazation.PlotFunctions import plot_xy_scatter, plot_ray_path_line
-
-
+from numpy import genfromtxt
 
 with open('../src/System_Parameters/config.json') as config_file:
     config = json.load(config_file)
@@ -171,51 +169,6 @@ class Camera():
         return ray
 
 
-
-
-    # def get_initial_intersection_points_from_surface_to_camera(self, rayList, windowsList):
-    #
-    #     self.cameraRayList = deepcopy(rayList)
-    #     #print("we are here", self.cameraRayList)
-    #     for ray in self.cameraRayList:
-    #         ray.Direction = ray.normalize(self.center - ray.Origin)
-    #         sortedwindowsList = self.reorder_list_from_closest_to_furthest(ray, windowsList)
-    #         print("our sorted windowslist is: ", sortedwindowsList)
-    #         print("our ray Origin in Camera ray list is:", ray.Origin, ray.Direction)
-    #         ray.DottoCameraRayList = [ray.Origin]
-    #         print(ray.DottoCameraRayList)
-    #         ray.windowSurfaceList =[]
-    #
-    #         for window in sortedwindowsList:
-    #             window.surfaceList = self.reorder_list_from_closest_to_furthest(ray, window.surfaceList)
-    #             print("window surface list", window.surfaceList)
-    #             ray.windowSurfaceList.extend(window.surfaceList)
-    #             print("ray surface list", len(ray.windowSurfaceList), ray.windowSurfaceList)
-    #             [print(surface.Name, surface.CenterPoint) for surface in ray.windowSurfaceList]
-    #
-    #
-    #
-    #             ray.IsRayInWindow = not ray.IsRayInWindow
-    #             window.ray_window_refractive_registration(ray)
-    #             self.camera_windows_transfer_manager(window, ray)
-    #         print("our ray surface list:", len(ray.windowSurfaceList))
-    #         # print(self.cameraName, " ray surface intersection", ray.Origin)
-    #         # print(self.cameraName, "ray surfaces intersection points", ray.DottoCameraRayList)
-    #         # print("window surface list length: ", str(len(ray.windowSurfaceList)))
-    #         ray.set_origin(self.center)
-    #
-    #         ray.DottoCameraRayList.append(ray.Origin)
-    #         ray.DottoCameraRayList = np.asarray(ray.DottoCameraRayList)
-    #         print("initial dot to camera is :", ray.DottoCameraRayList)
-    #
-    #
-    #         ray.write_the_story(self.cameraName, ray.Origin, ray.RayMuuValue)
-    #         #ray.windowSurfaceList = [item for sublist in ray.windowSurfaceList for item in sublist]
-    #         [print(surface) for surface in ray.windowSurfaceList]
-    #         print("ray surface list flattened", len(ray.windowSurfaceList), ray.windowSurfaceList)
-    #     #plot_ray_path_line(self.cameraRayList)
-    #     return self.cameraRayList
-
     def determine_time_distance_path_length(self, ray):
         distance = 0
         #print("ray to be determined", ray)
@@ -314,8 +267,8 @@ class Camera():
         Sensorlocation = holder[1::, 1]
         XLocations/0.0014
         YLocations/0.0014
-        Xindex = np.interp(XLocations, (-1.344, 1.344), (-1, 1921))
-        Yindex = np.interp(YLocations, (-0.756, 0.756), (-1, 1081))
+        Xindex = np.interp(XLocations, (-1.344, 1.344), (960, 0))
+        Yindex = np.interp(YLocations, (-0.756, 0.756), (0, 540))
         Xindex = np.asarray(Xindex, dtype=float)
         Yindex = np.asarray(Yindex, dtype=float)
         print("Our pixel indexing:", Xindex, Yindex)
@@ -346,7 +299,18 @@ class Camera():
         XLocations = get_interpolated_sensor_location_given_angle(XanglesList)
         YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
         Xindexed, Yindexed = self.pixelIndexing(XLocations, YLocations)
-        plot_xy_scatter(Xindexed, Yindexed)
+
+        my_data = genfromtxt('../src/Validation/B1-CCM0.csv', delimiter=',', skip_header=1)
+        Xvalidation = my_data[:, 0]
+        Xvalidation += 4.5
+        Yvalidation = my_data[:, 1]
+        Yvalidation += -11.5
+
+        print("validation data is: ", my_data)
+        print("validation X data is: ", my_data[:, 0])
+        print("validation Y data is: ", my_data[:, 1])
+
+        plot_xy_scatter(Xindexed, Yindexed, Xvalidation, Yvalidation)
 
 
         return

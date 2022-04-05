@@ -49,7 +49,7 @@
                                 "thickness": 0.4,
                                 "refractiveindex": {"450": 1.55,
                                                     "550": 1.51},
-                                "OnOff": "On"
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "CCM2",
@@ -99,27 +99,16 @@
                 }
 ],
 "lights":        [
-                {
-                                "name": "B2",
-                                "center": [ 8, 0, 3.2 ],
-                                "direction": [0, 0, -1],
-                                "rotation": [  0, 0, 30 ],
-                                "type": "projector_blue",
-                                "wavelength": 450,
-                                "LatticeConst": 7.6,
-                                "GratingOrder": 3,
-                                "OnOff": "On"
 
-                },
                       {
                                 "name": "B1",
                                 "center": [ -1.35, 0, 2.55 ],
                                 "direction": [0, 0, -1],
-                                "rotation": [ 0, 0, -10 ],
+                                "rotation": [ 0, 0, 17 ],
                                 "type": "projector_blue",
                                 "wavelength": 450,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 5,
+                                "GratingOrder": 3,
                                 "OnOff": "On"
                 },
 
@@ -132,7 +121,19 @@
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
                                 "GratingOrder": 5,
-                                "OnOff": "On"
+                                "OnOff": "Off"
+
+                },
+  {
+                                "name": "B2",
+                                "center": [ 8, -10, 3.2 ],
+                                "direction": [0, 0, -1],
+                                "rotation": [  0, 0, 30 ],
+                                "type": "projector_blue",
+                                "wavelength": 450,
+                                "LatticeConst": 7.6,
+                                "GratingOrder": 3,
+                                "OnOff": "Off"
 
                 },
   {
@@ -143,7 +144,7 @@
                                 "type": "projector_green",
                                 "wavelength": 550,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 0,
+                                "GratingOrder": 5,
                                 "OnOff": "Off"
 
                 },
