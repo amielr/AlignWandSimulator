@@ -71,7 +71,7 @@ def create_projectors():
     for projector in config["lights"]:
         name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant, OnOff = get_projector_parameters_from_json(projector)
 
-        if OnOff=="On":
+        if OnOff == "On":
             projectorobject = Projector(name, center, direction, rotation, wavelength, projtype, gratingorder, latticeconstant)
             projectorList.append(projectorobject)
 
@@ -102,7 +102,6 @@ def create_cameras():
         if OnOff == "On":
             cameraobject = Camera(name, center, direction,
                                         rotation, cameratype, windowthickness, refractiveindex)
-            #windowobject = WindowLens(name+"window", windowthickness, center+direction, direction, refractiveindex)
             cameraList.append(cameraobject)
     if len(cameraList) == 0:
         print("Huston we have a problem the Camera list is of len:", len(cameraList))
@@ -118,7 +117,5 @@ def get_camera_parameters_from_json(camera):
     cameratype = camera["type"]
     windowthickness = camera["thickness"]
     refractiveindex = camera["refractiveindex"]
-    OnOff = camera["OnOff"]
-
-
-    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff
+    onoff = camera["OnOff"]
+    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, onoff

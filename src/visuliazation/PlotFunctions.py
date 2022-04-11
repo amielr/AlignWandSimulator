@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from matplotlib import interactive
 interactive(True)
-from mpl_toolkits.mplot3d import Axes3D
+#from mpl_toolkits.mplot3d import Axes3D
 import numpy as np
 
 
@@ -73,12 +73,11 @@ def plot_ray_locations(rays):
     return
 
 def plot_ray_path_line(rays):
-    #x,y,z = ray.Origin
     fig = plt.figure()
     plt.subplot(projection='3d')
     for ray in rays:
         x, y, z = [], [], []
-        print("we are in ray path line plot our raystory is: ", ray.RayStoryCoordinates)
+        #print("we are in ray path line plot our raystory is: ", ray.RayStoryCoordinates[:8])
         for rayCoordinates in ray.RayStoryCoordinates:
             #print(rayCoordinates)
             x.append(rayCoordinates[0])

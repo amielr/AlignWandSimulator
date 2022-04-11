@@ -148,17 +148,6 @@ class Projector():
 
         npraylist = np.vstack(rotateddirectionlist)
         nplist = np.unique(npraylist, axis=0)
-        #print(len(nplist))
-        # Change directions to suit the projector direction
-        finaldirections = np.matmul(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2]), nplist.T).T
-
-        # Turn directions into rays - Origin, Direction, Amplitude combinations
-        # for direction in finaldirections:
-        #     self.ProjectorRayList.append(Ray(self.center, direction, self.ParentRay.get_amplitude()/len(finaldirections), self))
-        #     Projector.AllProjectorRaysList.append(Ray(self.center, direction, self.ParentRay.get_amplitude()/len(finaldirections), self))
-        #     self.NoOfProjectorRays += 1
-        #     Projector.NoOfProjectorRays += 1
-
         self.ProjectorRayList = raylist
         Projector.AllProjectorRaysList.extend(raylist)
         self.NoOfProjectorRays = len(raylist)

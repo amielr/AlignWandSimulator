@@ -89,7 +89,6 @@ class STL():
 
         # Ray1 = [-15, -30, 0, 0, 0, -1]
         # Ray2 = [-15, 0, -5, 0, -1, 0]
-        #
         # Rays = [Ray1, Ray2]
 
         rays = o3d.core.Tensor(Rays, dtype=o3d.core.Dtype.Float32)
@@ -98,9 +97,7 @@ class STL():
         print("our answer is: ", ans.keys())
         print(ans['t_hit'].numpy(), ans['geometry_ids'].numpy())
         print(ans['primitive_ids'].numpy(), ans['primitive_normals'].numpy(), ans['primitive_uvs'].numpy())
-
         #plt.imshow(ans['t_hit'].numpy())
-
 
         updatedrayList = []
         points = []
@@ -120,11 +117,8 @@ class STL():
         return updatedrayList
     # primitives uvs = the intersection coordinates of the the ray with the mesh
 
-    # %%
-
     def reverse_ray_infinitesimaly_backwards(self, raysList):
         for ray in raysList:
-            holder = []
             raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)-1:-len(ray.SpottoCameraRayList) + 1]
             print("ray segment ", raysegment)
             Direction = raysegment[0] - raysegment[1]
@@ -135,7 +129,6 @@ class STL():
 
             ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)] = raysegment[1]
             print("updated spot after, ", ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)])
-
         return
 
 
@@ -154,11 +147,7 @@ class STL():
                 holder = []
                 raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList):-len(ray.SpottoCameraRayList)+2]
                 Direction = raysegment[1]-raysegment[0]
-
                 print("raysegment is: ", raysegment, "rayDirection", Direction)
-
-
-
                 holder.extend(ray.Origin.tolist())
                 holder.extend(Direction.tolist())
                 # print("holder", holder)
