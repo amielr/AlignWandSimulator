@@ -38,7 +38,7 @@
                                                         "y": 1.512},
                                 "pixeldimension": {"x": 1.4e-3,
                                                     "y": 1.4e-3},
-                                "OnOff": "On"
+                                "OnOff": "Off"
                 },
                 {
                                 "name": "CCM1",
@@ -108,7 +108,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 460,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 2,
+                                "GratingOrder": 5,
                                 "OnOff": "On"
                 },
 
@@ -121,7 +121,7 @@
                                 "wavelength": 520,
                                 "LatticeConst": 7.6,
                                 "GratingOrder": 2,
-                                "OnOff": "On"
+                                "OnOff": "Off"
 
                 },
   {

@@ -9,8 +9,8 @@ def startSimulator():
 
     run_projectors(projectorsList)
 
-    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
-    #propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
+    #propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
 
     #reflectivesurface[0].load_profile_file()
 
@@ -83,12 +83,12 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
             camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(raycopy, windowsList))
 
         #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
-        plot_ray_path_line(camera.cameraRayList)
+        #plot_ray_path_line(camera.cameraRayList)
         camera.optimize_Camera_rays()
 
         plot_ray_path_line(camera.cameraRayList)
         windowsList.remove(camera.window)
-        camera.determine_pixel_locations()
+        #camera.determine_pixel_locations()
 
 
 
@@ -117,8 +117,8 @@ def propagate_rays_to_reflective_surface_STL(windowsList, reflectiveSurface, pro
     Projector.AllProjectorRaysList = reflectiveSurface.cast_rays_on_the_3D_mesh(Projector.AllProjectorRaysList)
     print("projector rays list: ", Projector.AllProjectorRaysList)
     print("projector ray origin: ", Projector.AllProjectorRaysList[0].Origin)
-    reflectiveSurface.rendering_3D_model()
-    plot_ray_locations(Projector.AllProjectorRaysList)
+    #reflectiveSurface.rendering_3D_model()
+    #plot_ray_locations(Projector.AllProjectorRaysList)
     #plot_projector_ray_locations_scatter(Projector)
     #plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
     #plot_quiver(Projector.AllProjectorRaysList, windowsList[0].Name + "full raylist")

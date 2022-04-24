@@ -112,7 +112,7 @@ class STL():
                 updatedrayList.append(ray)
                 points.append(ray.Origin)
 
-        self.point_cloud_plot(points)
+        #self.point_cloud_plot(points)
 
         return updatedrayList
     # primitives uvs = the intersection coordinates of the the ray with the mesh
@@ -136,20 +136,29 @@ class STL():
         for camera in cameraslist:
             raysList = camera.cameraRayList
 
-            self.reverse_ray_infinitesimaly_backwards(raysList)
+            #self.reverse_ray_infinitesimaly_backwards(raysList)
             print("We are testing blocked rays!!!")
 
             cube = o3d.t.geometry.TriangleMesh.from_legacy(self.mesh)
             scene = o3d.t.geometry.RaycastingScene()
             vert = np.asarray(self.mesh.vertices)
+            print("our vertices are: ", vert)
+            cube_id = scene.add_triangles(cube)
+
             Rays = []
             for ray in raysList:
                 holder = []
+                print("ray story coordinates", ray.RayStoryCoordinates)
+                print("ray spot to ...", ray.SpottoCameraRayList)
+                OriginHolder = ray.SpottoCameraRayList[1]
+                DirectionHolder = (ray.SpottoCameraRayList[0]-ray.SpottoCameraRayList[1])/np.linalg.norm(ray.SpottoCameraRayList[0]-ray.SpottoCameraRayList[1])
+
+                print(OriginHolder, DirectionHolder)
                 raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList):-len(ray.SpottoCameraRayList)+2]
                 Direction = raysegment[1]-raysegment[0]
                 print("raysegment is: ", raysegment, "rayDirection", Direction)
-                holder.extend(ray.Origin.tolist())
-                holder.extend(Direction.tolist())
+                holder.extend(OriginHolder.tolist())
+                holder.extend(DirectionHolder.tolist())
                 # print("holder", holder)
                 Rays.append(holder)
 
@@ -163,18 +172,25 @@ class STL():
             updatedrayList = []
             blockedRays = []
             for index, ray in enumerate(raysList):
-                print("our ray direction is:", ray.Direction, "multiplied by hit distance:",
-                      ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
-                print(ans['t_hit'][index].numpy())
-                if ans['t_hit'][index].isfinite().numpy():
-                    print("we are in open field, ", ans['t_hit'][index].numpy(), ans['t_hit'][index].isfinite().numpy())
-                    ray.Origin = ray.Origin #+ np.dot(ray.Direction, ans['t_hit'][index].numpy())
-                    ray.write_the_story(self.ObjectName, ray.Origin, 1)
-                    print(ray.Origin)
-                    updatedrayList.append(ray)
+                # print("our ray direction is:", ray.Direction, "multiplied by hit distance:",
+                #       ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
+                # print(ans['t_hit'][index].numpy())
+
+                OriginP = ray.SpottoCameraRayList[0]
+                OriginC = ray.SpottoCameraRayList[1] + ans['t_hit'][index].numpy()*(ray.SpottoCameraRayList[0]-ray.SpottoCameraRayList[1])/np.linalg.norm(ray.SpottoCameraRayList[0]-ray.SpottoCameraRayList[1])
+
+                comparison = OriginP == OriginC
+                print(OriginC, OriginP)
+                equal_arrays = np.allclose(OriginC, OriginP, 1.e-5, 1.e-8)
+                if equal_arrays:
+                    print("the same location")
                 else:
-                    print("we are in not blocked, ", ans['t_hit'][index].numpy(), ans['t_hit'][index].isfinite().numpy())
-                    blockedRays.append(ray)
+                    print("different location - must be a blockage")
+                    raysList.remove(ray)
+
+            camera.cameraRayList = raysList
+
+
         return
 
 
