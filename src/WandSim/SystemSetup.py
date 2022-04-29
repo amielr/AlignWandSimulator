@@ -13,7 +13,9 @@ def create_STL_object():
 
 def run_projectors(projectorsList):
     for projector in projectorsList:
-        projector.generate_projector_rays()
+        projector.generate_projector_rays_using_reciprocal_lattice_method()
+        #projector.generate_projector_rays()
+
     #    plot_quiver(projector.ProjectorRayList, str(projector.projectorName))
     #plot_quiver(Projector.AllProjectorRaysList, str(Projector.projectorName))
 

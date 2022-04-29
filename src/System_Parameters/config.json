@@ -97,18 +97,18 @@
                                                     "550": 1.51},
                                 "OnOff": "Off"
                 }
-],
+  ],
 "lights":        [
 
                       {
                                 "name": "B1",
                                 "center": [ -1.35, 0, 2.55 ],
                                 "direction": [0, 0, -1],
-                                "rotation": [ 0, 0, -18 ],
+                                "rotation": [ 0, 0, 0 ],
                                 "type": "projector_blue",
                                 "wavelength": 460,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 5,
+                                "GratingOrder": 13,
                                 "OnOff": "On"
                 },
 
@@ -160,7 +160,14 @@
                                 "OnOff": "Off"
 
                 }
-],
+  ],
+
+  "Operational modes": [{
+          "Optimized_mode": "True",
+          "Windowless_mode": "False",
+          "Rules_mode": "False"
+  }],
+
   "LatticeConst": 7.64,
   "GratingOrder": 11
 }

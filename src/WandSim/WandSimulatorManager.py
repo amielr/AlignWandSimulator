@@ -1,5 +1,5 @@
 from src.WandSim.SystemSetup import *
-from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations
+from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations,plot_projector_ray_locations_scatter
 from copy import deepcopy
 
 
@@ -9,12 +9,12 @@ def startSimulator():
 
     run_projectors(projectorsList)
 
-    #propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
-    propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
+    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    #propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
 
     #reflectivesurface[0].load_profile_file()
 
-    #plot_ray_path_line(Projector.AllProjectorRaysList)
+    plot_ray_path_line(Projector.AllProjectorRaysList)
     #print("Number of projector rays is:")
     #print(Projector.NoOfProjectorRays)
     return
@@ -95,7 +95,10 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
 def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):
 
     propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList)
-    propagate_rays_back_to_cameras(cameraList, windowsList)
+
+    #plot_projector_ray_locations_scatter(projectorList[0])
+
+    #propagate_rays_back_to_cameras(cameraList, windowsList)
     return
 
 
@@ -129,6 +132,7 @@ def propagate_rays_through_system_STL(Projector, windowsList, reflectiveSurface,
     propagate_rays_to_reflective_surface_STL(windowsList, reflectiveSurface, projectorList)
     propagate_rays_back_to_cameras(cameraList, windowsList)
     reflectiveSurface.test_rays_for_blockage(cameraList)
+    plot_ray_path_line(cameraList[0].cameraRayList)
     return
 
 

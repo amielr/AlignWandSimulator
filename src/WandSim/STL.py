@@ -171,6 +171,8 @@ class STL():
 
             updatedrayList = []
             blockedRays = []
+            print("length of raylist", len(raysList))
+
             for index, ray in enumerate(raysList):
                 # print("our ray direction is:", ray.Direction, "multiplied by hit distance:",
                 #       ans['t_hit'][index].numpy(), "==== ", np.dot(ray.Direction, ans['t_hit'][index].numpy()))
@@ -188,6 +190,7 @@ class STL():
                     print("different location - must be a blockage")
                     raysList.remove(ray)
 
+            print("length of raylist after", len(raysList))
             camera.cameraRayList = raysList
 
 

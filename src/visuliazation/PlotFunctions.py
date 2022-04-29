@@ -34,6 +34,17 @@ def plot_xy_scatter(X,Y, XV, YV):
     plt.show(block=True)
     return
 
+def plot_xy_scatter_lattice(X, Y, XV, YV):
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title("scatter XY")
+    # plt.scatter(X, Y, s=4)
+
+    plt.scatter(X, Y, s=6, c='b', marker="s", label='simulation')
+    plt.grid(True, 'both', 'both')
+    plt.show(block=True)
+    return
+
 
 def plot_projector_ray_locations_scatter(projector):
     rayLocationList = []
