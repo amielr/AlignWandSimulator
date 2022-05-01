@@ -96,9 +96,9 @@ def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, pro
 
     propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList)
 
-    #plot_projector_ray_locations_scatter(projectorList[0])
+    plot_projector_ray_locations_scatter(projectorList[0])
 
-    #propagate_rays_back_to_cameras(cameraList, windowsList)
+    propagate_rays_back_to_cameras(cameraList, windowsList)
     return
 
 

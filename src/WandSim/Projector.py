@@ -90,7 +90,7 @@ class Projector():
         #Projector.NoOfProjectorRays += 1
         return
 
-    def aget_lattice_distance(self):
+    def get_lattice_distance(self):
         return self.LatticeConstant * 1e-6 * np.cos(np.pi/6)
 
     def get_grating_equation_angle(self, order):
@@ -98,6 +98,12 @@ class Projector():
         angle = math.asin(order*self.wavelength/gratingdistance)
         angle = math.degrees(angle)
         return angle
+
+    def get_grating_equation_angle_lattice(self, distancefactor):
+        angle = math.asin(distancefactor*(self.wavelength / self.get_lattice_distance()))
+        #angle = math.degrees(angle)
+        return angle
+
 
     def get_ray_angle_direction(self, facets, order, suborder):
         basisangle = 360/facets
@@ -109,43 +115,89 @@ class Projector():
 
     def generate_projector_rays_using_reciprocal_lattice_method(self):
 
-        self.build_lattice(13)
+        self.build_lattice(self.gratingOrder)
         return
 
 
     def build_lattice(self, order):
-        #center = [0,0]
-        baseV1 = np.array([-1, 0])
-        #baseV2_direction = np.array([0.5, 0.866025])
-        baseV2_direction_holder = np.array([0.5, 0.866025])
+            #center = [0,0]
+            baseV1 = np.array([-1, 0])
+            #baseV2_direction = np.array([0.5, 0.866025])
+            baseV2_direction_holder = np.array([0.5, 0.866025])
 
-        #baseV3 = np.array([-0.5, 0.866025])
-        LatticeCooridnates = np.array([0, 0])
-        LatticeList = []
-        DistanceList = []
+            #baseV3 = np.array([-0.5, 0.866025])
+            LatticeCooridnates = np.array([0, 0])
+            LatticeList = []
+            DistanceList = []
+            AngleList = []
+            Zlist = []
+            DirectionList = []
+            rayList = []
 
-        LatticeList.append(LatticeCooridnates)
-
-        for i in range(1, order+1):  # create zero order column
-            baseV2_direction = baseV2_direction_holder
-            LatticeCooridnates = LatticeCooridnates+baseV1
-            for j in range(0, 6):
-                for k in range(0, i):
-                    LatticeCooridnates = LatticeCooridnates + baseV2_direction
-                    LatticeList.append(LatticeCooridnates)
-                    DistanceList.append([np.linalg.norm(LatticeCooridnates)*config["LatticeConst"]*np.pi/6])
-                    self.get_grating_equation_angle()
-                baseV2_direction = rotate_2d_vector(baseV2_direction)
-
-
-        LatticeList = np.array(LatticeList)
-        print("Lattice", len(LatticeList), LatticeList)
-        print(LatticeList[:,0])
-        plot_xy_scatter_lattice(LatticeList[:,0], LatticeList[:,1], LatticeList[:,0], LatticeList[:,1])
-        print("Distance", len(DistanceList), DistanceList)
+            LatticeList.append(LatticeCooridnates)
+            DistanceFactor = np.linalg.norm(LatticeCooridnates)
+            DistanceList.append([DistanceFactor])
+            AngleList.append(self.get_grating_equation_angle_lattice(DistanceFactor))
+            Zlist.append(-1)
+            direction = np.array([0,0,-1])
+            rayList.append(Ray(self.center, direction, 1, self, 0, 0, 0))
 
 
-        return
+            for i in range(1, order+1):  # create zero order column
+                baseV2_direction = baseV2_direction_holder
+                LatticeCooridnates = LatticeCooridnates+baseV1
+                for j in range(0, 6):
+                    for k in range(0, i):
+                        LatticeCooridnates = LatticeCooridnates + baseV2_direction
+                        LatticeList.append(LatticeCooridnates)
+                        DistanceFactor = np.linalg.norm(LatticeCooridnates)
+                        DistanceList.append([DistanceFactor])
+                        AngleList.append(self.get_grating_equation_angle_lattice(DistanceFactor))
+                        Zvalue = -DistanceFactor/math.tan(self.get_grating_equation_angle_lattice(DistanceFactor))
+                        Zlist.append(Zvalue)
+
+                        holder = np.append(LatticeCooridnates, Zvalue)
+                        factor = np.linalg.norm(holder)
+                        direction = holder / factor
+
+                        DirectionList.append(direction)
+
+                        rayList.append(Ray(self.center, direction, 1, self, i, j, k))
+
+                        #self.get_grating_equation_angle()
+                    baseV2_direction = rotate_2d_vector(baseV2_direction)
+
+
+            for index in range(len(Zlist)):
+                holder = np.append(LatticeList[index], Zlist[index])
+                factor = np.linalg.norm(holder)
+                direction = holder/factor
+                DirectionList.append(direction)
+            #print(np.append(LatticeList[index],Zlist[index]))
+
+
+
+            LatticeList = np.array(LatticeList)
+            print("Lattice", len(LatticeList), LatticeList)
+            print("Distance", len(DistanceList), DistanceList)
+            print("Angle", len(AngleList), AngleList)
+            print("Zlist", len(Zlist), Zlist)
+            print("DirectionList", len(DirectionList), DirectionList)
+            print("Raylist", len(rayList), rayList)
+            plot_xy_scatter_lattice(LatticeList[:,0], LatticeList[:,1], LatticeList[:,0], LatticeList[:,1])
+
+            for ray in rayList:
+                ray.Direction = np.matmul(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],
+                                                              self.rotationDirection[2] - 30), ray.Direction)
+
+            self.ProjectorRayList = rayList
+            Projector.AllProjectorRaysList.extend(rayList)
+            self.NoOfProjectorRays = len(rayList)
+            Projector.NoOfProjectorRays = len(rayList)
+
+            # plot_scatter(self.projectorName, finaldirections)
+            print(self)
+            return rayList
 
 
     def build_first_hextant(self, order):
@@ -198,19 +250,10 @@ class Projector():
         directionlist.extend(newdirectionlist)                           # full direction list of a single projector
         raylist.extend(newraylist)
 
-        # OnemmSurface = Surface("OneMMSurface", (0, 0, -1), (0, 0, 1))
-        #
-        # ray.ray_surface_intersection(OnemmSurface)
-
-
-        rotateddirectionlist = [np.matmul(raydirection, get_rotation_matrix(0, 0, -30)) for raydirection in directionlist]
-        #rotatedraylist = [ray.Direction = (np.matmul(ray.Direction, get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2]-30))) for ray in raylist]
-
         for ray in raylist:
             ray.Direction = np.matmul(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1], self.rotationDirection[2]-30),ray.Direction)
 
-        npraylist = np.vstack(rotateddirectionlist)
-        nplist = np.unique(npraylist, axis=0)
+
         self.ProjectorRayList = raylist
         Projector.AllProjectorRaysList.extend(raylist)
         self.NoOfProjectorRays = len(raylist)

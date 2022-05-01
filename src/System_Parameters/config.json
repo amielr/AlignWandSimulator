@@ -108,7 +108,7 @@
                                 "type": "projector_blue",
                                 "wavelength": 460,
                                 "LatticeConst": 7.6,
-                                "GratingOrder": 13,
+                                "GratingOrder": 10,
                                 "OnOff": "On"
                 },
 

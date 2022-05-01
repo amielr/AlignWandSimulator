@@ -20,7 +20,7 @@ class Ray():
     RayPathDistance = 0
     #RayStoryCoordinates = np.array(0)
 
-    def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None):
+    def __init__(self, _origin=None, _direction=None, _amplitude=None, _parentsource=None, _Iindex = None, _Jindex = None, _Kindex = None):
 
         self.Origin = np.array([0, 0, 0]) if _origin is None else np.array([_origin[0], _origin[1], _origin[2]])
         self.Direction = np.array([0, 0, 0]) if _direction is None else np.array([_direction[0], _direction[1], _direction[2]])
@@ -30,6 +30,7 @@ class Ray():
         self.EventRegister = 'NoName' if _parentsource is None else _parentsource
         self.IndexI = _Iindex
         self.IndexJ = _Jindex
+        self.IndexK = _Kindex
         self.RayStoryCoordinates = []
         self.RayStory = []
         self.RayrefractiveIndexList = []
