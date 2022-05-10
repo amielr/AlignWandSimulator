@@ -31,12 +31,18 @@ def create_object_lists():
 def create_windows():
     windowlist = []
     for window in config["windows"]:
-        name, normal, center, thickness, refractiveindex = get_window_parameters_from_json(window)
-        windowobject = WindowLens(name, thickness, np.array([center[0], center[1], center[2]]),
+        name, normal, center, thickness, refractiveindex, OnOff = get_window_parameters_from_json(window)
+        if OnOff == "On":
+            windowobject = WindowLens(name, thickness, np.array([center[0], center[1], center[2]]),
                                   np.array([normal[0], normal[1], normal[2]]), refractiveindex)
-        windowlist.append(windowobject)
+            windowlist.append(windowobject)
+
+    if len(windowlist) == 0:
+        print("Huston we have a problem the projector list is of len:", len(windowlist))
 
     return windowlist
+
+
 
 
 def get_window_parameters_from_json(window):
@@ -46,9 +52,10 @@ def get_window_parameters_from_json(window):
     center = window["center"]
     thickness = window["thickness"]
     refractiveindex = window["refractiveindex"]
+    OnOff = window["OnOff"]
     #print("refractive index is: ", refractiveindex)
 
-    return name, normal, center, thickness, refractiveindex
+    return name, normal, center, thickness, refractiveindex, OnOff
 
 
 def create_surfaces():
@@ -119,5 +126,5 @@ def get_camera_parameters_from_json(camera):
     cameratype = camera["type"]
     windowthickness = camera["thickness"]
     refractiveindex = camera["refractiveindex"]
-    onoff = camera["OnOff"]
-    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, onoff
+    OnOff = camera["OnOff"]
+    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff

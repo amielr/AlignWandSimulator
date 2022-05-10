@@ -1,5 +1,4 @@
 from src.WandSim.Ray import *
-from src.visuliazation.PlotFunctions import plot_xy_scatter_lattice
 from src.WandSim.Surface import Surface
 import json
 import math
@@ -159,6 +158,7 @@ class Projector():
                         holder = np.append(LatticeCooridnates, Zvalue)
                         factor = np.linalg.norm(holder)
                         direction = holder / factor
+                        direction = direction#- [0.0103, 0.0170, 0.9998]
 
                         DirectionList.append(direction)
 
@@ -172,6 +172,7 @@ class Projector():
                 holder = np.append(LatticeList[index], Zlist[index])
                 factor = np.linalg.norm(holder)
                 direction = holder/factor
+
                 DirectionList.append(direction)
             #print(np.append(LatticeList[index],Zlist[index]))
 
@@ -184,11 +185,11 @@ class Projector():
             print("Zlist", len(Zlist), Zlist)
             print("DirectionList", len(DirectionList), DirectionList)
             print("Raylist", len(rayList), rayList)
-            plot_xy_scatter_lattice(LatticeList[:,0], LatticeList[:,1], LatticeList[:,0], LatticeList[:,1])
+            #plot_xy_scatter_lattice(LatticeList[:,0], LatticeList[:,1], LatticeList[:,0], LatticeList[:,1])
 
             for ray in rayList:
                 ray.Direction = np.matmul(get_rotation_matrix(self.rotationDirection[0], self.rotationDirection[1],
-                                                              self.rotationDirection[2] - 30), ray.Direction)
+                                                              self.rotationDirection[2]-30), ray.Direction)
 
             self.ProjectorRayList = rayList
             Projector.AllProjectorRaysList.extend(rayList)

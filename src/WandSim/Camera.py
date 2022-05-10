@@ -3,7 +3,7 @@ from scipy.optimize import minimize
 from src.WandSim.WindowLens import *
 from src.WandSim.Projector import get_rotation_matrix
 import math
-from src.visuliazation.PlotFunctions import plot_xy_scatter, plot_ray_path_line
+from src.visuliazation.PlotFunctions import plot_xy_scatter_camera_sensor, plot_ray_path_line
 from numpy import genfromtxt
 
 with open('../src/System_Parameters/config.json') as config_file:
@@ -86,6 +86,13 @@ class Camera():
 
         orderedList = [x for _, x in sorted(zip(kfactorList, surfaceList), reverse=False)]
         return orderedList
+
+
+
+    def get_intersection_with_camera_no_windows(self,ray):
+        ray.write_the_story(self.cameraName, self.center, 1)
+        return ray
+
 
     def get_initial_intersection_points_from_surface_to_camera_v2(self, ray, windowList):
 
@@ -180,13 +187,31 @@ class Camera():
             self.update_camera_ray_directions()
         return
 
+    def optimize_Camera_rays_v2(self):
+        for ray in self.cameraRayList:
+            self.determine_time_distance_path_length(ray)
+            initialConditions = self.slice_xy_intersect_of_surfaces_and_flatten(ray.SpottoCameraRayList)
+            initialConditions = np.asarray(initialConditions)
+            boundsx = (-30, 30)
+            boundsy = (-20, 20)
+            bounds = [boundsx for i in range(len(initialConditions))]
+            res = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
+            #print("Optimization results: ", res)
+            #print("our camera intersection points after are: ", ray.DottoCameraRayList)
+            #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
+            #print(z)
+            #print("the result is", result)
+            self.update_camera_ray_directions()
+        return
+
+
     def pixelIndexing(self, XLocations, YLocations):
         holder = np.genfromtxt('../src/System_Parameters/CameraAngleSensorRelation.csv', delimiter=',')
         Sensorlocation = holder[1::, 1]
         XLocations/0.0014
         YLocations/0.0014
         Xindex = np.interp(XLocations, (-1.344, 1.344), (960, 0))
-        Yindex = np.interp(YLocations, (-0.756, 0.756), (0, 540))
+        Yindex = np.interp(YLocations, (-0.756, 0.756), (540, 0))
         Xindex = np.asarray(Xindex, dtype=float)
         Yindex = np.asarray(Yindex, dtype=float)
         print("Our pixel indexing:", Xindex, Yindex)
@@ -218,7 +243,11 @@ class Camera():
         YLocations = get_interpolated_sensor_location_given_angle(YanglesList)
         Xindexed, Yindexed = self.pixelIndexing(XLocations, YLocations)
 
-        my_data = genfromtxt('../src/Validation/B1-CCM0.csv', delimiter=',', skip_header=1)
+        #testOptions = config["Validation_strings"]
+        #for option in testOptions:
+        my_data = genfromtxt('../src/Validation/B2-CCM1.csv', delimiter=',', skip_header=1)
+
+
         Xvalidation = my_data[:, 0]
         Xvalidation -= -7.5
         Yvalidation = 540-my_data[:, 1]
@@ -228,5 +257,5 @@ class Camera():
         print("validation X data is: ", my_data[:, 0])
         print("validation Y data is: ", my_data[:, 1])
 
-        plot_xy_scatter(Xindexed, Yindexed, Xvalidation, Yvalidation)
+        plot_xy_scatter_camera_sensor(Xindexed, Yindexed, Xvalidation, Yvalidation)
         return

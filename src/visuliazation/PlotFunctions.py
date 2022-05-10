@@ -15,7 +15,7 @@ def plot_scatter(name, data):
     plt.show(block=True)
     return
 
-def plot_xy_scatter(X,Y, XV, YV):
+def plot_xy_scatter_camera_sensor(X, Y, XV, YV):
     fig = plt.figure()
     ax = fig.add_subplot()
     ax.set_title("scatter XY")
@@ -33,6 +33,51 @@ def plot_xy_scatter(X,Y, XV, YV):
     ax.set_ylim([0, 540])
     plt.show(block=True)
     return
+
+def plot_xy_directionUnit_Projector_simulation_validation(projector, valX, valY):
+    rayLocationList = []
+    for ray in projector.ProjectorRayList:
+        rayLocationList.append(ray.Origin)
+        print(ray.Origin)
+    npraylocationlist = np.vstack(rayLocationList)
+    xcoords, ycoords, zcoords = npraylocationlist.T
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title("scatter XY")
+    #plt.scatter(X, Y, s=4)
+
+    plt.scatter(xcoords, ycoords, s=6, c='b', marker="s", label='simulation')
+    plt.scatter(valX, valY, s=4, c='g', marker="o", label='validation')
+
+    plt.grid(True, 'both', 'both')
+    plt.show(block=True)
+    return
+
+
+def plot_xy_Origin_Projector_simulation_validation(projector, valX, valY):
+    rayLocationList = []
+    for ray in projector.ProjectorRayList:
+        rayLocationList.append(ray.Origin)
+    npraylocationlist = np.vstack(rayLocationList)
+    xcoords, ycoords, zcoords = npraylocationlist.T
+
+    fig = plt.figure()
+    ax = fig.add_subplot()
+    ax.set_title("scatter XY")
+    #plt.scatter(X, Y, s=4)
+
+    plt.scatter(xcoords, ycoords, s=6, c='b', marker="s", label='simulation')
+    plt.scatter(valX, valY, s=4, c='g', marker="o", label='validation')
+
+    plt.grid(True, 'both', 'both')
+    plt.show(block=True)
+    return
+
+
+
+
+
 
 def plot_xy_scatter_lattice(X, Y, XV, YV):
     fig = plt.figure()

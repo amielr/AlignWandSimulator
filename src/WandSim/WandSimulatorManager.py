@@ -1,6 +1,7 @@
 from src.WandSim.SystemSetup import *
-from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations,plot_projector_ray_locations_scatter
+from src.visuliazation.PlotFunctions import plot_ray_path_line, plot_ray_locations,plot_projector_ray_locations_scatter, plot_xy_directionUnit_Projector_simulation_validation,plot_xy_Origin_Projector_simulation_validation
 from copy import deepcopy
+import time
 
 
 def startSimulator():
@@ -9,12 +10,25 @@ def startSimulator():
 
     run_projectors(projectorsList)
 
-    propagate_rays_through_system(Projector, windowsList, reflectivesurface, projectorsList, cameraList)
+    begin = time.time()
+
+    propagate_rays_through_system(windowsList, reflectivesurface, projectorsList, cameraList)
+    end = time.time()
+    total_no_windows_time = end - begin
+    print("Total time for regular run", total_no_windows_time)
+
+    begin = time.time()
+    propagate_rays_through_system_no_windows(reflectivesurface, projectorsList, cameraList)
+    end = time.time()
+
+    total_no_windows_time = end - begin
+
+    print("Total time for no windows", total_no_windows_time)
     #propagate_rays_through_system_STL(Projector, windowsList, STLSurface, projectorsList, cameraList)
 
     #reflectivesurface[0].load_profile_file()
 
-    plot_ray_path_line(Projector.AllProjectorRaysList)
+    #plot_ray_path_line(Projector.AllProjectorRaysList)
     #print("Number of projector rays is:")
     #print(Projector.NoOfProjectorRays)
     return
@@ -32,10 +46,29 @@ def ray_window_manager(ray, window):
     return
 
 
+def propagate_rays_to_reflective_surface_no_windows(reflectiveSurface, projectorList):
+    Projector.AllProjectorRaysList.clear()
+    for projector in projectorList:
+        for ray in projector.ProjectorRayList:
+
+            ray.ray_surface_intersection(reflectiveSurface[0])
+            # print("our object type is: ", type(reflectiveSurface[0]))
+            # print(isinstance(reflectiveSurface[0], WindowLens))
+            Projector.AllProjectorRaysList.append(ray)
+
+    #plot_ray_locations(Projector.AllProjectorRaysList)
+    #plot_ray_path_line(Projector.AllProjectorRaysList)
+    # plot_projector_ray_locations_scatter(projector)
+    # plot_quiver(projector.ProjectorRayList, windowsList[0].SurfaceName + " before")
+    # plot_quiver(Projector.AllProjectorRaysList, windowsList[0].Name + "full raylist")
+
+
+
 def propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList):
     # rayList = Projector.AllProjectorRaysList
     Projector.AllProjectorRaysList.clear()
     for projector in projectorList:
+
         for ray in projector.ProjectorRayList:
             sortedwindowsList = reorder_list_from_closest_to_furthest(ray, windowsList)
 
@@ -77,26 +110,63 @@ def propagate_rays_back_to_cameras(cameraList, windowsList):
         print("camera window parameters", camera.window)
         print("camera direction: ", camera.center, camera.direction)
         camera.cameraRayList = []
-
-        for ray in Projector.AllProjectorRaysList:
-            raycopy = deepcopy(ray)
-            camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(raycopy, windowsList))
+        projectorRaylistscopy = deepcopy(Projector.AllProjectorRaysList)
+        for ray in projectorRaylistscopy:
+            camera.cameraRayList.append(camera.get_initial_intersection_points_from_surface_to_camera_v2(ray, windowsList))
 
         #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
         #plot_ray_path_line(camera.cameraRayList)
         camera.optimize_Camera_rays()
 
-        plot_ray_path_line(camera.cameraRayList)
+        #plot_ray_path_line(camera.cameraRayList)
         windowsList.remove(camera.window)
+        camera.determine_pixel_locations()
+
+
+
+def propagate_rays_back_to_cameras_no_windows(cameraList):
+    for camera in cameraList:
+        print("camera window parameters", camera.window)
+        print("camera center and direction: ", camera.center, camera.direction)
+        camera.cameraRayList = []
+
+        projectorRaylists = deepcopy(Projector.AllProjectorRaysList)
+
+        for ray in projectorRaylists:
+            #raycopy = deepcopy(ray)
+            camera.cameraRayList.append(camera.get_intersection_with_camera_no_windows(ray))
+
+        #print("Ray Initial conditions:  tell the story...", ray.tell_the_story())
+        #plot_ray_path_line(camera.cameraRayList)
+        #camera.optimize_Camera_rays()
+
+        #plot_ray_path_line(camera.cameraRayList)
         #camera.determine_pixel_locations()
 
 
 
-def propagate_rays_through_system(Projector, windowsList, reflectiveSurface, projectorList, cameraList):
+def propagate_rays_through_system_no_windows(reflectiveSurface, projectorList, cameraList):
+    propagate_rays_to_reflective_surface_no_windows(reflectiveSurface, projectorList)
+    propagate_rays_back_to_cameras_no_windows(cameraList)
+
+
+def propagate_rays_through_system(windowsList, reflectiveSurface, projectorList, cameraList):
 
     propagate_rays_to_reflective_surface(windowsList, reflectiveSurface, projectorList)
 
-    plot_projector_ray_locations_scatter(projectorList[0])
+    #plot_projector_ray_locations_scatter(projectorList[0])
+    # my_data = genfromtxt('../src/Validation/B2-ITO-Directions.csv', delimiter=',', skip_header=1)
+    # Xvalidation = my_data[:, 0]-0.01
+    # Yvalidation = my_data[:, 1]-0.017
+    #
+    my_data = genfromtxt('../src/Validation/B2-132mm.csv', delimiter=',', skip_header=1)
+    Xvalidation = my_data[:, 0]
+    Yvalidation = my_data[:, 1]
+    #plot_xy_directionUnit_Projector_simulation_validation(projectorList[0], Xvalidation, Yvalidation)
+
+    #plot_xy_Origin_Projector_simulation_validation(projectorList[0], Xvalidation, Yvalidation)
+
+
 
     propagate_rays_back_to_cameras(cameraList, windowsList)
     return
@@ -132,7 +202,7 @@ def propagate_rays_through_system_STL(Projector, windowsList, reflectiveSurface,
     propagate_rays_to_reflective_surface_STL(windowsList, reflectiveSurface, projectorList)
     propagate_rays_back_to_cameras(cameraList, windowsList)
     reflectiveSurface.test_rays_for_blockage(cameraList)
-    plot_ray_path_line(cameraList[0].cameraRayList)
+    #plot_ray_path_line(cameraList[0].cameraRayList)
     return
 
 
