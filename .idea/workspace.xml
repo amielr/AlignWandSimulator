@@ -2,14 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="1211379e-8fc5-4a35-8511-a9e8db678603" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/System_Parameters/simulatorOperationsConfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/System_Parameters/validationconfig.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/B1_raylocations.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/src/B1_raylocations.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/System_Parameters/config.json" beforeDir="false" afterPath="$PROJECT_DIR$/src/System_Parameters/config.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B1-CCM0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B1-CCM0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B2-132mm.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B2-132mm.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B2-1mm.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B2-1mm.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B2-5mm.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B2-5mm.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B2-CCM1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B2-CCM1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B2Real-Val.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B2Real-Val.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/B3-CCM2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/B3-CCM2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/G1-CCM0.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/G1-CCM0.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Validation/G2-CCM2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/Validation_Data/G2-CCM2.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/Camera.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Camera.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/WandSim/Projector.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/Projector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/WandSim/STL.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/STL.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/SystemSetup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/visuliazation/PlotFunctions.py" beforeDir="false" afterPath="$PROJECT_DIR$/src/visuliazation/PlotFunctions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,12 +47,16 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/System_Parameters" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\User\Desktop\parnasa\Align Tech\WandSimulatorProject\src\System_Parameters" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\User\Desktop\parnasa\Align Tech\WandSimulatorProject\src\visuliaztion" />
       <recent name="C:\Users\User\Desktop\parnasa\Align Tech\WandSimulatorProject\src\System_Parameters" />
@@ -108,7 +121,10 @@
       <workItem from="1648562067517" duration="55839000" />
       <workItem from="1648934826468" duration="63664000" />
       <workItem from="1650748974668" duration="8840000" />
-      <workItem from="1650952845820" duration="91553000" />
+      <workItem from="1650952845820" duration="110252000" />
+      <workItem from="1652736155251" duration="319000" />
+      <workItem from="1652736503904" duration="20000" />
+      <workItem from="1653384293787" duration="8975000" />
     </task>
     <servers />
   </component>
@@ -116,10 +132,6 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1644711116241">
-      <screen x="0" y="0" width="1366" height="738" />
-    </state>
-    <state x="137" y="24" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.738@0.0.1366.738" timestamp="1644711116241" />
     <state width="681" height="466" key="DebuggerActiveHint" timestamp="1644901648940">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -128,42 +140,42 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state x="463" y="110" key="FileChooserDialogImpl/0.0.1366.738@0.0.1366.738" timestamp="1645528808307" />
-    <state width="1076" height="160" key="GridCell.Tab.0.bottom" timestamp="1652166302498">
+    <state width="1068" height="98" key="GridCell.Tab.0.bottom" timestamp="1653510209506">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.bottom/0.0.1366.707@0.0.1366.707" timestamp="1649166704665" />
-    <state width="1076" height="160" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1652166302498" />
-    <state width="1076" height="160" key="GridCell.Tab.0.center" timestamp="1652166302498">
+    <state width="1068" height="98" key="GridCell.Tab.0.bottom/0.0.1366.738@0.0.1366.738" timestamp="1653510209506" />
+    <state width="1068" height="98" key="GridCell.Tab.0.center" timestamp="1653510209505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.center/0.0.1366.707@0.0.1366.707" timestamp="1649166704665" />
-    <state width="1076" height="160" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1652166302498" />
-    <state width="1076" height="160" key="GridCell.Tab.0.left" timestamp="1652166302497">
+    <state width="1068" height="98" key="GridCell.Tab.0.center/0.0.1366.738@0.0.1366.738" timestamp="1653510209505" />
+    <state width="1068" height="98" key="GridCell.Tab.0.left" timestamp="1653510209505">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.left/0.0.1366.707@0.0.1366.707" timestamp="1649166704664" />
-    <state width="1076" height="160" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1652166302497" />
-    <state width="1076" height="160" key="GridCell.Tab.0.right" timestamp="1652166302498">
+    <state width="1068" height="98" key="GridCell.Tab.0.left/0.0.1366.738@0.0.1366.738" timestamp="1653510209505" />
+    <state width="1068" height="98" key="GridCell.Tab.0.right" timestamp="1653510209506">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="1323" height="215" key="GridCell.Tab.0.right/0.0.1366.707@0.0.1366.707" timestamp="1649166704665" />
-    <state width="1076" height="160" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1652166302498" />
-    <state width="1140" height="308" key="GridCell.Tab.1.bottom" timestamp="1651958067627">
+    <state width="1068" height="98" key="GridCell.Tab.0.right/0.0.1366.738@0.0.1366.738" timestamp="1653510209506" />
+    <state width="1135" height="102" key="GridCell.Tab.1.bottom" timestamp="1653508668850">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1140" height="308" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1651958067627" />
-    <state width="1140" height="308" key="GridCell.Tab.1.center" timestamp="1651958067627">
+    <state width="1135" height="102" key="GridCell.Tab.1.bottom/0.0.1366.738@0.0.1366.738" timestamp="1653508668850" />
+    <state width="1135" height="102" key="GridCell.Tab.1.center" timestamp="1653508668850">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1140" height="308" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1651958067627" />
-    <state width="1140" height="308" key="GridCell.Tab.1.left" timestamp="1651958067627">
+    <state width="1135" height="102" key="GridCell.Tab.1.center/0.0.1366.738@0.0.1366.738" timestamp="1653508668850" />
+    <state width="1135" height="102" key="GridCell.Tab.1.left" timestamp="1653508668850">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1140" height="308" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1651958067627" />
-    <state width="1140" height="308" key="GridCell.Tab.1.right" timestamp="1651958067627">
+    <state width="1135" height="102" key="GridCell.Tab.1.left/0.0.1366.738@0.0.1366.738" timestamp="1653508668850" />
+    <state width="1135" height="102" key="GridCell.Tab.1.right" timestamp="1653508668850">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state width="1140" height="308" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1651958067627" />
+    <state width="1135" height="102" key="GridCell.Tab.1.right/0.0.1366.738@0.0.1366.738" timestamp="1653508668850" />
     <state x="429" y="80" key="RollbackChangesDialog" timestamp="1651179589218">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
@@ -176,22 +188,22 @@
       <screen x="0" y="0" width="1366" height="738" />
     </state>
     <state width="691" height="372" key="XDebugger.FullValuePopup/0.0.1366.738@0.0.1366.738" timestamp="1648796870884" />
-    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1646740855028">
+    <state x="327" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1652171980159">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1646740855028" />
-    <state x="714" y="127" width="607" height="590" key="find.popup" timestamp="1652048637897">
+    <state x="327" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.738@0.0.1366.738" timestamp="1652171980159" />
+    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1653509868561">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="714" y="127" width="607" height="590" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1652048637897" />
-    <state x="424" y="12" key="refactoring.ChangeSignatureDialog" timestamp="1642710950617">
+    <state x="492" y="286" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1366.738@0.0.1366.738" timestamp="1653509868561" />
+    <state x="714" y="127" width="607" height="590" key="find.popup" timestamp="1653392314077">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="424" y="12" key="refactoring.ChangeSignatureDialog/0.0.1366.738@0.0.1366.738" timestamp="1642710950617" />
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1651175303423">
+    <state x="714" y="127" width="607" height="590" key="find.popup/0.0.1366.738@0.0.1366.738" timestamp="1653392314077" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup" timestamp="1652357194301">
       <screen x="0" y="0" width="1366" height="738" />
     </state>
-    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1651175303423" />
+    <state x="346" y="59" width="672" height="678" key="search.everywhere.popup/0.0.1366.738@0.0.1366.738" timestamp="1652357194301" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -202,19 +214,29 @@
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
-          <url>file://$PROJECT_DIR$/src/WandSim/STL.py</url>
-          <line>130</line>
-          <option name="timeStamp" value="45" />
+          <url>file://$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py</url>
+          <line>147</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/WandSim/Camera.py</url>
-          <line>79</line>
-          <option name="timeStamp" value="56" />
+          <line>122</line>
+          <option name="timeStamp" value="65" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/WandSim/Camera.py</url>
+          <line>104</line>
+          <option name="timeStamp" value="68" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/src/WandSim/Camera.py</url>
+          <line>121</line>
+          <option name="timeStamp" value="69" />
         </line-breakpoint>
         <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
           <url>file://$PROJECT_DIR$/src/WandSim/WandSimulatorManager.py</url>
-          <line>136</line>
-          <option name="timeStamp" value="59" />
+          <line>126</line>
+          <option name="timeStamp" value="71" />
         </line-breakpoint>
       </breakpoints>
       <default-breakpoints>
@@ -227,6 +249,6 @@
     </breakpoint-manager>
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1652166302448" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
+    <SUITE FILE_PATH="coverage/WandSimulatorProject$_init_.coverage" NAME="_init_ Coverage Results" MODIFIED="1653510209491" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/src" />
   </component>
 </project>

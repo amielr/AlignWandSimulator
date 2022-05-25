@@ -7,7 +7,7 @@
           "thickness": 0.5,
           "refractiveindex": {"450":1.5253,
                               "520":1.5202 },
-          "OnOff": "On"
+          "OnOff": "Off"
 
         },
     {
@@ -17,7 +17,7 @@
           "thickness": 1,
           "refractiveindex": {"450":1.5327,
                               "520":1.5269},
-          "OnOff": "On"
+          "OnOff": "Off"
 
     }
     ],

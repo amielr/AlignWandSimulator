@@ -38,7 +38,7 @@ def create_windows():
             windowlist.append(windowobject)
 
     if len(windowlist) == 0:
-        print("Huston we have a problem the projector list is of len:", len(windowlist))
+        print("Huston No windows:", len(windowlist))
 
     return windowlist
 
@@ -106,11 +106,11 @@ def get_projector_parameters_from_json(projector):
 def create_cameras():
     cameraList = []
     for camera in config["cameras"]:
-        name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff  = get_camera_parameters_from_json(camera)
+        name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff, windowOnOff  = get_camera_parameters_from_json(camera)
 
         if OnOff == "On":
             cameraobject = Camera(name, center, direction,
-                                        rotation, cameratype, windowthickness, refractiveindex)
+                                        rotation, cameratype, windowthickness, refractiveindex, windowOnOff)
             cameraList.append(cameraobject)
     if len(cameraList) == 0:
         print("Huston we have a problem the Camera list is of len:", len(cameraList))
@@ -127,4 +127,5 @@ def get_camera_parameters_from_json(camera):
     windowthickness = camera["thickness"]
     refractiveindex = camera["refractiveindex"]
     OnOff = camera["OnOff"]
-    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff
+    windowOnOff = camera["windowOnOff"]
+    return name, center, direction, rotation, cameratype, windowthickness, refractiveindex, OnOff, windowOnOff

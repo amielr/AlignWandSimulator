@@ -31,7 +31,7 @@ class Camera():
 
     #Camerawindow = WindowLens()
 
-    def __init__(self, _name, _center, _direction, _rotation, _type, _windowthickness, _refractiveindex):
+    def __init__(self, _name, _center, _direction, _rotation, _type, _windowthickness, _refractiveindex, windowOnOff):
         self.cameraRayList = [] # is this really working???
         self.cameraName = "noName" if _name is None else _name
         self.center = np.array([0, 0, 0]) if _center is None else np.array([_center[0], _center[1], _center[2]])
@@ -42,8 +42,10 @@ class Camera():
         self.windowthickness = 0 if _windowthickness is None else _windowthickness
         self.refractiveindex = _refractiveindex if _refractiveindex is None else _refractiveindex
         print("initialising camera -        center, direction",self.center, self.direction)
-        self.window = WindowLens(self.cameraName+"window", self.windowthickness, self.center+self.windowthickness*self.direction, self.direction, self.refractiveindex)
-        print("initialising camera window- center , direction",self.window.CenterPoint, self.window.Normal)
+        if windowOnOff == "On":
+            self.window = WindowLens(self.cameraName+"window", self.windowthickness, self.center+self.windowthickness*self.direction, self.direction, self.refractiveindex)
+            print("initialising camera window- center , direction", self.window.CenterPoint, self.window.Normal)
+
 
         return
 
@@ -100,8 +102,9 @@ class Camera():
         surfaceList = []
         intersectionList = []
         depthCounter = 1
-
-        windowList = self.reorder_surfaces_closest_to_furthest(ray, windowList)
+        len(windowList)
+        if len(windowList) != 0:
+            windowList = self.reorder_surfaces_closest_to_furthest(ray, windowList)
         for window in windowList:
             window.surfaceList = self.reorder_surfaces_closest_to_furthest(ray, window.surfaceList)
 
@@ -166,11 +169,11 @@ class Camera():
         #plot_ray_path_line([ray])
         return pathresult
 
-    def update_camera_ray_directions(self):
+    def update_camera_rays_directions(self):
         for ray in self.cameraRayList:
             ray.Direction = (ray.RayStoryCoordinates[-1]-ray.RayStoryCoordinates[-2])/np.linalg.norm((ray.RayStoryCoordinates[-1]-ray.RayStoryCoordinates[-2]))
 
-    def optimize_Camera_rays(self):
+    def optimize_camera_rays_surface_incident_points(self):
         for ray in self.cameraRayList:
             self.determine_time_distance_path_length(ray)
             initialConditions = self.slice_xy_intersect_of_surfaces_and_flatten(ray.SpottoCameraRayList)
@@ -179,29 +182,12 @@ class Camera():
             boundsy = (-20, 20)
             bounds = [boundsx for i in range(len(initialConditions))]
             res = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
-            #print("Optimization results: ", res)
+            print("Optimization results: ", res)
             #print("our camera intersection points after are: ", ray.DottoCameraRayList)
             #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
             #print(z)
             #print("the result is", result)
-            self.update_camera_ray_directions()
-        return
-
-    def optimize_Camera_rays_v2(self):
-        for ray in self.cameraRayList:
-            self.determine_time_distance_path_length(ray)
-            initialConditions = self.slice_xy_intersect_of_surfaces_and_flatten(ray.SpottoCameraRayList)
-            initialConditions = np.asarray(initialConditions)
-            boundsx = (-30, 30)
-            boundsy = (-20, 20)
-            bounds = [boundsx for i in range(len(initialConditions))]
-            res = minimize(self.objective_function_to_minimize_ray_path_distance, initialConditions, bounds=bounds, args = (ray,))
-            #print("Optimization results: ", res)
-            #print("our camera intersection points after are: ", ray.DottoCameraRayList)
-            #print(len(ray.windowSurfaceList))#.determine_surface_z_given_xy(surfaceXY)
-            #print(z)
-            #print("the result is", result)
-            self.update_camera_ray_directions()
+            #self.update_camera_ray_directions()
         return
 
 
@@ -245,7 +231,7 @@ class Camera():
 
         #testOptions = config["Validation_strings"]
         #for option in testOptions:
-        my_data = genfromtxt('../src/Validation/B2-CCM1.csv', delimiter=',', skip_header=1)
+        my_data = genfromtxt('../src/Validation_Data/B2-CCM1.csv', delimiter=',', skip_header=1)
 
 
         Xvalidation = my_data[:, 0]
@@ -257,5 +243,5 @@ class Camera():
         print("validation X data is: ", my_data[:, 0])
         print("validation Y data is: ", my_data[:, 1])
 
-        plot_xy_scatter_camera_sensor(Xindexed, Yindexed, Xvalidation, Yvalidation)
+        plot_xy_scatter_camera_sensor(Xindexed, Yindexed, 0, 0)# Xvalidation, Yvalidation)
         return

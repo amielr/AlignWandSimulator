@@ -117,26 +117,11 @@ class STL():
         return updatedrayList
     # primitives uvs = the intersection coordinates of the the ray with the mesh
 
-    def reverse_ray_infinitesimaly_backwards(self, raysList):
-        for ray in raysList:
-            raysegment = ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)-1:-len(ray.SpottoCameraRayList) + 1]
-            print("ray segment ", raysegment)
-            Direction = raysegment[0] - raysegment[1]
-            Direction = Direction/np.linalg.norm(Direction)
-            print("ray before, ", raysegment[1])
-            raysegment[1] = raysegment[1] + 0.0000001 * Direction
-            print("ray after, ", raysegment[1])
-
-            ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)] = raysegment[1]
-            print("updated spot after, ", ray.RayStoryCoordinates[-len(ray.SpottoCameraRayList)])
-        return
-
 
     def test_rays_for_blockage(self, cameraslist):
         for camera in cameraslist:
             raysList = camera.cameraRayList
 
-            #self.reverse_ray_infinitesimaly_backwards(raysList)
             print("We are testing blocked rays!!!")
 
             cube = o3d.t.geometry.TriangleMesh.from_legacy(self.mesh)
